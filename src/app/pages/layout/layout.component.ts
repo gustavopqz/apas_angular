@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common'
+import { RouterModule, RouterOutlet, RouterLinkActive } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatListModule } from '@angular/material/list'
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterModule, RouterOutlet, MatToolbarModule, MatSidenavModule, MatListModule, CommonModule, RouterLinkActive],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
+
 
 }

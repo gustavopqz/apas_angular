@@ -1,2 +1,25 @@
-<p>layout works!</p>
-<router-outlet></router-outlet>
+<mat-sidenav-container mode="side">
+    <mat-sidenav class="sidenav" mode="side" opened fixedInViewport disableClose >
+        <mat-nav-list class="nav-list">
+            <div class="logo-div">
+                <img src="assets/img/apas_logo.jpg" alt="APAS Logo" class="logo">
+            </div>
+            <a class="list-item" routerLink="/home" routerLinkActive="ativo">
+                <i class="material-icons v-middle">
+                    home
+                </i>
+                <span class="textoNavItem">Início</span>
+            </a>
+            
+            <a class="list-item" routerLink="/cadastro-admin" routerLinkActive="ativo">
+                <i class="material-icons v-middle">
+                    description
+                </i>
+                <span class="textoNavItem">Cadastro admin</span>
+            </a>            
+        </mat-nav-list>
+    </mat-sidenav>
+</mat-sidenav-container>
+<div class="routerOutlet">
+    <router-outlet></router-outlet> 
+</div>
