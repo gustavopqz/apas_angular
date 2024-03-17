@@ -20,6 +20,11 @@ export const routes: Routes = [
             {
                 path: 'cadastro-admin',
                 component: CadastroAdminComponent
+            },
+            {
+              path: '',
+              redirectTo: 'home',
+              pathMatch: 'full'
             }
         ]
     }

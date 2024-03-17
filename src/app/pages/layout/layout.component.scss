@@ -1,0 +1,60 @@
+@import '../../app.component.scss';
+
+.routerOutlet {
+    margin-left: 200px;
+}
+
+.sidenav{
+    width: 200px;
+
+    .nav-list {
+        height: 100%;
+        background-color: $primaria-verde;
+    
+        .logo-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    
+            height: 30vh;
+        
+            .logo {
+                max-width: 120px;
+                border-radius: 8px;
+            }
+        }
+    
+        .list-item {
+            display: flex;
+            padding: .6rem .8rem;
+            margin: 0 .8rem 1rem .8rem;
+            cursor: pointer;
+            border-radius: 8px;
+            color: $primaria-amarela-transparente;
+            transition: .3s ease;
+            text-decoration: none;
+            
+            .material-icons {
+                vertical-align: middle;
+                font-size: 1.8rem;
+                padding-right: .6rem;
+            }
+    
+            .textoNavItem{
+                display: flex;
+                align-items: center;
+                font-size: 1.1rem;
+            }
+        }
+    
+        .ativo{
+            color: $primaria-amarela;
+            background-color: $secundaria-verde;
+        }
+    
+        .list-item:hover{
+            background-color: $secundaria-verde;
+            color: $primaria-amarela;
+        }
+    }
+}
