@@ -1,4 +1,4 @@
-<div class="container">
+<div [ngClass]="container ? 'container sing-up-js': 'container sing-in-js' ">
     <!--Primary content-->
     <div class="content first-content">
         <div class="first-column">
@@ -11,7 +11,7 @@
             <p class="description description-primary">
                 Faça login com as suas informações
             </p>
-            <button id="signin" class="btn btn-primary">Login</button>
+            <button (click)="trocaCard()" class="btn btn-primary">Login</button>
         </div>
         <div class="second-column">
             <h2 class="title title-secondary">Crie sua conta</h2>
@@ -67,7 +67,7 @@
             <p class="description description-primary">
                 E ajude a cuidar dos animais
             </p>
-            <button id="signup" class="btn btn-primary">Crie sua conta</button>
+            <button (click)="trocaCard()" class="btn btn-primary">Crie sua conta</button>
         </div>
         <div class="second-column">
             <h2 class="title title-secondary">Faça login</h2>
