@@ -4,19 +4,14 @@
             <div class="logo-div">
                 <img src="assets/img/apas_logo.jpg" alt="APAS Logo" class="logo">
             </div>
-            <a class="list-item" routerLink="/home" routerLinkActive="ativo">
+
+            <a *ngFor="let route of navRoutes" class="list-item" routerLink="{{route.rota}}" routerLinkActive="ativo">
                 <i class="material-icons v-middle">
-                    home
+                    {{route.icone}}
                 </i>
-                <span class="textoNavItem">Início</span>
+                <span class="textoNavItem">{{route.texto}}</span>
             </a>
-            
-            <a class="list-item" routerLink="/cadastro-admin" routerLinkActive="ativo">
-                <i class="material-icons v-middle">
-                    description
-                </i>
-                <span class="textoNavItem">Cadastro admin</span>
-            </a>            
+
         </mat-nav-list>
     </mat-sidenav>
 </mat-sidenav-container>

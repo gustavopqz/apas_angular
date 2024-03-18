@@ -1,9 +1,5 @@
-export interface navRoutes {
-    icone: string,
-    texto: string,
-    rota: string
-}
-
-const dataSouce : navRoutes[] = [
-    {icone: 'home', texto: 'Início', rota: 'home'}
+export const dataSource = [
+    {icone: 'home', texto: 'Início', rota: 'home'},
+    {icone: 'description', texto: 'Relatórios', rota: 'relatorios'},
+    {icone: 'group_add', texto: 'Cadastro admin', rota: 'cadastro-admin'}
 ]
