@@ -1,1 +1,13 @@
-<p>Hello world</p>
+<div [ngClass]="classCardContainer ? 'cardContainer' : 'outro'" >
+    <mat-card class="matCard">
+        <mat-card-header>
+            <h1>Título</h1>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button (click)='funcao()'>Troca de classe</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
