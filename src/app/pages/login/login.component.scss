@@ -30,8 +30,7 @@
         height: 100%;
         border-top-left-radius: 15px;
         border-bottom-left-radius: 15px;
-       // border-top-right-radius: 15px;
-       // border-bottom-right-radius: 15px;
+      
 
         left: 0%;
     }
@@ -168,7 +167,7 @@
     
     .second-content .first-column{
         order: 2;
-       z-index: -1;
+        z-index: -1;
     }
     .second-content .second-column{
         order: 1;
@@ -181,24 +180,151 @@
     }
 }
 
-.sing-in-js .first-content .first-column,
-.sing-in-js .first-content .second-column{
+.sing-in-ts .first-content .first-column,
+.sing-in-ts .first-content .second-column{
     z-index: -1;
 }
-.sing-in-js .second-content .first-column,
-.sing-in-js .second-content .second-column{
+
+.sing-in-ts .second-content .second-column{
     z-index: 11;
 }
-.sing-in-js .content::before{
+.sing-in-ts .second-content .first-column{
+    z-index: 13;
+    animation: fadeIn 2s;
+}
+.sing-in-ts .content::before{
     left: 60%;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+    animation: slidein 2.5s linear;
+
+    z-index: 12;
 }
-.sing-up-js .second-content .first-column,
-.sing-up-js .second-content .second-column{
+.sing-up-ts .content::before{
+    animation: slideout 2.5s linear;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    z-index: 12;
+}
+.sing-up-ts .second-content .first-column,
+.sing-up-ts .second-content .second-column{
     z-index: -1;
 }
-.sing-up-js .first-content .first-column,
-.sing-up-js .first-content .second-column{
+.sing-up-ts .first-content .second-column{
     z-index: 11;
+}
+.sing-up-ts .first-content .first-column{
+    z-index: 13;
+    animation: fadeIn 2.5s linear;
+}
+
+.sing-in-ts .first-content .second-column{
+    z-index: -1;
+    position: relative;
+    animation: leftDisplacement 3s;
+}
+.sing-up-ts .second-content .second-column{
+    z-index: -1;
+    position: relative;
+    animation: rightDisplacement 2.5s;
+}
+
+/* Animação CSS para conteúdo */
+@keyframes rightDisplacement {
+    from{
+        left: 0;
+        z-index: 12;
+    }
+    25%{
+        left: 80px;
+    }
+    50%{
+        left: 100px;
+    }
+    to{
+        left: 110px;
+        z-index: -1;
+    }
+}
+@keyframes leftDisplacement {
+    from{
+        left: 0;
+        opacity: 1;
+        z-index: 12;
+    }
+    25%{
+        left: -80px;
+        opacity: .5;
+    }
+    50%{
+        left: -100px;
+        opacity: .2;
+    }
+    to{
+        left: -110px;
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+/* Animação */
+
+@keyframes slidein{
+
+    from{
+        left: 0;
+        widht: 40%;
+    }   
+    25% {
+        left: 5%;   
+        width: 50%;
+    }
+    50%{
+        left: 25%;
+        width: 50%;
+    }
+    75%{
+        left: 45%;
+        width: 50%;
+    }
+    to{
+        left: 60%;
+        width: 40%;
+    }
+}
+
+@keyframes slideout{
+
+    from{
+        left: 60%;
+        widht: 40%
+    }   
+    25% {
+        left: 45%;   
+        width: 50%;
+    }
+    50%{
+        left: 25%;
+        width: 60%;
+    }
+    75%{
+        left: 5%;
+        width: 50%;
+    }
+    to{
+        left: 0;
+        width: 40%;
+    }
+}
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+    }
+    80%{
+        opacity: .8;
+    }
+    100%{
+        opacity: 1;
+    }
 }
