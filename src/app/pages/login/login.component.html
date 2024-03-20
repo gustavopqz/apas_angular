@@ -1,7 +1,8 @@
-<div [ngClass]="container ? 'container sing-up-ts': 'container sing-in-ts' ">
+<div [ngClass]="container ? 'container sing-in-ts': 'container sing-up-ts' ">
     <!--Primary content-->
     <div class="content first-content">
         <div class="first-column">
+            <img src="assets/img/apas_logo.jpg" alt="APAS Logo" class="logo" width="100" height="100">
             <h2 class="title title-primary">
                 Seja Bem Vindo!
             </h2>
@@ -51,6 +52,12 @@
                     </i>
                     <input type="password" placeholder="Senha">
                 </label>
+                <label class="label-input">
+                    <i class="material-icons icons-forms">
+                        key
+                    </i>
+                    <input type="password" placeholder="Confirmar senha">
+                </label>
                 <button class="btn btn-secondary">Enviar</button>
             </form>
         </div>
@@ -58,6 +65,7 @@
     <!--Second content-->
     <div class="content second-content">
         <div class="first-column">
+            <img src="assets/img/apas_logo.jpg" alt="APAS Logo" class="logo" width="100" height="100">
             <h2 class="title title-primary">
                 Olá, Aumigo(a)
             </h2>
