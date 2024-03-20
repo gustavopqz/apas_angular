@@ -1,0 +1,405 @@
+/* Importando fonte do google */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+
+:root {
+    --color-neutral-0: #0e0c0c;
+    --color-neutral-10: #ffffff;
+    --color-neutral-30: #000000;
+    --color-neutral-40: #000000;
+}
+
+/* Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Header */
+header {
+    position: fixed;
+    width: 100%;
+    background-color: #FFF;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5vw;
+    border-bottom: 1px solid #000;
+    box-shadow: 0px 0px 4px 0.5px #000;
+    width: 100%;
+    height: 10vh;
+    z-index: 9999;
+}
+
+.logo {
+    max-width: 5vw;
+}
+
+#space {
+    width: 5vw;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    width: 90vw;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1%;
+    width: 100%;
+}
+
+nav ul li {
+    min-width: 10vw;
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 2px solid #FFF;
+    cursor: pointer;
+}
+
+nav ul li:hover {
+    border-bottom: 2px solid #397269;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #397269;
+}
+
+
+/* Seção de boas vindas */
+#boas-vindas {
+    padding-top: 10vh;
+    min-height: 60vh;
+    display: flex;
+    background: url('/assets/img/landing/paws.png');
+    background-color: #D0C7BF;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#boas-vindas img {
+    height: 60vh;
+}
+
+#boas-vindas .dizeres {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 1rem;
+    border-radius: 10px;
+    color: #397269;
+}
+
+#boas-vindas .dizeres h2 {
+    font-size: 2rem;
+    text-align: center;
+    max-width: 40vw;
+}
+
+.dizeres h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+/* História */
+#historia {
+    padding: 10vh 0;
+    display: flex;
+    justify-content: center;
+}
+
+#historia .dizeres {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #39726990;
+    max-width: 40vw;
+    margin: 2rem;
+    margin-right: 10rem;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+#historia .dizeres h2 {
+    font-size: 2.4rem;
+    padding-bottom: 1rem;
+}
+
+#historia .dizeres p {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+#logo_div {
+    max-width: 50vw;
+    display: flex;
+    align-items: center;
+}
+
+#logo_div img {
+    width: 20vw;
+}
+
+/* Como nos ajudar */
+#ajudar {
+    min-height: 80vh;
+    background: url('/assets/img/landing/dog.jpg');
+    background-size: cover;
+    display: flex;
+    padding: 10vh 0;
+}
+
+#ajudar .espaco {
+    width: 50vw;
+}
+
+#conteudo {
+    width: 50vw;
+}
+
+#ajudar h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    line-height: 75px;
+}
+
+#conteudo ul {
+    list-style: none;
+    height: calc(100% - 75px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ajuda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    font-size: 1.7rem;
+    cursor: default;
+}
+
+.ajuda img {
+    max-width: 3.5rem;
+    transition: ease .3s;
+}
+
+.ajuda img:hover {
+    transform: scale(1.1);
+}
+
+/* Contatos */
+#contatos {
+    min-height: 60vh;
+    background: url('/assets/img/landing/paws.png');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#contatos ul {
+    list-style: none;
+}
+
+#contatos .conteudo {
+    background-color: #FFF;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+#contatos .conteudo h2 {
+    text-align: center;
+    font-size: 2.4rem;
+}
+
+#contatos .conteudo ul li {
+    font-size: 1.7rem;
+    color: #397269;
+}
+
+#contatos .conteudo ul li a{
+    font-size: 1.7rem;
+    color: #397269;
+}
+
+/* Localização */
+#map {
+    max-width: 100%;
+}
+
+#localizacao {
+    background-color: #ffffff;
+    padding-top: 2rem;
+}
+
+#titulo_loc{
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+#localizacao .dizeres {
+    padding-bottom: 1.5rem;
+}
+
+#localizacao .dizeres h2 {
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+#localizacao .dizeres p {
+    font-size: 1.7rem
+}
+
+#desc_loc {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+/* Modal */
+
+
+/* Footer */
+footer {
+    background-color: #d0c7bf;
+}
+
+#logo_footer {
+    width: 10rem;
+}
+
+#conteudo_footer {
+    display: flex;
+    padding: 2rem 0;
+}
+
+.footer-list {
+    width: 33.4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+#nav-footer h2 {
+    font-size: 2rem;
+}
+
+#nav-footer ul {
+    list-style: none;
+}
+
+#nav-footer ul li {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+#nav-footer a {
+    color: #000;
+    text-decoration: none;
+}
+
+#ul-nav li a:hover{
+    color: #397269;
+}
+
+.footer-list .footer-link:hover{
+    color: #25d366;
+}    
+
+#footer_social_media {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+#footer_social_media {
+    flex-direction: row;
+    justify-content: center;
+}
+
+#footer_social_media .footer-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: var(--color-neutral-40);
+    border-radius: 50%;
+    transition: all 0.4s;
+}
+
+#footer_social_media .footer-link i {
+    font-size: 1.25rem;
+}
+
+#footer_social_media .footer-link:hover {
+    opacity: 0.8;
+}
+
+#instagram {
+    background: linear-gradient(#7f37c9, #ff2992, #ff9807);
+}
+
+#whatsapp {
+    background-color: #25d366;
+}
+
+#footer_copyright {
+    border-top: 2px solid #000;
+    display: flex;
+    justify-content: center;
+    background-color: #d0c7bf;
+    font-size: 0.9rem;
+    padding: 1.5rem;
+    font-weight: 100;
+}
+
+@media (max-width:1300px), (max-height: 700px){
+    #boas-vindas .dizeres h2{
+        font-size: 1.5rem;
+    }
+
+    #logo_div img{
+        width: 30vw;
+    }
+
+    #ajudar h2{
+        font-size: 2rem;
+    }
+
+    .ajuda{
+        font-size: 1.2rem;
+    }
+
+    #map iframe{
+        max-height: 60vh;
+    }
+}
+
+/* Image bounce */
+
+@keyframes bounce{
+    0% { transform: scale(1);}
+    50% { transform: scale(1.1);}
+    100% { transform: scale(1);}
+}
+.bounce{
+    animation: bounce 2s infinite;
+}

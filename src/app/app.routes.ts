@@ -3,14 +3,19 @@ import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { HomeComponent } from './pages/layout/home/home.component';
 import { CadastroAdminComponent } from './pages/layout/cadastro-admin/cadastro-admin.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 export const routes: Routes = [
+    {
+        path: '',
+        component: LandingComponent
+    },
     {
         path: 'login',
         component: LoginComponent
     },
     {
-        path: '',
+        path: 'painel',
         component: LayoutComponent,
         children: [
             {
