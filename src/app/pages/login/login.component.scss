@@ -83,6 +83,7 @@
     .btn-secondary{
         background-color: $primaria-verde;
         border: 1px solid $primaria-verde;
+        margin-top: 5px;
     }
     .btn-secondary:hover{
         background-color: #fff;
@@ -102,6 +103,10 @@
         z-index: 10;
         text-align: center;
         width: 40%;
+    }
+    .logo{
+        border-radius: 50%;
+        animation: fadeIn 2s;
     }
     .second-column{
         width: 60%;
