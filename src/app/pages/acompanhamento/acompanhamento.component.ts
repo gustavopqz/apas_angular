@@ -17,16 +17,14 @@ import { InstaData } from '../../modules/instaData'
 })
 export class AcompanhamentoComponent implements OnInit{
 
-  instaData ?: InstaData;
-  
-
-  posts: Posts[] = [];
-
-  primeiroItem ?:Posts;
-
   constructor(private instagramService : InstagramService){
     
   }
+
+  instaData ?: InstaData;
+  posts: Posts[] = [];
+  // Loading
+  loading :boolean = true
 
   ngOnInit(): void {
     this.mostraPosts();
@@ -36,7 +34,8 @@ export class AcompanhamentoComponent implements OnInit{
     this.instagramService.getPosts()
     .subscribe(instaData => {
       this.instaData = instaData
-      this.posts = this.instaData.data  
+      this.posts = this.instaData.data 
+      this.loading = false
     })
   }
 }
