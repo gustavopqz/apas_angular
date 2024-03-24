@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<main>
+    <section class="doacoes">
+        <h2 class="title">Acompanhe nossas postagens</h2>
+        <div class="posts">
+            <mat-card class="card" *ngFor="let post of posts.slice(0, 3)">
+                <mat-card-header>
+                  <div mat-card-avatar class="header-image"></div>
+                  <mat-card-title>apas_serrinha_official</mat-card-title>
+                </mat-card-header>
+                <video *ngIf="post.media_type == 'VIDEO'" mat-card-image [src]="posts ? post.media_url : ''" alt="APAS Logo" controls></video>
+                <img *ngIf="post.media_type == 'CAROUSEL_ALBUM' || post.media_type == 'IMAGE'" mat-card-image [src]="posts ? post.media_url : ''" alt="APAS Logo">
+                <mat-card-content class="caption">
+                  <p>
+                    {{ post.caption }}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <a [href]="post.permalink" target="_blank"><button mat-button>VISITE</button></a>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+    </section>
+</main>
+
+<app-footer></app-footer>
