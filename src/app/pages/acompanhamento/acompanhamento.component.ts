@@ -4,10 +4,9 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
-import { LandingService } from '../../services/landing.service';
+import { InstagramService } from '../../services/instagram.service';
 import { Posts } from '../../modules/posts';
-import { Response1 } from '../../modules/responses'
-import { Observable } from 'rxjs';
+import { InstaData } from '../../modules/instaData'
 
 @Component({
   selector: 'app-acompanhamento',
@@ -18,14 +17,14 @@ import { Observable } from 'rxjs';
 })
 export class AcompanhamentoComponent implements OnInit{
 
-  response1 ?: Response1;
+  instaData ?: InstaData;
   
 
   posts: Posts[] = [];
 
   primeiroItem ?:Posts;
 
-  constructor(private landingService :LandingService){
+  constructor(private instagramService : InstagramService){
     
   }
 
@@ -34,11 +33,10 @@ export class AcompanhamentoComponent implements OnInit{
   }
 
   mostraPosts(){
-    this.landingService.getPosts()
-    .subscribe(response1 => {
-      this.response1 = response1
-      this.posts = this.response1.data
-      console.log(this.posts)    
+    this.instagramService.getPosts()
+    .subscribe(instaData => {
+      this.instaData = instaData
+      this.posts = this.instaData.data  
     })
   }
 }

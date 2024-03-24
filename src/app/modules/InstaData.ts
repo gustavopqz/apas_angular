@@ -1,4 +1,4 @@
-export interface Response1{
+export interface InstaData{
     data: any;
     paging: any;
 }
