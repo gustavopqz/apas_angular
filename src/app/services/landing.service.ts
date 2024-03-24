@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Posts } from './posts';
+import { Posts } from '../modules/posts';
 import { Observable } from 'rxjs';
+import { Response1 } from '../modules/responses'; 
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class LandingService {
     
   }
 
-  getPosts() :Observable<Posts> {
-    return this.httpCLient.get<Posts>(this.url)
+  getPosts() :Observable<Response1> {
+    return this.httpCLient.get<Response1>(this.url)
   }
 }

@@ -1,0 +1,43 @@
+main{
+    padding-top: 90px;
+
+    h2{
+        display: flex;
+        align-items: center;
+    }
+
+
+
+    .doacoes{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 3vh 0;
+
+        .card {
+            max-width: 300px;
+        }
+        
+        .header-image {
+        background-image: url('/assets/img/apas_logo.jpg');
+        background-size: cover;
+        }
+
+        .posts{
+            display: flex;
+            width: 60vw;
+            gap: 2vw;
+            flex-wrap: wrap;
+            justify-content: center;
+            // align-items: center;
+
+            .caption{
+                padding: 1vw;
+                height: 100%;
+            }
+        }
+        
+    }
+
+    
+}
+

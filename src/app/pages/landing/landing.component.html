@@ -1,124 +1,77 @@
-<header>
-    <img class="logo" src="assets/img/landing/apas_logo.jpg" alt="Logo">
-    <nav>
+<app-header></app-header>
+<main>
+  <section id="boas-vindas">
+    <img src="assets/img/landing/dog.png" alt="cachorro">
+    <div class="dizeres">
+      <h2>Cada latido importa, cada miado conta!</h2>
+      <h1 id="titulo">Associação protetora dos animais de Serrinha</h1>
+    </div>
+    <img src="assets/img/landing/cat.png" alt="Gato">
+  </section>
+
+  <section id="historia">
+    <div class="dizeres">
+      <h2>História da APAS</h2>
+      <p>
+        Fundada em <strong>2008</strong>, a <em>APAS (Associação de Proteção aos Animais de Serrinha)</em>
+        surgiu com o objetivo de resgatar e cuidar de animais em situações de vulnerabilidade.
+        <br><br>
+        Cuidamos de mais de <strong>200 animais</strong> nesses <strong>15 anos</strong> de existência, contando entre
+        cães e gatos.
+        <br><br>
+        Pregamos a <strong>adoção responsável</strong>, além de termos um abrigo improvisado na cidade de Serrinha.
+      </p>
+    </div>
+    <div id="logo_div">
+      <img id="historia_logo" src="assets/img/landing/apas_logo.jpg" alt="Logo" width="100%">
+    </div>
+  </section>
+
+  <section id="ajudar">
+    <div class="espaco"></div>
+    <div id="conteudo">
+      <h2>Como Nos Ajudar</h2>
       <ul>
-        <li><a href="#boas-vindas">TOPO</a></li>
-        <li><a href="#historia">HISTÓRIA</a></li>
-        <li><a href="#ajudar">COMO NOS AJUDAR</a></li>
-        <li><a href="#contatos">CONTATOS</a></li>
-        <li><a href="#localizacao">LOCALIZAÇÃO</a></li>
+        <li class="ajuda"><img src="assets/img/landing/pets.png" alt="Pets">Adote um animalzinho</li>
+        <li class="ajuda"><img src="assets/img/landing/racao.png" alt="Ração">Doe ração</li>
+        <li class="ajuda"><img src="assets/img/landing/remedio.png" alt="Medicamentos">Doe medicamentos</li>
+        <li class="ajuda"><img src="assets/img/landing/limpeza.png" alt="Materiais de limpeza">Doe materiais de limpeza</li>
+        <li class="ajuda"><img src="assets/img/landing/pix.png" alt="Pix">Ajude financeiramente<br><br>Pix: 10836521000137</li>
       </ul>
-    </nav>
-    <div id="space"></div>
-  </header>
-
-  <main>
-    <section id="boas-vindas">
-      <img src="assets/img/landing/dog.png" alt="cachorro">
-      <div class="dizeres">
-        <h2>Cada latido importa, cada miado conta!</h2>
-        <h1 id="titulo">Associação protetora dos animais de Serrinha</h1>
-      </div>
-      <img src="assets/img/landing/cat.png" alt="Gato">
-    </section>
-
-    <section id="historia">
-      <div class="dizeres">
-        <h2>História da APAS</h2>
-        <p>
-          Fundada em <strong>2008</strong>, a <em>APAS (Associação de Proteção aos Animais de Serrinha)</em>
-          surgiu com o objetivo de resgatar e cuidar de animais em situações de vulnerabilidade.
-          <br><br>
-          Cuidamos de mais de <strong>200 animais</strong> nesses <strong>15 anos</strong> de existência, contando entre
-          cães e gatos.
-          <br><br>
-          Pregamos a <strong>adoção responsável</strong>, além de termos um abrigo improvisado na cidade de Serrinha.
-        </p>
-      </div>
-      <div id="logo_div">
-        <img id="historia_logo" src="assets/img/landing/apas_logo.jpg" alt="Logo" width="100%">
-      </div>
-    </section>
-
-    <section id="ajudar">
-      <div class="espaco"></div>
-      <div id="conteudo">
-        <h2>Como Nos Ajudar</h2>
-        <ul>
-          <li class="ajuda"><img src="assets/img/landing/pets.png" alt="Pets">Adote um animalzinho</li>
-          <li class="ajuda"><img src="assets/img/landing/racao.png" alt="Ração">Doe ração</li>
-          <li class="ajuda"><img src="assets/img/landing/remedio.png" alt="Medicamentos">Doe medicamentos</li>
-          <li class="ajuda"><img src="assets/img/landing/limpeza.png" alt="Materiais de limpeza">Doe materiais de limpeza</li>
-          <li class="ajuda"><img src="assets/img/landing/pix.png" alt="Pix">Ajude financeiramente<br><br>Pix: 10836521000137</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="contatos">
-      <div class="conteudo">
-        <h2>Contatos</h2>
-        <ul>
-          <li>
-            <i class="fa-brands fa-whatsapp"></i>
-            <a href="https://wa.me/+5575988198676">(75) 9 8819-8676</a>
-          </li>
-          <li>
-            <i class="fa-brands fa-instagram"></i>
-            <a href="https://www.instagram.com/apas_serrinha_oficial/">apas_serrinha_oficial</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="localizacao">
-      <div class="dizeres">
-        <h2 id="titulo_loc">Localização da APAS</h2>
-        <p id="desc_loc">Avenida Lomanto Junior, n°411, Vaquejada</p>
-      </div>
-      <div id='map'>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2927.265473343576!2d-39.00118819712261!3d-11.663854311983215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7138d3a3c7e44f1%3A0xa2339eb0f4b6cb39!2sAv.%20Lomanto%20J%C3%BAnior%2C%20411%20-%20Vaquejada%2C%20Serrinha%20-%20BA%2C%2048700-000!5e0!3m2!1spt-BR!2sbr!4v1695341118478!5m2!1spt-BR!2sbr"
-          width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-    </section>
-
-   
-  </main>
-
-  <footer>
-    <div id="conteudo_footer">
-      <div class="footer-list">
-        <img src="assets/img/landing/apas_logo_no_bg.png" alt="Apas com background transparente" id="logo_footer">
-        <p>Associação Protetora dos animais de Serrinha</p>
-      </div>
-
-      <div class="footer-list" id="nav-footer">
-        <h2>Site</h2>
-        <ul id="ul-nav">
-          <li><a href="#boas-vindas">Topo</a></li>
-          <li><a href="#historia">História da APAS</a></li>
-          <li><a href="#ajudar">Como nos ajudar</a></li>
-          <li><a href="#contatos">Contatos</a></li>
-          <li><a href="#localizacao">Localização</a></li>
-        </ul>
-      </div>
-
-      <div id="contatos-footer" class="footer-list">
-        <h2>Contatos</h2>
-        <div id="footer_social_media">
-          <a href="https://www.instagram.com/apas_serrinha_oficial/" class="footer-link" id="instagram" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-
-          <a href="https://wa.me/+5575988198676" class="footer-link" id="whatsapp" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-        </div>
-      </div>
     </div>
-    <div id="footer_copyright">
-      2023 APAS SERRINHA
+  </section>
+
+  <section id="contatos">
+    <div class="conteudo">
+      <h2>Contatos</h2>
+      <ul>
+        <li>
+          <i class="fa-brands fa-whatsapp"></i>
+          <a href="https://wa.me/+5575988198676">(75) 9 8819-8676</a>
+        </li>
+        <li>
+          <i class="fa-brands fa-instagram"></i>
+          <a href="https://www.instagram.com/apas_serrinha_oficial/">apas_serrinha_oficial</a>
+        </li>
+      </ul>
     </div>
-  </footer>
+  </section>
+
+  <section id="localizacao">
+    <div class="dizeres">
+      <h2 id="titulo_loc">Localização da APAS</h2>
+      <p id="desc_loc">Avenida Lomanto Junior, n°411, Vaquejada</p>
+    </div>
+    <div id='map'>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2927.265473343576!2d-39.00118819712261!3d-11.663854311983215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7138d3a3c7e44f1%3A0xa2339eb0f4b6cb39!2sAv.%20Lomanto%20J%C3%BAnior%2C%20411%20-%20Vaquejada%2C%20Serrinha%20-%20BA%2C%2048700-000!5e0!3m2!1spt-BR!2sbr!4v1695341118478!5m2!1spt-BR!2sbr"
+        width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  
+</main>
+
+<app-footer></app-footer>
