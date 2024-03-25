@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { InstaData } from '../modules/instaData'; 
+import { InstaData } from '../modules/InstaData.module'; 
 
 @Injectable({
   providedIn: 'root'
