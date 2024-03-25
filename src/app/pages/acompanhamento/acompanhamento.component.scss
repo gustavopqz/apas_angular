@@ -31,10 +31,21 @@ main{
             justify-content: center;
             align-items: center;
 
-            .caption{
-                padding: 1vw;
-                height: 100%;
+            .card{
+                min-height: 837px;
+
+                .caption{
+                    padding: 1vw;
+                    height: 100%;
+                }
+
+                .botao_visite{
+                    position: relative;
+                    top: auto;
+                }
             }
+
+
         }
         
     }
