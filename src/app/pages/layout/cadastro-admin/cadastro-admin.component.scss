@@ -1,0 +1,84 @@
+.main-register {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    width: 800px; /* Defina a largura desejada */
+    height: 500px; /* Defina a altura desejada */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: #397269;
+    text-align: center;
+    margin-bottom: 20px; 
+}
+
+.card-register {
+    width: 600px;
+    padding: 30px 35px;
+    border-radius: 20px;
+    background-image: url('../../../../assets/img/retrato-de-cachorro-adoravel-olhando-para-cima.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(95%);
+    text-align: center;
+}
+
+.card-register > h2 {
+    color: white;
+    font-weight: 800;
+    margin: 0;
+}
+
+.textfield {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinhar os itens à esquerda */
+    margin-bottom: 20px;
+}
+
+.textfield > input {
+    width: 300px; /* Definindo um comprimento menor para os inputs */
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 12pt;
+    outline: none;
+    box-sizing: border-box;
+    align-items: center;
+    
+}
+
+.textfield > label {
+    color: #ffffff;
+    margin-bottom: 5px;
+    align-self: flex-start; /* Alinhar os labels ao topo */
+    text-align: center; /* Alinhar o texto do rótulo */
+    width: 300px; /* Definir largura igual à do input */
+}
+
+
+.btn-register {
+    width: 30%;
+    padding: 16px 0px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #397269;
+    background: #f0ffffde;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #00000056;
+}
