@@ -1,1 +1,20 @@
-<p>doacoes works!</p>
+<app-header></app-header>
+
+<main>
+    <section class="doacoes">
+        <mat-card class="doador" *ngFor="let doador of doadores">
+          <mat-card-header>
+            <div mat-card-avatar><img class="doador-img" [src]="doador?.img" width="40" height="40"></div>
+            <mat-card-title>{{doador?.email}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="doadorMsg">
+            <p>
+              Doou: {{ doador?.valor}}! <br>
+              Mensagem: {{ doador?.mensagem }}
+            </p>
+          </mat-card-content>
+        </mat-card>
+    </section>
+</main>
+
+<app-footer></app-footer>
