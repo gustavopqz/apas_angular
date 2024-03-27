@@ -7,6 +7,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { RelatoriosGastosComponent } from './pages/layout/relatorios-gastos/relatorios-gastos.component';
 import { RelatoriosDoacoesComponent } from './pages/layout/relatorios-doacoes/relatorios-doacoes.component';
+import { DoacoesComponent } from './pages/doacoes/doacoes.component';
 
 export const routes: Routes = [
     {
@@ -16,6 +17,10 @@ export const routes: Routes = [
     {
         path: 'acompanhamento',
         component: AcompanhamentoComponent
+    },
+    {
+        path: 'doacoes',
+        component: DoacoesComponent
     },
     {
         path: 'login',
