@@ -5,9 +5,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../../../../assets/colagem-de-animal-de-estimacao-bonito-isolada-Photoroom.png-Photoroom.png);
+    background-image: url(../../../../assets/img/cadastro-admin/colagem-de-animal-de-estimacao-bonito-isolada-Photoroom.png-Photoroom\ \(2\)_compressed.png);
     background-size: cover;
     background-position: center;
+    
 }
 
 .register-container {
@@ -21,7 +22,7 @@
 
 .card-register {
     width: 900px;
-    padding: 30px 35px;
+    padding: 60px 35px;
     border-radius: 20px;
     background-size: cover;
     background-position: center;
@@ -38,8 +39,9 @@
   font-weight: 800;
   font-size: 50px;
   position: relative;
-  top: -25px; 
-  z-index: 3;
+  top: -22px; 
+  z-index: 1.5;
+  margin-top: auto;
 }
 
 .textfield {
@@ -73,7 +75,7 @@
 
 
 .btn-register {
-    width: 20%;
+    width: 17%;
     padding: 12px 0px;
     border: none;
     border-radius: 8px;
@@ -87,3 +89,19 @@
     box-shadow: 0px 10px 40px -12px #00000056;
 }
 
+.error-message {
+    color: white;
+  }
+  
+  .password-mismatch-error {
+    color: white;
+  }
+  
+  .email-validation-error {
+    color: white;
+  }
+  
+  .usuario-validation-error {
+    color: white;
+  }
+  
