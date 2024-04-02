@@ -1,11 +1,14 @@
 <app-header></app-header>
 
 <main>
+  <div class="mainHeader"></div>
+
+  <h2 class="titulo">Acompanhe nossas postagens!</h2>
+
     <section class="instagram">
-        <h2 class="title">Acompanhe nossas postagens</h2>
         <div class="posts">
           <div *ngIf="this.loading" class="loadingio-spinner-spinner-umdfa32ztyl"><div class="ldio-9dlqot11oq7"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
-            <mat-card class="card" *ngFor="let post of posts.slice(0, 3)">
+            <mat-card class="card" *ngFor="let post of posts.slice(0, 5)">
                 <mat-card-header>
                   <img mat-card-avatar class="header-image" src="./assets/img/landing/apas_logo.jpg">
                   <mat-card-title>apas_serrinha_official</mat-card-title>
@@ -18,25 +21,10 @@
                   </p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <a [href]="post.permalink" target="_blank"><button mat-button class="botao_visite">VISITE</button></a>
+                  <a [href]="post.permalink" target="_blank" class="divBotaoVisite"><button mat-button class="botaoVisite">VISITE</button></a>
                 </mat-card-actions>
               </mat-card>
         </div>
-    </section>
-
-    <section class="doacoes">
-        <mat-card class="doador">
-          <mat-card-header>
-            <div mat-card-avatar class="doador-img"><img src="./assets/img/profiles/pasqua.png" width="40" height="40"></div>
-            <mat-card-title>{{doador?.email}}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="doadorMsg">
-            <p>
-              Doou: {{ doador?.valor}}! <br>
-              Mensagem: {{ doador?.mensagem }}
-            </p>
-          </mat-card-content>
-        </mat-card>
     </section>
 </main>
 
