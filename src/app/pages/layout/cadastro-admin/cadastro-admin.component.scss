@@ -1,92 +1,94 @@
+:host {
+  display: block;
+  overflow: hidden;
+}
 
 .main-register {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(../../../../assets/img/cadastro-admin/colagem-de-animal-de-estimacao-bonito-isolada-Photoroom.png-Photoroom\ \(2\)_compressed.png);
-    background-size: cover;
-    background-position: center;
-    
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../../../assets/img/cadastro-admin/colagem-de-animal-de-estimacao-bonito-isolada-Photoroom.png-Photoroom\ \(2\)_compressed.png);
+  background-size: cover;
+  background-position: center;
 }
 
 .register-container {
-    width: 800px; 
-    height: 500px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-register {
-    width: 900px;
-    padding: 60px 35px;
-    border-radius: 20px;
-    background-size: cover;
-    background-position: center;
-    backdrop-filter: blur(5px); 
-    background-color: rgba(255, 255, 255, 0.01); 
-    border: 1px solid rgba(255, 255, 255, 0.05); 
-    text-align: center;
-     }
-    
-    
+  width: 900px;
+  padding: 60px 35px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
 
 .card-register > h2 {
-    color: white;
+  color: white;
   font-weight: 800;
   font-size: 50px;
   position: relative;
-  top: -22px; 
+  top: -22px;
   z-index: 1.5;
   margin-top: auto;
 }
 
 .textfield {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .textfield > input {
-    width: 350px; 
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 12pt;
-    outline: none;
-    box-sizing: border-box;
-    align-items: center;
-
+  width: 350px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 12pt;
+  outline: none;
+  box-sizing: border-box;
+  align-items: center;
 }
 
 .textfield > label {
-    color: #ffffff;
-    margin-bottom: 5px;
-    align-self: flex-start; 
-    text-align: center; 
-    width: 540px; 
+  color: #ffffff;
+  margin-bottom: 5px;
+  align-self: flex-start;
+  text-align: center;
+  width: 540px;
 }
 
-
 .btn-register {
-    width: 17%;
-    padding: 12px 0px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: #397269;
-    background: #ffffff;
-    cursor: pointer;
-    box-shadow: 0px 10px 40px -12px #00000056;
+  width: 17%;
+  padding: 12px 0px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #397269;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0px 10px 40px -12px #00000056;
 }
 
 .error-message {

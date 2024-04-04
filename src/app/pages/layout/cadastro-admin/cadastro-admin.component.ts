@@ -16,7 +16,7 @@ export class CadastroAdminComponent {
   senha: string = '';
   confirmarSenha: string = '';
 
-<<<<<<< HEAD
+
   
   isEmailValid: boolean = true;
   isPasswordValid: boolean = true;
@@ -65,6 +65,6 @@ export class CadastroAdminComponent {
   bootstrap: [CadastroAdminComponent]
 })
 export class CadastroAdminModule {}
-=======
-}
->>>>>>> main
+
+
+
