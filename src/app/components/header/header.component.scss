@@ -19,7 +19,27 @@ header {
 
 #space {
     width: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+
+    .user_img{
+        max-width: 3rem;
+    }
+
+    span{
+        color: #397269;
+        border-bottom: 2px solid #FFF;
+    }
+
+    span:hover{
+        font-weight: bolder;
+    }
 }
+
+
 
 nav {
     display: flex;
@@ -48,3 +68,4 @@ nav ul li {
 nav ul li:hover {
     border-bottom: 2px solid #397269;
 }
+
