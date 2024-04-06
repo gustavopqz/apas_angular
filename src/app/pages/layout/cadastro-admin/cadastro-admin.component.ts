@@ -16,44 +16,43 @@ export class CadastroAdminComponent {
   senha: string = '';
   confirmarSenha: string = '';
 
-
-  
   isEmailValid: boolean = true;
   isPasswordValid: boolean = true;
   isConfirmPasswordValid: boolean = true;
+  isUsernameValid: boolean = true; 
 
-  
   validateEmail() {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     this.isEmailValid = emailPattern.test(this.email);
   }
 
-  
   validatePassword() {
     this.isPasswordValid = this.senha.length >= 8;
   }
 
-  
   validateConfirmPassword() {
     this.isConfirmPasswordValid = this.confirmarSenha === this.senha;
   }
 
-  
-  onSubmit() {
+  validateUsername() {
     
+    this.isUsernameValid = this.usuario.trim().length > 0;
+  }
+
+  onSubmit() {
     this.validateEmail();
     this.validatePassword();
     this.validateConfirmPassword();
+    this.validateUsername();
 
-    
-    if (this.isEmailValid && this.isPasswordValid && this.isConfirmPasswordValid) {
+    if (this.isEmailValid && this.isPasswordValid && this.isConfirmPasswordValid && this.isUsernameValid) {
       console.log('Formulário enviado com sucesso!');
-    
     } else {
       console.log('Falha na validação do formulário!');
     }
   }
 }
+
 
 
 
