@@ -36,7 +36,8 @@
   "gastos": [
     {
       "valor": 5000,
-      "produto": "Ração"
+      "produto": "Ração",
+      "id": "2b9b"
     }
   ],
   "administradores": [
@@ -55,5 +56,20 @@
       "img": ""
     }
   ],
-  "usuarios": []
+  "usuarios": [
+    {
+      "nome": "Luis Fernando",
+      "email": "dev.luisfernando12@gmail.com",
+      "senha": "12345",
+      "img": "./assets/img/profiles/luisfernando.png",
+      "id": "d552"
+    },
+    {
+      "id": "b676",
+      "nome": "Gugu Pasquinha",
+      "email": "gustavopasqua@hotmail.com",
+      "senha": "jade123",
+      "img": ""
+    }
+  ]
 }
