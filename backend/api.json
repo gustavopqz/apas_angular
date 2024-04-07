@@ -34,11 +34,18 @@
     }
   ],
   "gastos": [
-    {
-      "valor": 5000,
-      "produto": "Ração",
-      "id": "2b9b"
-    }
+    { "data": "2024-04-01", "descricao": "Ração", "valor": "R$ 680,00" },
+    { "data": "2024-04-02", "descricao": "Medicamentos", "valor": "R$ 450,00" },
+    { "data": "2024-04-02", "descricao": "Aluguel", "valor": "R$ 700,00" },
+    { "data": "2024-04-02", "descricao": "Embasa", "valor": "R$ 425,00" },
+    { "data": "2024-04-02", "descricao": "Coelba", "valor": "R$ 500,00" }
+  ],
+  "relDoacoes": [
+    { "data": "2024-04-01", "doador": "Pasquinha", "descricao": "Valor em dinheiro", "valor": "R$ 1000,00" },
+    { "data": "2024-04-01", "doador": "Fefinho", "descricao": "Valor em ração", "valor": "R$ 600,00" },
+    { "data": "2024-04-01", "doador": "Gugu", "descricao": "Valor em Medicação", "valor": "R$ 900,00" },
+    { "data": "2024-04-01", "doador": "Cesinha", "descricao": "Valor em dinheiro", "valor": "R$ 500,00" },
+    { "data": "2024-04-01", "doador": "Vivi", "descricao": "Valor em ração", "valor": "R$ 300,00" }
   ],
   "administradores": [
     {
