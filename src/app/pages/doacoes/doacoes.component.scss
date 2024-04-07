@@ -38,4 +38,24 @@ main{
     .doador-img{
         border-radius: 20rem;
     }
+
+
+    .doar{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        .botao_doar{
+            background-color: #51837B;
+            width: 40vw;
+            height: 10vh;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+.teste{
+    font-size: 3rem;
 }

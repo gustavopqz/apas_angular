@@ -1,0 +1,25 @@
+<mat-toolbar style="background-color: #4E7E76; display:flex; justify-content: center;">
+  <h2 mat-dialog-title style="color: #fff">Olá doador!</h2>
+</mat-toolbar>
+
+<mat-dialog-content style="color: #000;">
+  Escolha a quantia ou digite um valor:
+</mat-dialog-content>
+
+<section class="quantias" style="display: flex; justify-content: center; gap: 5px;">
+  <button mat-flat-button style="background-color: #4E7E76; color: #fff; width: 30%;" (click)="atualizaValorDoacao(20)">R$20,00</button>
+  <button mat-flat-button style="background-color: #4E7E76; color: #fff; width: 30%;" (click)="atualizaValorDoacao(50)">R$50,00</button>
+  <button mat-flat-button style="background-color: #4E7E76; color: #fff; width: 30%;" (click)="atualizaValorDoacao(100)">R$100,00</button>
+</section>
+
+<section class="personalizado" style="display: flex; align-items: center; padding-top: 1.5rem; flex-direction: column;">
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="valorDoacao">
+  </mat-form-field>
+  <img src="/assets/img/doacoes/mercado-pago.png" alt="Mercado Pago" style="width: 50%;">
+</section>
+
+<mat-dialog-actions style="display: flex; justify-content: center; padding-top: 1.5rem;">
+  <button mat-flat-button color="warn" style="height: 40px; width: 45%" mat-dialog-close>Cancelar</button>
+  <button mat-flat-button style="background-color: #4E7E76; color: #fff; height: 40px; width: 45%;" mat-dialog-close cdkFocusInitial>Prosseguir</button>
+</mat-dialog-actions>
