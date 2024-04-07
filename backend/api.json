@@ -1,0 +1,59 @@
+{
+  "doacoes": [
+    {
+      "id": "1",
+      "doadorNome": "Gustavo Pasqua",
+      "email": "gustavo.pasqua@hotmail.com",
+      "valor": 10,
+      "mensagem": "ONG que preza o bem estar dos animais",
+      "img": "./assets/img/profiles/pasqua.png"
+    },
+    {
+      "id": "2",
+      "doadorNome": "Luís Fernando",
+      "email": "luis.fernando@hotmail.com",
+      "valor": 10,
+      "mensagem": "Conheci o pessoal e são muito queridos",
+      "img": "./assets/img/profiles/luisfernando.png"
+    },
+    {
+      "id": "3",
+      "doadorNome": "Gustavo Silva",
+      "email": "gustavo.silva@hotmail.com",
+      "valor": 10,
+      "mensagem": "Conheci o pessoal e são muito queridos",
+      "img": ""
+    },
+    {
+      "id": "4",
+      "doadorNome": "Gustavo Pasqua",
+      "email": "gustavo.pasqua@hotmail.com",
+      "valor": 10,
+      "mensagem": "ONG que preza o bem estar dos animais",
+      "img": "./assets/img/profiles/pasqua.png"
+    }
+  ],
+  "gastos": [
+    {
+      "valor": 5000,
+      "produto": "Ração"
+    }
+  ],
+  "administradores": [
+    {
+      "id": "f8ae",
+      "nome": "Gustavo Silva",
+      "senha": "1234",
+      "email": "gustavo.silva@hotmail.com",
+      "img": ""
+    },
+    {
+      "id": "f4c2",
+      "nome": "Gustavo Pasqua",
+      "senha": "1234",
+      "email": "gustavo.pasqua@hotmail.com",
+      "img": ""
+    }
+  ],
+  "usuarios": []
+}
