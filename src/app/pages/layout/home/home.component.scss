@@ -1,0 +1,59 @@
+.bem-vindo-header {
+    background-color: #397269;
+    color: white;
+    padding: 50px;
+    text-align: center;
+    font-size: 45px;
+  }
+  
+  .bem-vindo-content {
+    padding: 20px;
+  }
+  
+  .ong-card {
+    background-color: #f0f0f0;
+    border-top: 10px solid #397269;
+    padding: 40px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card {
+    width: calc(33.33% - 20px);
+    background-color: #f0f0f0;
+    border-top: 10px solid #397269;
+    padding: 60px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card h2 {
+    margin-top: 0;
+  }
+  
+  .card p {
+    margin-bottom: 0;
+  }
+  .btn-text {
+    top: 35px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  .mat-icon {
+    margin-top: 5px;
+   
+  }
