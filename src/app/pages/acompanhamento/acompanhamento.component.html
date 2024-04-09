@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<main>
+  <div class="mainHeader"></div>
+
+  <h2 class="titulo">Acompanhe nossas postagens!</h2>
+
+    <section class="instagram">
+        <div class="posts">
+          <div *ngIf="this.loading" class="loadingio-spinner-spinner-umdfa32ztyl"><div class="ldio-9dlqot11oq7"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+            <mat-card class="card" *ngFor="let post of posts.slice(0, 5)">
+                <mat-card-header>
+                  <img mat-card-avatar class="header-image" src="./assets/img/landing/apas_logo.jpg">
+                  <mat-card-title>apas_serrinha_official</mat-card-title>
+                </mat-card-header>
+                <video *ngIf="post.media_type == 'VIDEO'" mat-card-image [src]="posts ? post.media_url : ''" alt="APAS Logo" controls></video>
+                <img *ngIf="post.media_type == 'CAROUSEL_ALBUM' || post.media_type == 'IMAGE'" mat-card-image [src]="posts ? post.media_url : ''" alt="APAS Logo">
+                <mat-card-content class="caption">
+                  <p>
+                    {{ post.caption }}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <a [href]="post.permalink" target="_blank" class="divBotaoVisite"><button mat-button class="botaoVisite">VISITE</button></a>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+    </section>
+</main>
+
+<app-footer></app-footer>

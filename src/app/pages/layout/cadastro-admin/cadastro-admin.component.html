@@ -1,1 +1,29 @@
-<p>cadastro-admin works!</p>
+<div class="main-register">
+    <div class="register-container">
+      <div class="card-register">
+        <h2>Cadastro</h2>
+        <div class="image-input">
+          <div class="textfield">
+            <label for="usuario">Nome:</label>
+            <input type="text" name="usuario" placeholder="Nome" [(ngModel)]="usuario">
+          </div>
+          <div class="textfield">
+            <label for="email">Email:</label>
+            <input type="text" name="email" placeholder="Email" [(ngModel)]="email" (blur)="validateEmail()">
+            <div *ngIf="!isEmailValid" class="error-message">Por favor, insira um email válido.</div>
+          </div>
+          <div class="textfield">
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" placeholder="Senha" [(ngModel)]="senha" (blur)="validatePassword()">
+            <div *ngIf="!isPasswordValid" class="error-message">A senha deve ter pelo menos 8 caracteres.</div>
+          </div>
+          <div class="textfield">
+            <label for="confirmarSenha">Senha:</label>
+            <input type="password" name="confirmarSenha" placeholder="Confirmar Senha" [(ngModel)]="confirmarSenha" (blur)="validateConfirmPassword()">
+            <div *ngIf="!isConfirmPasswordValid" class="error-message">As senhas não coincidem.</div>
+          </div>
+        </div>
+        <button class="btn-register" (click)="onSubmit()">Cadastrar</button>
+      </div>
+    </div>
+</div>

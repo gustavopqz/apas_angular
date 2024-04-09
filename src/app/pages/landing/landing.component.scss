@@ -1,0 +1,217 @@
+/* Importando fonte do google */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+
+:root {
+    --color-neutral-0: #0e0c0c;
+    --color-neutral-10: #ffffff;
+    --color-neutral-30: #000000;
+    --color-neutral-40: #000000;
+}
+
+/* Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Seção de boas vindas */
+#boas-vindas {
+    padding-top: 10vh;
+    min-height: 60vh;
+    display: flex;
+    background: url('/assets/img/landing/paws.png');
+    background-color: #D0C7BF;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#boas-vindas img {
+    height: 60vh;
+}
+
+#boas-vindas .dizeres {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 1rem;
+    border-radius: 10px;
+    color: #397269;
+}
+
+#boas-vindas .dizeres h2 {
+    font-size: 2rem;
+    text-align: center;
+    max-width: 40vw;
+}
+
+.dizeres h1 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+/* História */
+#historia {
+    padding: 10vh 0;
+    display: flex;
+    justify-content: center;
+}
+
+#historia .dizeres {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #39726990;
+    max-width: 40vw;
+    margin: 2rem;
+    margin-right: 10rem;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+#historia .dizeres h2 {
+    font-size: 2.4rem;
+    padding-bottom: 1rem;
+}
+
+#historia .dizeres p {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+#logo_div {
+    max-width: 50vw;
+    display: flex;
+    align-items: center;
+}
+
+#logo_div img {
+    width: 20vw;
+}
+
+/* Como nos ajudar */
+#ajudar {
+    min-height: 80vh;
+    background: url('/assets/img/landing/dog.jpg');
+    background-size: cover;
+    display: flex;
+    padding: 10vh 0;
+}
+
+#ajudar .espaco {
+    width: 50vw;
+}
+
+#conteudo {
+    width: 50vw;
+}
+
+#ajudar h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    line-height: 75px;
+}
+
+#conteudo ul {
+    list-style: none;
+    height: calc(100% - 75px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ajuda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    font-size: 1.7rem;
+    cursor: default;
+}
+
+.ajuda img {
+    max-width: 3.5rem;
+    transition: ease .3s;
+}
+
+.ajuda img:hover {
+    transform: scale(1.1);
+}
+
+/* Localização */
+#map {
+    max-width: 100%;
+}
+
+#localizacao {
+    background-color: #ffffff;
+    padding-top: 2rem;
+}
+
+#titulo_loc{
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+#localizacao .dizeres {
+    padding-bottom: 1.5rem;
+}
+
+#localizacao .dizeres h2 {
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+#localizacao .dizeres p {
+    font-size: 1.7rem
+}
+
+#desc_loc {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+@media (max-width:1300px), (max-height: 700px){
+    #boas-vindas .dizeres h2{
+        font-size: 1.5rem;
+    }
+
+    #logo_div img{
+        width: 30vw;
+    }
+
+    #ajudar h2{
+        font-size: 2rem;
+    }
+
+    .ajuda{
+        font-size: 1.2rem;
+    }
+
+    #map iframe{
+        max-height: 60vh;
+    }
+}
+
+/* Image bounce */
+
+@keyframes bounce{
+    0% { transform: scale(1);}
+    50% { transform: scale(1.1);}
+    100% { transform: scale(1);}
+}
+.bounce{
+    animation: bounce 2s infinite;
+}

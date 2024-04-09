@@ -1,0 +1,15 @@
+<header>
+    <img routerLink="" class="logo" src="./assets/img/landing/apas_logo.jpg" alt="Logo">
+    <nav>
+      <ul>
+        <li routerLink="">PRINCIPAL</li>
+        <li routerLink="/acompanhamento">ACOMPANHAMENTO</li>
+        <li routerLink="/doacoes">DOAÇÕES</li>
+        <li routerLink="/doacoes">PATROCÍNIOS</li>        
+      </ul>
+    </nav>
+    <div id="space">
+      <img src="/assets/img/header/user.png" class="user_img">
+      <span *ngIf="!isLogged" routerLink="/login">LOGIN</span>
+    </div>
+  </header>
