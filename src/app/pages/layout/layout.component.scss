@@ -46,6 +46,12 @@
                 font-size: 1.1rem;
             }
         }
+
+        .botao_voltar{
+            position: absolute;
+            bottom: 10px;
+            
+        }
     
         .ativo{
             color: $primaria-amarela;
