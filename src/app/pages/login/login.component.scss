@@ -1,9 +1,16 @@
 @import "../../app.component.scss";
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// *{
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box;
+// }
+
+.botao_voltar{
+    background-color: #51837B !important;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 //Container 
 .container{
