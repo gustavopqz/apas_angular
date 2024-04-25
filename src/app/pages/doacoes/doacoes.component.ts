@@ -3,7 +3,7 @@ import { NgModel } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { MatCardModule } from '@angular/material/card'; 
-import { DoacesService } from '../../services/doaces.service';
+import { DoacoesService } from '../../services/doacoes.service';
 import { Doadores } from '../../modules/doadores.module';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule ,MatButton } from '@angular/material/button';
@@ -25,7 +25,7 @@ export class DoacoesComponent implements OnInit {
   doador1 ?: Doadores;
   doadores ?: Doadores[];
 
-  constructor(private doacoesService :DoacesService, public dialog: MatDialog){}
+  constructor(private doacoesService :DoacoesService, public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.getDoadores();

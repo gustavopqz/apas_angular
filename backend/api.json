@@ -21,16 +21,28 @@
       "doadorNome": "Gustavo Silva",
       "email": "gustavo.silva@hotmail.com",
       "valor": 10,
-      "mensagem": "Conheci o pessoal e são muito queridos",
+      "mensagem": "Muito bonito o projeto",
       "img": ""
+    }
+  ],
+  "patrocinadores": [
+    {
+      "id": "1",
+      "patrocinador": "Automatize",
+      "email": "dev.gustavo@hotmail.com",
+      "valor": 10,
+      "mensagem": "Nossa empresa Automatize apoia a ONG APAS que propões os cuidados e proteção aos animais de Serrinha.",
+      "img": "./assets/img/patrocinadores/automatize.png",
+      "url": "https://gustavopasqua.netlify.app/"
     },
     {
-      "id": "4",
-      "doadorNome": "Gustavo Pasqua",
-      "email": "gustavo.pasqua@hotmail.com",
+      "id": "2",
+      "patrocinador": "UNIFAN",
+      "email": "unifan@teste.com.br",
       "valor": 10,
-      "mensagem": "ONG que preza o bem estar dos animais",
-      "img": "./assets/img/profiles/pasqua.png"
+      "mensagem": "Alunos da UNIFAN gostam do projeto sem fins lucrativos que cuida dos animais.",
+      "img": "./assets/img/patrocinadores/unifan.jpg",
+      "url": "https://unifan.net.br/"
     }
   ],
   "gastos": [

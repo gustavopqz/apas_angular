@@ -8,6 +8,7 @@ import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.c
 import { RelatoriosGastosComponent } from './pages/layout/relatorios-gastos/relatorios-gastos.component';
 import { RelatoriosDoacoesComponent } from './pages/layout/relatorios-doacoes/relatorios-doacoes.component';
 import { DoacoesComponent } from './pages/doacoes/doacoes.component';
+import { PatrocinadoresComponent } from './pages/patrocinadores/patrocinadores.component';
 
 export const routes: Routes = [
     {
@@ -21,6 +22,10 @@ export const routes: Routes = [
     {
         path: 'doacoes',
         component: DoacoesComponent
+    },
+    {
+        path: 'patrocinios',
+        component: PatrocinadoresComponent
     },
     {
         path: 'login',

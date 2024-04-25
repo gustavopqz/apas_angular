@@ -6,10 +6,8 @@ import { Doadores } from '../modules/doadores.module';
 @Injectable({
   providedIn: 'root'
 })
-export class DoacesService {
-
-
-
+export class DoacoesService {
+  
   constructor(private http: HttpClient) { }
 
   getDoador1(): Observable<Doadores>{
