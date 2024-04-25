@@ -1,4 +1,7 @@
-<div [ngClass]="container ? 'container sing-in-ts': 'container sing-up-ts' ">
+<button mat-flat-button class="botao_voltar" color="primary" routerLink=""><i class="material-icons">
+    chevron_left
+    </i>Voltar ao site</button>
+<div [ngClass]="container ? 'container sing-in-ts': 'container sing-up-ts' ">    
     <!--Primary content-->
     <div class="content first-content">
         <div class="first-column">
@@ -58,7 +61,7 @@
                     </i>
                     <input type="password" placeholder="Confirmar senha">
                 </label>
-                <button class="btn btn-secondary">Enviar</button>
+                <button class="btn btn-secondary" routerLink="/painel/home">Enviar</button>
             </form>
         </div>
     </div>
@@ -110,7 +113,7 @@
                     <input type="password" placeholder="Senha">
                 </label>
                 <a class="password" href="#">Esqueceu sua senha?</a>
-                <button class="btn btn-secondary">Enviar</button>
+                <button class="btn btn-secondary" routerLink="/painel/home">Enviar</button>
             </form>
         </div>
     </div>
