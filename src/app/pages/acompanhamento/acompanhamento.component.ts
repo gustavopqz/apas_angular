@@ -5,7 +5,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
 import { InstagramService } from '../../services/instagram.service';
-import { DoacesService } from '../../services/doaces.service';
+import { DoacoesService } from '../../services/doacoes.service';
 import { Posts } from '../../modules/posts.module';
 import { InstaData } from '../../modules/InstaData.module'
 import { Doadores } from '../../modules/doadores.module';
@@ -19,7 +19,7 @@ import { Doadores } from '../../modules/doadores.module';
 })
 export class AcompanhamentoComponent implements OnInit{
 
-  constructor(private instagramService : InstagramService,private doacoesService: DoacesService){
+  constructor(private instagramService : InstagramService,private doacoesService: DoacoesService){
   }
 
   instaData ?: InstaData;

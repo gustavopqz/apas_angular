@@ -1,0 +1,41 @@
+<app-header></app-header>
+
+<main>
+    <div class="mainHeader"></div>
+
+    <h2 class="titulo">Seja um doador!</h2>
+
+    <section class="patrocinadores">
+        <mat-card class="patrocinador">
+          <mat-card-header>
+            <div mat-card-avatar><img class="patrocinador-img" src="/assets/img/apas_logo.jpg" width="40" height="40"></div>
+            <mat-card-title>Seja um Patrocinador!</mat-card-title>
+            <mat-card-subtitle>Qualquer valor será de grande ajuda...</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="mensagem">
+              Deseja aparecer nesta página junto a outros doadores? <br><br>
+              É opcional, também é possível realizar doações anônimas! <br><br>
+              Somos gratos pela sua presença e desejo em ajudar.
+            </p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="patrocinador" *ngFor="let patrocinador of patrocinadores">
+          <mat-card-header>
+            <div mat-card-avatar><img class="doador-img" [src]="patrocinador?.img || '/assets/img/header/user.png'" width="40" height="40"></div>
+            <mat-card-title>{{patrocinador?.patrocinador}}</mat-card-title>
+            <mat-card-subtitle>Valor doado: {{ patrocinador?.valor | number: '1.2-2' }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="mensagem">
+              "{{ patrocinador?.mensagem }}"
+            </p>
+          </mat-card-content>
+
+          <button mat-flat-button color="primary" class="botao_doar" (click)="redirencionaParaPatrocinador(patrocinador.url)">Visite nossa empresa</button>
+        </mat-card>
+    </section>
+</main>
+
+<app-footer></app-footer>
