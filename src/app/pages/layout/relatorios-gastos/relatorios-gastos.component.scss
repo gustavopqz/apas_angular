@@ -1,0 +1,60 @@
+table {
+    margin-top: 50px;
+    width: 90%;
+}
+
+input[type="date"] {
+    height: 40px;
+    background-color: #f8f8f8;
+    border: 1px solid #397269;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.base input[type="text"] {
+    width: 300px;
+    height: 40px;
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #397269;
+    border-radius: 5px;
+}
+
+.base .titulo h1 {
+    font-size: 48px;
+    color: #397269;
+    text-align: center;
+    font-family: 'Arial', sans-serif; 
+    margin-bottom: 30px;
+    margin-top: 55px;
+    }
+
+.base .inserts {
+    margin-left: 350px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.botaoInserir {
+    position: fixed; 
+    top: 118px;
+    right: 400px; 
+}
+.example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+    }
+      
+.example-button-row {
+    display: table-cell;
+    max-width: 600px;
+   }
+      
+.example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+   }
+

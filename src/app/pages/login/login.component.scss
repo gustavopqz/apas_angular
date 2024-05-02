@@ -16,7 +16,7 @@
     .content{
         background-color: #ffffff;
         border-radius: 15px;
-        width: 960px;
+        width: 100vh;
         height: 50%;
         justify-content: space-between;
         align-items: center;
@@ -35,7 +35,7 @@
         left: 0%;
     }
     .title{
-        font-size: 28px;
+        font-size: 23px;
         font-weight: bold;
         text-transform: capitalize;
     }
@@ -83,7 +83,7 @@
     .btn-secondary{
         background-color: $primaria-verde;
         border: 1px solid $primaria-verde;
-        margin-top: 5px;
+        margin-top: 4px;
     }
     .btn-secondary:hover{
         background-color: #fff;
@@ -144,7 +144,7 @@
     form{
         display: flex;
         flex-direction: column;
-        width: 55%;
+        width: 65%;
         text-align: center;
     }
     .form input {
@@ -152,13 +152,13 @@
         height: 45px;
         border: none;
         background-color: #ecf0f1;
-        margin: 8px;
+        margin: 2px;
     }
     .label-input{
         background-color: #ecf0f1;
         display: flex;
         align-items: center;
-        margin: 8px;
+        margin: 5px;
     }
     .icons-forms{
         color: #7f8c8d;
@@ -201,7 +201,7 @@
     left: 60%;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    animation: slidein 2.5s linear;
+    animation: slidein 2s linear;
 
     z-index: 12;
 }
@@ -227,12 +227,12 @@
 .sing-in-ts .first-content .second-column{
     z-index: -1;
     position: relative;
-    animation: leftDisplacement 3s;
+    animation: leftDisplacement 2s;
 }
 .sing-up-ts .second-content .second-column{
     z-index: -1;
     position: relative;
-    animation: rightDisplacement 2.5s;
+    animation: rightDisplacement 2s;
 }
 
 /* Animação CSS para conteúdo */

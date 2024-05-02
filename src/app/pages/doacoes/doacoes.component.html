@@ -23,7 +23,7 @@
 
         <mat-card class="doacao" *ngFor="let doador of doadores">
           <mat-card-header>
-            <div mat-card-avatar><img class="doador-img" [src]="doador?.img" width="40" height="40"></div>
+            <div mat-card-avatar><img class="doador-img" [src]="doador?.img || '/assets/img/header/user.png'" width="40" height="40"></div>
             <mat-card-title>{{doador?.doadorNome}}</mat-card-title>
             <mat-card-subtitle>Valor doado: {{ doador?.valor | number: '1.2-2' }}</mat-card-subtitle>
           </mat-card-header>
@@ -33,6 +33,10 @@
             </p>
           </mat-card-content>
         </mat-card>
+    </section>
+
+    <section class="doar">
+      <button mat-flat-button class="botao_doar" (click)="abrirDialog()">DOAR!</button>
     </section>
 </main>
 

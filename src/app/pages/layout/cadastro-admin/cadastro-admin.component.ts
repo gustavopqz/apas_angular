@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -59,7 +60,7 @@ export class CadastroAdminComponent {
 
 
 @NgModule({
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, MatIconModule],
   declarations: [CadastroAdminComponent],
   bootstrap: [CadastroAdminComponent]
 })

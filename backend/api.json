@@ -1,0 +1,82 @@
+{
+  "doacoes": [
+    {
+      "id": "1",
+      "doadorNome": "Gustavo Pasqua",
+      "email": "gustavo.pasqua@hotmail.com",
+      "valor": 10,
+      "mensagem": "ONG que preza o bem estar dos animais",
+      "img": "./assets/img/profiles/pasqua.png"
+    },
+    {
+      "id": "2",
+      "doadorNome": "Luís Fernando",
+      "email": "luis.fernando@hotmail.com",
+      "valor": 10,
+      "mensagem": "Conheci o pessoal e são muito queridos",
+      "img": "./assets/img/profiles/luisfernando.png"
+    },
+    {
+      "id": "3",
+      "doadorNome": "Gustavo Silva",
+      "email": "gustavo.silva@hotmail.com",
+      "valor": 10,
+      "mensagem": "Conheci o pessoal e são muito queridos",
+      "img": ""
+    },
+    {
+      "id": "4",
+      "doadorNome": "Gustavo Pasqua",
+      "email": "gustavo.pasqua@hotmail.com",
+      "valor": 10,
+      "mensagem": "ONG que preza o bem estar dos animais",
+      "img": "./assets/img/profiles/pasqua.png"
+    }
+  ],
+  "gastos": [
+    { "data": "2024-04-01", "descricao": "Ração", "valor": "R$ 680,00" },
+    { "data": "2024-04-02", "descricao": "Medicamentos", "valor": "R$ 450,00" },
+    { "data": "2024-04-02", "descricao": "Aluguel", "valor": "R$ 700,00" },
+    { "data": "2024-04-02", "descricao": "Embasa", "valor": "R$ 425,00" },
+    { "data": "2024-04-02", "descricao": "Coelba", "valor": "R$ 500,00" }
+  ],
+  "relDoacoes": [
+    { "data": "2024-04-01", "doador": "Pasquinha", "descricao": "Valor em dinheiro", "valor": "R$ 1000,00" },
+    { "data": "2024-04-01", "doador": "Fefinho", "descricao": "Valor em ração", "valor": "R$ 600,00" },
+    { "data": "2024-04-01", "doador": "Gugu", "descricao": "Valor em Medicação", "valor": "R$ 900,00" },
+    { "data": "2024-04-01", "doador": "Cesinha", "descricao": "Valor em dinheiro", "valor": "R$ 500,00" },
+    { "data": "2024-04-01", "doador": "Vivi", "descricao": "Valor em ração", "valor": "R$ 300,00" }
+  ],
+  "administradores": [
+    {
+      "id": "f8ae",
+      "nome": "Gustavo Silva",
+      "senha": "1234",
+      "email": "gustavo.silva@hotmail.com",
+      "img": ""
+    },
+    {
+      "id": "f4c2",
+      "nome": "Gustavo Pasqua",
+      "senha": "1234",
+      "email": "gustavo.pasqua@hotmail.com",
+      "img": ""
+    }
+  ],
+  "usuarios": [
+    {
+      "nome": "Luis Fernando",
+      "email": "dev.luisfernando12@gmail.com",
+      "senha": "12345",
+      "img": "./assets/img/profiles/luisfernando.png",
+      "id": "d552"
+    },
+    {
+      "id": "b676",
+      "nome": "Gugu Pasquinha",
+      "email": "gustavopasqua@hotmail.com",
+      "senha": "jade123",
+      "img": ""
+    }
+  ]
+}
