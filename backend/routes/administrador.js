@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 const Administrador = require('../models/Administrador');
 
@@ -9,7 +10,8 @@ router.get('/', async (req, res) => {
     if (email) {
         try {
             let administrador = await Administrador.findOne({ "email": email });
-            res.status(200).json(administrador);
+            if (administrador) res.status(200).json(administrador)
+            else res.status(404).json({"message": "Administrador não encontrado"})
         } catch (error) {
             res.status(500).json({ "message": "Algo deu errado!" });
         }
@@ -24,7 +26,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/cadastro', async (req, res) => {
-    let { id, nome, email, senha, img} = await req.body;
+    let { id, nome, email, senha, img } = await req.body;
     
 
     if (!id || !nome || !email || !senha) {
@@ -39,11 +41,14 @@ router.post('/cadastro', async (req, res) => {
         return;
     }
 
+    const salt = await bcrypt.genSalt(8)
+    const senhaEncriptada = await bcrypt.hash(senha, salt)
+
     let administradorObj = {
         id,
         nome,
         email,
-        senha,
+        senha: senhaEncriptada,
         img
     };
 
