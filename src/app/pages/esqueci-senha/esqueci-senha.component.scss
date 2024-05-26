@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    border: 2px solid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.first-content{
+    display: flex;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
