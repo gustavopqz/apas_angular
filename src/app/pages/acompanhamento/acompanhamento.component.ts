@@ -9,11 +9,12 @@ import { DoacoesService } from '../../services/doacoes.service';
 import { Posts } from '../../modules/posts.module';
 import { InstaData } from '../../modules/InstaData.module'
 import { Doadores } from '../../modules/doadores.module';
+import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutuante.component';
 
 @Component({
   selector: 'app-acompanhamento',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, MatCardModule, MatButtonModule, CommonModule],
+  imports: [HeaderComponent, FooterComponent, MatCardModule, MatButtonModule, CommonModule, BtnFlutuanteComponent],
   templateUrl: './acompanhamento.component.html',
   styleUrl: './acompanhamento.component.scss'
 })
