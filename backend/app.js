@@ -33,11 +33,13 @@ app.get('/', (req, res)=>{
 
 // Import routes
 const doacoes = require("./routes/doacoes");
+const patrocinios = require("./routes/patrocinios")
 
 // Routes
 app.use('/doacoes', doacoes);
+app.use('/patrocinios', patrocinios)
 
 // Serve
-app.listen(3000, ()=>{
-    console.log('Escutando na porta 3000');
+app.listen(9000, ()=>{
+    console.log('Escutando na porta 9000');
 })
