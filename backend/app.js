@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 
 // Import routes
 const doacoes = require("./routes/doacoes");
+const administrador = require("./routes/administrador");
 
 // Middlewars
 app.use(cors());
@@ -30,6 +31,8 @@ app.get('/', (req, res)=>{
 
 // Router
 app.use('/doacoes', doacoes);
+app.use('/administrador', administrador);
+
 
 //DB connection
 const connection = mongoose.connect(`mongodb+srv://${user}:${pass}@${cluster}.gvpzqhx.mongodb.net/apas`)
