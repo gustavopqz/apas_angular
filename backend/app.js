@@ -9,6 +9,10 @@ const bodyParser = require("body-parser");
 // DB Import
 const mongoose = require("mongoose");
 
+// Import routes
+const doacoes = require("./routes/doacoes");
+const gastos = require("./routes/gastos");
+
 // Middlewars
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,11 +37,13 @@ app.get('/', (req, res)=>{
 
 // Import routes
 const doacoes = require("./routes/doacoes");
+const gastos = require("./routes/gastos");
 
 // Routes
 app.use('/doacoes', doacoes);
+app.use('/gastos', gastos);
 
 // Serve
-app.listen(3000, ()=>{
-    console.log('Escutando na porta 3000');
+app.listen(9000, ()=>{
+    console.log('Escutando na porta 9000');
 })
