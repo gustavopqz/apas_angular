@@ -9,6 +9,7 @@ import { RelatoriosGastosComponent } from './pages/layout/relatorios-gastos/rela
 import { RelatoriosDoacoesComponent } from './pages/layout/relatorios-doacoes/relatorios-doacoes.component';
 import { DoacoesComponent } from './pages/doacoes/doacoes.component';
 import { PatrocinadoresComponent } from './pages/patrocinadores/patrocinadores.component';
+import { EsqueciSenhaComponent } from './pages/esqueci-senha/esqueci-senha.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,10 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'esqueci-senha',
+        component: EsqueciSenhaComponent
     },
     {
         path: 'painel',
