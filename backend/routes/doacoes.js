@@ -13,14 +13,12 @@ router.get('/', async (req, res)=>{
 
     let todasDoacoes = await Doacoes.find({})
     res.status(200).json(todasDoacoes);
-
-    
 })
 
-router.post('/', async (req, res)=>{
+router.post('/cadastro', async (req, res)=>{
     let { id, doadorNome, email, valor, mensagem, img } = await req.body;
 
-    if (!id || !doadorNome || !email || !valor || !mensagem || !img){
+    if (!id || !doadorNome || !email || !valor || !mensagem){
         res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
         return;
     }
