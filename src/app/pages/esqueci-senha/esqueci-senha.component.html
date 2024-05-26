@@ -1,17 +1,22 @@
 <div class="container">
     <div class="content first-content">
         <div class="first-column">
-            <h2 class="title">Bem vindo de volta!</h2>
-            <p class="description">To keep connected with us</p>
-            <p class="description">Clique aqui para voltar</p>
-            <button class="btn">Voltar</button>
+            <h2 class="title title-primary">Olá, novamente!</h2>
+            <p class="description description-primary">Para reconectar conosco</p>
+            <p class="description description-primary">Iremos te ajudar a recuperar sua conta</p>
+            <button class="btn btn-primary" routerLink="/painel/login">Voltar</button>
         </div>
         <div class="second-column">
-            <h2 class="title">Insira as informações</h2>
-            <p class="description">Insira seu email para recuperar a senha</p>
+            <h2 class="title title-secondary">Insira as informações</h2>
+            <p class="description description-secondary">Insira seu email para recuperar a senha</p>
             <form class="form">
-                <input type="email" placeholder="E-mail">
-                <button class="btn">Enviar</button>
+                <label class="label-input">
+                    <i class="material-icons icons-forms">
+                        mail
+                    </i>
+                    <input type="email" placeholder="Email">
+                </label>
+                <button class="btn btn-secondary">Enviar</button>
             </form>
         </div>
     </div>

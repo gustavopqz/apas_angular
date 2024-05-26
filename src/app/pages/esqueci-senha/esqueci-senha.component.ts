@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-esqueci-senha',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
+  providers: [NgModule],
   templateUrl: './esqueci-senha.component.html',
   styleUrl: './esqueci-senha.component.scss'
 })
