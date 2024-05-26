@@ -12,11 +12,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import {FormsModule} from '@angular/forms';
+import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutuante.component';
 
 @Component({
   selector: 'app-doacoes',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, MatCardModule, CommonModule, MatButton, MatDialogModule],
+  imports: [HeaderComponent, FooterComponent, MatCardModule, CommonModule, MatButton, MatDialogModule, BtnFlutuanteComponent],
   templateUrl: './doacoes.component.html',
   styleUrl: './doacoes.component.scss'
 })
