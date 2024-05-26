@@ -12,18 +12,16 @@ router.post('/', async (req, res)=>{
     const senhaHash = usuario.senha //$2a$08$Mcum05hv17hYt/GVmKCbi.9eFZR0gh0mAWE33xucwhIcBgfnyV8Qi
     try {
         const validaSenha = await bcrypt.compare(senha, senhaHash)
-        if (validaSenha == true){
-
+        if (validaSenha){
+            res.status(200).json({"mensagem": "A senha está valida"})
         }else{
-
+            res.status(400).json({"mensagem": "A senha não foi validada"})
         }
-
     } catch (error) {
-        
+        res.status(400).json({"mensagem": "Erro"})
     }
 
-    console.log(email, senha)
-    res.send('ok')
+    
     
 })
 
