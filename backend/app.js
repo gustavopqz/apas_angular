@@ -36,6 +36,7 @@ const doacoes = require("./routes/doacoes");
 const gastos = require("./routes/gastos");
 const administrador = require("./routes/administrador");
 const login = require("./routes/login");
+const cadastro = require('./routes/cadastro')
 
 // Routes
 app.use('/doacoes', doacoes);

@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/cadastro', async (req, res) => {
-    let { id, nome, email, senha, img } = await req.body;
+    let { id, nome, email, senha, img, privilegio } = await req.body;
     
 
     if (!id || !nome || !email || !senha) {
@@ -49,7 +49,8 @@ router.post('/cadastro', async (req, res) => {
         nome,
         email,
         senha: senhaEncriptada,
-        img
+        img,
+        privilegio
     };
 
     try {
