@@ -33,10 +33,14 @@ app.get('/', (req, res)=>{
 
 // Import routes
 const doacoes = require("./routes/doacoes");
+const gastos = require("./routes/gastos");
+const administrador = require("./routes/administrador");
 const login = require("./routes/login");
 
 // Routes
 app.use('/doacoes', doacoes);
+app.use('/gastos', gastos);
+app.use('/administrador', administrador);
 app.use('/login', login);
 app.use('/cadastro', cadastro);
 

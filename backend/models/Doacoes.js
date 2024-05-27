@@ -6,7 +6,9 @@ const Doacoes = mongoose.model("Doacoes", {
     email: "String",
     valor: "Number",
     mensagem: "String",
-    img: "String"
+    img: "String",
+    descricao: "String",
+    data: "Date"
 })
 
 module.exports = Doacoes;

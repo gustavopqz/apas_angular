@@ -46,18 +46,73 @@
     }
   ],
   "gastos": [
-    { "data": "2024-04-01", "descricao": "Ração", "valor": "R$ 680,00" },
-    { "data": "2024-04-02", "descricao": "Medicamentos", "valor": "R$ 450,00" },
-    { "data": "2024-04-02", "descricao": "Aluguel", "valor": "R$ 700,00" },
-    { "data": "2024-04-02", "descricao": "Embasa", "valor": "R$ 425,00" },
-    { "data": "2024-04-02", "descricao": "Coelba", "valor": "R$ 500,00" }
+    {
+      "data": "2024-04-01",
+      "descricao": "Ração",
+      "valor": "R$ 680,00",
+      "id": "f074"
+    },
+    {
+      "data": "2024-04-02",
+      "descricao": "Medicamentos",
+      "valor": "R$ 450,00",
+      "id": "d296"
+    },
+    {
+      "data": "2024-04-02",
+      "descricao": "Aluguel",
+      "valor": "R$ 700,00",
+      "id": "b84c"
+    },
+    {
+      "data": "2024-04-02",
+      "descricao": "Embasa",
+      "valor": "R$ 425,00",
+      "id": "dc21"
+    },
+    {
+      "data": "2024-04-02",
+      "descricao": "Coelba",
+      "valor": "R$ 500,00",
+      "id": "6a73"
+    }
   ],
   "relDoacoes": [
-    { "data": "2024-04-01", "doador": "Pasquinha", "descricao": "Valor em dinheiro", "valor": "R$ 1000,00" },
-    { "data": "2024-04-01", "doador": "Fefinho", "descricao": "Valor em ração", "valor": "R$ 600,00" },
-    { "data": "2024-04-01", "doador": "Gugu", "descricao": "Valor em Medicação", "valor": "R$ 900,00" },
-    { "data": "2024-04-01", "doador": "Cesinha", "descricao": "Valor em dinheiro", "valor": "R$ 500,00" },
-    { "data": "2024-04-01", "doador": "Vivi", "descricao": "Valor em ração", "valor": "R$ 300,00" }
+    {
+      "data": "2024-04-01",
+      "doador": "Pasquinha",
+      "descricao": "Valor em dinheiro",
+      "valor": "R$ 1000,00",
+      "id": "1f59"
+    },
+    {
+      "data": "2024-04-01",
+      "doador": "Fefinho",
+      "descricao": "Valor em ração",
+      "valor": "R$ 600,00",
+      "id": "67e3"
+    },
+    {
+      "data": "2024-04-01",
+      "doador": "Gugu",
+      "descricao": "Valor em Medicação",
+      "valor": "R$ 900,00",
+      "id": "8852"
+    },
+    {
+      "data": "2024-04-01",
+      "doador": "Cesinha",
+      "descricao": "Valor em dinheiro",
+      "valor": "R$ 500,00",
+      "id": "d17a"
+    },
+    {
+      "data": "2024-04-01",
+      "doador": "Vivi",
+      "descricao": "Valor em ração",
+      "valor": "R$ 300,00",
+      "id": "9f1c"
+    }
   ],
   "administradores": [
     {
@@ -72,6 +127,30 @@
       "nome": "Gustavo Pasqua",
       "senha": "1234",
       "email": "gustavo.pasqua@hotmail.com",
+      "img": ""
+    },
+    {
+      "id": "40d9"
+    },
+    {
+      "id": "b922",
+      "nome": "Luis Fernando",
+      "senha": "123400",
+      "email": "LuisFernando.@hotmail.com",
+      "img": ""
+    },
+    {
+      "id": "edfa",
+      "nome": "César",
+      "senha": "123400",
+      "email": "César.@hotmail.com",
+      "img": ""
+    },
+    {
+      "id": "76b3",
+      "nome": "Anderson",
+      "senha": "123400",
+      "email": "DedeVivi.@hotmail.com",
       "img": ""
     }
   ],
