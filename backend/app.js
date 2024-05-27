@@ -9,10 +9,6 @@ const bodyParser = require("body-parser");
 // DB Import
 const mongoose = require("mongoose");
 
-// Import routes
-const doacoes = require("./routes/doacoes");
-const gastos = require("./routes/gastos");
-
 // Middlewars
 app.use(cors());
 app.use(bodyParser.json());
