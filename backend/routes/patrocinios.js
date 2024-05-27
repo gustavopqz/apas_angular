@@ -3,12 +3,12 @@ const router = express.Router();
 
 // const Doacoes = require('../models/Doacoes')
 
-// router.get('/', async (req, res)=>{
+router.get('/', async (req, res)=>{
+    res.send('ok')
+})
 
-// })
-
-router.post('/cadastro', async (req, res)=>{
-    
+router.post('/', async (req, res)=>{
+    res.send('ok')
 })
 
 module.exports = router;
