@@ -9,10 +9,6 @@ const bodyParser = require("body-parser");
 // DB Import
 const mongoose = require("mongoose");
 
-// Import routes
-const doacoes = require("./routes/doacoes");
-const administrador = require("./routes/administrador");
-
 // Middlewars
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,21 +20,26 @@ const user = process.env.USER
 const pass = process.env.PASS
 const cluster = process.env.CLUSTER
 
-// Rotas
-app.get('/', (req, res)=>{
-    res.send('{ "teste": "niver de dede" }');
-})
-
-// Router
-app.use('/doacoes', doacoes);
-app.use('/administrador', administrador);
-
-
 //DB connection
 const connection = mongoose.connect(`mongodb+srv://${user}:${pass}@${cluster}.gvpzqhx.mongodb.net/apas`)
 if(connection){
     console.log('Conectado to MongoDB');
 }
+
+// Rotas
+app.get('/', (req, res)=>{
+    res.send('{ "mensagem": "Backend APAS está online!" }');
+})
+
+// Import routes
+const doacoes = require("./routes/doacoes");
+const gastos = require("./routes/gastos");
+const administrador = require("./routes/administrador");
+
+// Routes
+app.use('/doacoes', doacoes);
+app.use('/gastos', gastos);
+app.use('/administrador', administrador);
 
 // Serve
 app.listen(9000, ()=>{

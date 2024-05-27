@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { Patrocinadores } from '../../modules/patrocinadores.module'; 
 import { PatrocinadoresService } from '../../services/patrocinadores.service';
 import { MatButton, MatButtonModule } from '@angular/material/button';
+import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutuante.component';
 
 @Component({
   selector: 'app-patrocinadores',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, MatCardModule, CommonModule, MatButtonModule],
+  imports: [HeaderComponent, FooterComponent, MatCardModule, CommonModule, MatButtonModule, BtnFlutuanteComponent],
   templateUrl: './patrocinadores.component.html',
   styleUrl: './patrocinadores.component.scss'
 })

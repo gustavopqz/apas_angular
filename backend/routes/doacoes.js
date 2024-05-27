@@ -13,17 +13,17 @@ router.get('/', async (req, res)=>{
 
     let todasDoacoes = await Doacoes.find({})
     res.status(200).json(todasDoacoes);
-
-    
 })
 
-router.post('/', async (req, res)=>{
-    let { id, doadorNome, email, valor, mensagem, img } = await req.body;
+router.post('/cadastro', async (req, res)=>{
+    let { id, doadorNome, email, valor, mensagem, img, descricao } = await req.body;
 
-    if (!id || !doadorNome || !email || !valor || !mensagem || !img){
+    if (!id || !doadorNome || !email || !valor || !mensagem){
         res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
         return;
     }
+
+    const dataAtual = new Date;
 
     let doacoesObj = {
         id,
@@ -31,7 +31,9 @@ router.post('/', async (req, res)=>{
         email,
         valor,
         mensagem,
-        img 
+        img,
+        descricao,
+        data: dataAtual,
     };
 
     try {
