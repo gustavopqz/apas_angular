@@ -1,4 +1,4 @@
-export interface Admistradores {
+export interface Administradores {
     nome: string,
     senha: string,
     email: string,
