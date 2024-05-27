@@ -8,8 +8,8 @@
         <li routerLink="/patrocinios">PATROCÍNIOS</li>        
       </ul>
     </nav>
-    <div id="space">
+    <div *ngIf="!isLogged" routerLink="/login" id="space">
       <img src="/assets/img/header/user.png" class="user_img">
-      <span *ngIf="!isLogged" routerLink="/login">LOGIN</span>
+      <span >LOGIN</span>
     </div>
   </header>
