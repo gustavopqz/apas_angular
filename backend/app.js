@@ -37,7 +37,8 @@ const login = require("./routes/login");
 
 // Routes
 app.use('/doacoes', doacoes);
-app.use('/login', login)
+app.use('/login', login);
+app.use('/cadastro', cadastro);
 
 // Serve
 app.listen(9000, ()=>{
