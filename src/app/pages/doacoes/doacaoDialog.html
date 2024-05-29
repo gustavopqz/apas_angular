@@ -2,6 +2,11 @@
   <h2 mat-dialog-title style="color: #fff">Olá doador!</h2>
 </mat-toolbar>
 
+<mat-radio-group style="display: flex; justify-content: center; padding-top: 20px;" [(ngModel)]="data.tipoDoacao">
+  <mat-radio-button class="radio-button" value="anonimo">Anônimo</mat-radio-button>
+  <mat-radio-button class="radio-button" value="usuario">Usuário</mat-radio-button>
+</mat-radio-group>
+
 <mat-dialog-content style="color: #000;">
   Escolha a quantia ou digite um valor:
 </mat-dialog-content>
@@ -14,12 +19,12 @@
 
 <section class="personalizado" style="display: flex; align-items: center; padding-top: 1.5rem; flex-direction: column;">
   <mat-form-field>
-    <input matInput type="text" [(ngModel)]="valorDoacao">
+    <input matInput type="text" [(ngModel)]="data.valorDoacao">
   </mat-form-field>
   <img src="/assets/img/doacoes/mercado-pago.png" alt="Mercado Pago" style="width: 50%;">
 </section>
 
 <mat-dialog-actions style="display: flex; justify-content: center; padding-top: 1.5rem;">
   <button mat-flat-button color="warn" style="height: 40px; width: 45%" mat-dialog-close>Cancelar</button>
-  <button mat-flat-button style="background-color: #4E7E76; color: #fff; height: 40px; width: 45%;" mat-dialog-close cdkFocusInitial>Prosseguir</button>
+  <button mat-flat-button style="background-color: #4E7E76; color: #fff; height: 40px; width: 45%;" (click)="enviarDoacao()" cdkFocusInitial>Prosseguir</button>
 </mat-dialog-actions>
