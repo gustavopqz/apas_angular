@@ -40,11 +40,6 @@ export class DoacoesComponent implements OnInit {
   }
   
   // FETCHS 
-  getDoador1() :void {
-    this.doacoesService.getDoador1()
-    .subscribe(doador => this.doador1 = doador)
-  }
-
   getDoadores() :void{
     this.doacoesService.getDoacoes()
     .subscribe(doadores => {

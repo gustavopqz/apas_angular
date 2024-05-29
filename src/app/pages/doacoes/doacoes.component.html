@@ -21,7 +21,7 @@
           </mat-card-content>
         </mat-card>
 
-        <mat-card class="doacao" *ngFor="let doador of doadores">
+        <mat-card class="doacao" *ngFor="let doador of doadores | slice:0:7">
           <mat-card-header>
             <div mat-card-avatar><img class="doador-img" [src]="doador?.img || '/assets/img/header/user.png'" width="40" height="40"></div>
             <mat-card-title>{{doador?.doadorNome}}</mat-card-title>
