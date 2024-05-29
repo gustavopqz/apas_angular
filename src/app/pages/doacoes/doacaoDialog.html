@@ -7,7 +7,7 @@
   <mat-radio-button class="radio-button" value="usuario">Usuário</mat-radio-button>
 </mat-radio-group>
 
-<mat-dialog-content style="color: #000;">
+<mat-dialog-content style="color: #000; text-align: center;">
   Escolha a quantia ou digite um valor:
 </mat-dialog-content>
 
@@ -19,9 +19,17 @@
 
 <section class="personalizado" style="display: flex; align-items: center; padding-top: 1.5rem; flex-direction: column;">
   <mat-form-field>
-    <input matInput type="text" [(ngModel)]="data.valorDoacao">
+    <input matInput type="text" [(ngModel)]="data.valorDoacao" style="text-align: center;">
   </mat-form-field>
-  <img src="/assets/img/doacoes/mercado-pago.png" alt="Mercado Pago" style="width: 50%;">
+  <img src="/assets/img/doacoes/mercado-pago.png" alt="Mercado Pago" style="width: 50%;" *ngIf="data.tipoDoacao == 'anonimo'">
+</section>
+
+<section class="mensagem" style="display: flex; align-items: center; padding-top: 1.5rem; flex-direction: column;" *ngIf="data.tipoDoacao == 'usuario'">
+  <label style="font-weight: 500; padding-bottom: 10px;">Digite uma mensagem que aparecerá na plataforma:</label>
+  <mat-form-field style="width: 92%;">
+    <input matInput type="text" [(ngModel)]="data.mensagemDoacao" style="text-align: center; font-size: .9rem;">
+  </mat-form-field>
+  <img src="/assets/img/doacoes/mercado-pago.png" alt="Mercado Pago" style="width: 50%;" *ngIf="data.tipoDoacao == 'usuario'">
 </section>
 
 <mat-dialog-actions style="display: flex; justify-content: center; padding-top: 1.5rem;">
