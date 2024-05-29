@@ -4,21 +4,23 @@ const router = express.Router();
 const Doacoes = require('../models/Doacoes')
 
 router.get('/', async (req, res)=>{
-    let id = await req.query.id;
 
-    if (id){
-        let doacao = await Doacoes.findOne({ "id": id })
-        res.status(200).json(doacao);
-    }
+    let todasDoacoesConcluidas = await Doacoes.find({"conclusao": true, "tipoDoacao": 'usuario'})
+    res.status(200).json(todasDoacoesConcluidas);
+
+})
+
+router.get('/todas', async (req, res)=>{
 
     let todasDoacoes = await Doacoes.find({})
     res.status(200).json(todasDoacoes);
+
 })
 
 router.post('/cadastro', async (req, res)=>{
-    let { id, doadorNome, email, valor, mensagem, img, descricao } = await req.body;
+    let { doadorNome, tipoDoacao, email, valor, mensagem, img, descricao } = await req.body;
 
-    if (!id || !doadorNome || !email || !valor || !mensagem){
+    if (!valor){
         res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
         return;
     }
@@ -26,14 +28,15 @@ router.post('/cadastro', async (req, res)=>{
     const dataAtual = new Date;
 
     let doacoesObj = {
-        id,
         doadorNome,
+        tipoDoacao,
         email,
         valor,
         mensagem,
         img,
         descricao,
-        data: dataAtual,
+        conclusao: false,
+        data: dataAtual
     };
 
     try {

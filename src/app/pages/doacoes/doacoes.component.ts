@@ -18,7 +18,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 export interface DadosDialog{
   tipoDoacao: String,
-  valorDoacao: Number
+  valorDoacao: Number,
+  mensagemDoacao: String
 }
 
 @Component({
@@ -40,11 +41,6 @@ export class DoacoesComponent implements OnInit {
   }
   
   // FETCHS 
-  getDoador1() :void {
-    this.doacoesService.getDoador1()
-    .subscribe(doador => this.doador1 = doador)
-  }
-
   getDoadores() :void{
     this.doacoesService.getDoacoes()
     .subscribe(doadores => {
@@ -55,20 +51,22 @@ export class DoacoesComponent implements OnInit {
   // Dialog
   tipoDoacao: String = 'anonimo';
   valorDoacao: Number = 0;
+  mensagemDoacao: String = '';
 
   // Doacao Dialog (CARD)
   abrirDialog(): void{
     const dialogRef = this.dialog.open(DoacaoDialog, {
-      width: '350px',
+      width: '400px',
       enterAnimationDuration: 0,
       exitAnimationDuration: 0,
-      data: {tipoDoacao: 'anonimo', valorDoacao: 0}
+      data: {tipoDoacao: 'anonimo', valorDoacao: 0, mensagemDoacao: ''}
     })
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.tipoDoacao = result.tipoDoacao
+        this.tipoDoacao = result.tipoDoacao;
         this.valorDoacao = result.valorDoacao;
+        this.mensagemDoacao = result.mensagemDoacao;
       }
     })
   }

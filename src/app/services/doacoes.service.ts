@@ -10,11 +10,6 @@ export class DoacoesService {
   
   constructor(private http: HttpClient) { }
 
-  getDoador1(): Observable<Doadores>{
-    return this.http.get<Doadores>('http://localhost:9000/doacoes/1')
-  }
-
-
   getDoacoes(): Observable<Doadores>{
     return this.http.get<Doadores>('http://localhost:9000/doacoes')
   }
