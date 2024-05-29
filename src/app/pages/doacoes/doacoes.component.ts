@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -13,6 +13,13 @@ import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import {FormsModule} from '@angular/forms';
 import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutuante.component';
+import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio' 
+import { MAT_DIALOG_DATA } from '@angular/material/dialog'
+
+export interface DadosDialog{
+  tipoDoacao: String,
+  valorDoacao: Number
+}
 
 @Component({
   selector: 'app-doacoes',
@@ -42,35 +49,58 @@ export class DoacoesComponent implements OnInit {
     this.doacoesService.getDoacoes()
     .subscribe(doadores => {
       this.doadores = doadores as unknown as Doadores[]
-      console.log(this.doadores)
     })
   }
 
+  // Dialog
+  tipoDoacao: String = 'anonimo';
+  valorDoacao: Number = 0;
 
   // Doacao Dialog (CARD)
-  abrirDialog(){
-    this.dialog.open(DoacaoDialog, {
+  abrirDialog(): void{
+    const dialogRef = this.dialog.open(DoacaoDialog, {
       width: '350px',
       enterAnimationDuration: 0,
       exitAnimationDuration: 0,
+      data: {tipoDoacao: 'anonimo', valorDoacao: 0}
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.tipoDoacao = result.tipoDoacao
+        this.valorDoacao = result.valorDoacao;
+      }
     })
   }
+
 }
 
 @Component({
   selector: 'doacaoDialog',
   templateUrl: 'doacaoDialog.html',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatToolbarModule, MatInputModule, MatFormFieldModule, FormsModule],
-  providers: [NgModel]
+  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatToolbarModule, MatInputModule, MatFormFieldModule, FormsModule, MatRadioModule, CommonModule],
+  providers: [
+    NgModel, 
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: 'primary'} 
+    }
+  ]
 })
 
 export class DoacaoDialog {
-  constructor(public dialogRef: MatDialogRef<DoacaoDialog>) {}
-
-  valorDoacao :number = 0;
+  constructor(public dialogRef: MatDialogRef<DoacaoDialog>, @Inject(MAT_DIALOG_DATA) public data: DadosDialog ) {}
 
   atualizaValorDoacao(valor :number) :void{
-    this.valorDoacao = valor;
+    this.data.valorDoacao = valor;
+  }
+
+  enviarDoacao(): void{
+    if (!this.data.valorDoacao){
+      alert('Nenhum valor digitado');
+    }else{
+      this.dialogRef.close(this.data);
+    }
   }
 }
