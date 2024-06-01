@@ -23,16 +23,11 @@ export class PatrocinadoresComponent implements OnInit {
   constructor(private patrocinadoresService: PatrocinadoresService){}
 
   ngOnInit(): void {
-    this.getDoadores();
+    this.getPatrocinadores();
   }
   
   // FETCHS 
-  getpatrocinador1() :void {
-    this.patrocinadoresService.getPatrocinador1()
-    .subscribe(patrocinador => this.patrocinador1 = patrocinador)
-  }
-
-  getDoadores() :void{
+  getPatrocinadores() :void{
     this.patrocinadoresService.getPatrocinadores()
     .subscribe(patrocinadores => {
       this.patrocinadores = patrocinadores as unknown as Patrocinadores[]
