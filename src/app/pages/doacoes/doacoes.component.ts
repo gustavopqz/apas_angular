@@ -15,6 +15,7 @@ import {FormsModule} from '@angular/forms';
 import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutuante.component';
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio' 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { ActivatedRoute } from '@angular/router'
 
 export interface DadosDialog{
   tipoDoacao: String,
@@ -31,13 +32,20 @@ export interface DadosDialog{
 })
 export class DoacoesComponent implements OnInit {
 
-  doador1 ?: Doadores;
   doadores ?: Doadores[];
 
-  constructor(private doacoesService :DoacoesService, public dialog: MatDialog){}
+  constructor(private doacoesService :DoacoesService, public dialog: MatDialog, private activatedRoute: ActivatedRoute){}
 
   ngOnInit(): void {
     this.getDoadores();
+
+    this.activatedRoute.queryParams.subscribe(params =>{
+      let id = params['preference_id'] ? params['preference_id'] : null;
+      if (id){
+        let status = params['status'] ? params['status'] : null;
+      }
+    })
+
   }
   
   // FETCHS 
@@ -88,7 +96,7 @@ export class DoacoesComponent implements OnInit {
 })
 
 export class DoacaoDialog {
-  constructor(public dialogRef: MatDialogRef<DoacaoDialog>, @Inject(MAT_DIALOG_DATA) public data: DadosDialog ) {}
+  constructor(public dialogRef: MatDialogRef<DoacaoDialog>, @Inject(MAT_DIALOG_DATA) public data: DadosDialog, private doacoesService :DoacoesService) {}
 
   atualizaValorDoacao(valor :number) :void{
     this.data.valorDoacao = valor;
@@ -99,6 +107,7 @@ export class DoacaoDialog {
       alert('Nenhum valor digitado');
     }else{
       this.dialogRef.close(this.data);
+      this.doacoesService.postInicioDoacao(this.data.valorDoacao);
     }
   }
 }

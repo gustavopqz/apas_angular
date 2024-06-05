@@ -38,6 +38,7 @@ const gastos = require("./routes/gastos");
 const administrador = require("./routes/administrador");
 const login = require("./routes/login");
 const cadastro = require('./routes/cadastro')
+const webhook = require('./routes/webhook')
 
 // Routes
 app.use('/doacoes', doacoes);
@@ -46,6 +47,7 @@ app.use('/gastos', gastos);
 app.use('/administrador', administrador);
 app.use('/login', login);
 app.use('/cadastro', cadastro);
+app.use('/webhook', webhook);
 
 // Serve
 app.listen(9000, ()=>{

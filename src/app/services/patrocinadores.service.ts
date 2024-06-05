@@ -10,12 +10,7 @@ export class PatrocinadoresService {
 
   constructor(private http: HttpClient) { }
 
-  getPatrocinador1(): Observable<Patrocinadores>{
-    return this.http.get<Patrocinadores>('http://localhost:9000/patrocinadores/1')
-  }
-
-
   getPatrocinadores(): Observable<Patrocinadores>{
-    return this.http.get<Patrocinadores>('http://localhost:9000/patrocinadores')
+    return this.http.get<Patrocinadores>('http://localhost:9000/patrocinios')
   }
 }
