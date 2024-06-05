@@ -18,8 +18,7 @@ export class DoacoesService {
   //Observable<Doadores> | Erro
   postInicioDoacao(valor: Number) {
 
-    let objMercadoPago = {
-      "notification_url": "https://webhook.site/d9e2cc57-d2cf-4bd6-83e2-1e13b852a6af",
+    let objMercadoPago = {      
       "items": [
         {
           "title": "Doação para APAS",

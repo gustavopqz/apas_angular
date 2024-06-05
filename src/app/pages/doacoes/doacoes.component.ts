@@ -27,7 +27,6 @@ export interface DadosDialog{
   selector: 'app-doacoes',
   standalone: true,
   imports: [HeaderComponent, FooterComponent, MatCardModule, CommonModule, MatButton, MatDialogModule, BtnFlutuanteComponent],
-  // providers: [ActivatedRoute],
   templateUrl: './doacoes.component.html',
   styleUrl: './doacoes.component.scss'
 })
