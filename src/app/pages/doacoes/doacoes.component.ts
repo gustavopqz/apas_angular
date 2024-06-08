@@ -45,8 +45,19 @@ export class DoacoesComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe(params =>{
       let id = params['preference_id'] ? params['preference_id'] : null;
-      if (id){
-        let status = params['status'] ? params['status'] : null;
+      if (id && params['status'] && params['status'] == 'approved'){
+        let status = params['status'];
+        const body = {
+          id_pagamento: id,
+          status
+        }
+
+        console.log(body)
+        this.doacoesService.patchAprovaDoacao(body)
+        .subscribe(response => {
+          this.getDoacoes();
+          window.location.href = 'http://localhost:4200/#/doacoes';
+        })  
       }
     })
 

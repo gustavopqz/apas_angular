@@ -48,7 +48,7 @@ export class DoacoesService {
       this.http.post('https://api.mercadopago.com/checkout/preferences', objMercadoPago, options)
       .subscribe(
         response =>{
-          this.resposta = response;          
+          this.resposta = response;         
           this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.sandbox_init_point)
         }
       )
@@ -88,7 +88,7 @@ export class DoacoesService {
     }
   }
 
-  postAprovaDoacao(): Observable<Doacoes>{
-    return this.http.get<Doacoes>('http://localhost:9000/doacoes')
+  patchAprovaDoacao(body: any): Observable<Doacoes>{
+    return this.http.patch<Doacoes>('http://localhost:9000/doacoes/aprovacao', body)
   }  
 }

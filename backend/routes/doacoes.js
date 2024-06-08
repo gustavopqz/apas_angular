@@ -18,7 +18,7 @@ router.get('/todas', async (req, res)=>{
 })
 
 router.post('/cadastro', async (req, res)=>{
-    let { doadorNome, tipoDoacao, email, valor, mensagem, img, descricao } = await req.body;
+    let { id_pagamento ,doadorNome, tipoDoacao, email, valor, mensagem, img, descricao } = await req.body;
 
     if (!valor){
         res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
@@ -28,6 +28,7 @@ router.post('/cadastro', async (req, res)=>{
     const dataAtual = new Date;
 
     let doacoesObj = {
+        id_pagamento,
         doadorNome,
         tipoDoacao,
         email,
@@ -41,11 +42,44 @@ router.post('/cadastro', async (req, res)=>{
 
     try {
         await Doacoes.create(doacoesObj);
-        res.status(201).json({ "message": `A doação de ${doadorNome} foi salva com sucesso!`});
+        res.status(201).json({ "mensagem": `A doação de ${doadorNome} foi salva com sucesso!`});
         
     } catch (error) {
-        res.status(500).json({ "message": `Algo deu errado!`});
+        res.status(500).json({ "mensagem": `Algo deu errado!`});
     }
 })
+
+router.patch('/aprovacao', async (req, res) =>{
+    let { id_pagamento, status } = req.body;
+
+    if (!id_pagamento || !status){
+        res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
+        return;
+    }
+
+    try {
+        let doacao = await Doacoes.findOne({id_pagamento});
+        if(!doacao){
+            return { "mensagem": "Doação não encontrada"}
+        }else 
+        if (status = 'approved'){
+            doacao.conclusao = status;
+        }
+
+        // Filter
+        let filter = {id_pagamento}
+
+        // Update
+        let update = { $set: { conclusao: true } }
+
+        await Doacoes.updateOne(filter, update)
+
+        res.status(200).json({"mensagem": `Doação ${id_pagamento} atualizada com sucesso!`})
+
+    } catch (error) {
+        res.status(500).json({ "mensagem": `Algo deu errado!`});    
+    }
+
+});
 
 module.exports = router;
