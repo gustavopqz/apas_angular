@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<main>
+<main [ngClass]="opacity">
     <div class="mainHeader"></div>
 
     <h2 class="titulo">Seja um doador!</h2>
@@ -21,15 +21,15 @@
           </mat-card-content>
         </mat-card>
 
-        <mat-card class="doacao" *ngFor="let doador of doadores | slice:0:7">
+        <mat-card class="doacao" *ngFor="let doacao of doacoes | slice:0:7">
           <mat-card-header>
-            <div mat-card-avatar><img class="doador-img" [src]="doador?.img || '/assets/img/header/user.png'" width="40" height="40"></div>
-            <mat-card-title>{{doador?.doadorNome}}</mat-card-title>
-            <mat-card-subtitle>Valor doado: {{ doador?.valor | number: '1.2-2' }}</mat-card-subtitle>
+            <div mat-card-avatar><img class="doador-img" [src]="doacao?.img || '/assets/img/header/user.png'" width="40" height="40"></div>
+            <mat-card-title>{{doacao?.doadorNome}}</mat-card-title>
+            <mat-card-subtitle>Valor doado: {{ doacao?.valor | number: '1.2-2' }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="doadorMsg">
             <p class="mensagem">
-              "{{ doador?.mensagem }}"
+              "{{ doacao?.mensagem }}"
             </p>
           </mat-card-content>
         </mat-card>
@@ -43,3 +43,5 @@
 <app-footer></app-footer>
 
 <app-btn-flutuante></app-btn-flutuante>
+
+<app-loading *ngIf="loading"></app-loading>
