@@ -61,6 +61,12 @@
                     </i>
                     <input type="password" placeholder="Confirmar senha">
                 </label>
+                <label class="label-input">
+                    <i class="material-icons icons-forms">
+                        image
+                    </i>
+                    <input class="uploadImg" type="file" (change)="onSelectImage($event)">
+                </label>
                 <button class="btn btn-secondary" routerLink="/painel/home">Enviar</button>
             </form>
         </div>

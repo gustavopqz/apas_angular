@@ -13,9 +13,18 @@ import { RouterModule } from '@angular/router';
 })
 export class LoginComponent {
   container: boolean = true;
-
+  selectedImage: File | null = null
+  
   trocaCard(){
     this.container = !this.container;
+  }
+  onSelectImage(event: Event){
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length){
+      this.selectedImage = target.files[0];
+    } else {
+      this.selectedImage = null;
+    }
   }
 }
 
