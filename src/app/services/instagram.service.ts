@@ -8,7 +8,7 @@ import { InstaData } from '../modules/InstaData.module';
 })
 export class InstagramService {
 
-  private url:string = 'https://graph.instagram.com/me/media?access_token=IGQWRNWmFEaDVoQ3Fucmk2cFF3VktDNEZADNHBiUGJERGNMQkpTRWd4Q0tQUWZApS1hWNWtsWGNzV1VMQzZAobFVsVzFiVi05T0JwY3NmU01EdkgxanotbnhWMzlPMWtVT0V1WUdFUjNNcHp3bF9fY2xFZAjhkSG9MUDgZD&fields=media_url,media_type,caption,permalink'
+  private url:string = 'https://graph.instagram.com/me/media?access_token=IGQWRQYkJuMmhzaXN0ZA1g0Skp5bmg2S1dLUHFYTm9lNmFvNjNJUU5iVTQ3bDNGd203MGZAJbnM1NEYxLWItSWRLRk9hZAGtOOFkycDE3b0xJUml3QVZAnSzYtbE5UOTRRdUVhcWhOMmxqM21FbzhGUGl6Wi1wVko5cDAZD&fields=media_url,media_type,caption,permalink'
 
   constructor(private httpCLient: HttpClient) {
     

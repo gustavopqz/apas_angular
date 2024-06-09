@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError  } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Doacoes } from '../modules/doacoes.model';
-import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +18,14 @@ export class DoacoesService {
 
   postMercadoPago(valor: number, tipoDoacao: string, extraInfo?: any){
 
+    let valorDoacao = Number(valor);
+
     let objMercadoPago = {      
       "items": [
         {
           "title": "Doação para APAS",
           "quantity": 1,
-          "unit_price": valor,
+          "unit_price": valorDoacao,
           "currency_id": "BRL"        
         }
       ],
@@ -49,7 +50,7 @@ export class DoacoesService {
       .subscribe(
         response =>{
           this.resposta = response;         
-          this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.sandbox_init_point)
+          this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.init_point);
         }
       )
 
