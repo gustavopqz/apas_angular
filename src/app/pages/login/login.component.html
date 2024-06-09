@@ -65,7 +65,8 @@
                     <i class="material-icons icons-forms">
                         image
                     </i>
-                    <input class="uploadImg" type="file" (change)="onSelectImage($event)">
+                    <span class="file-upload">Insira sua imagem</span>
+                    <input class="uploadImg" type="file" (change)="onSelectImage($event)" placeholder="Envie sua imagem">
                 </label>
                 <button class="btn btn-secondary" routerLink="/painel/home">Enviar</button>
             </form>

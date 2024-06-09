@@ -167,8 +167,8 @@
         align-items: center;
         margin: 5px;
     }
-    .uploadImg{
-        list-style-type: none;
+    input[type="file"]{
+        display: none;
     }
     .icons-forms{
         color: #7f8c8d;
