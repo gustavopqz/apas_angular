@@ -41,6 +41,7 @@ export class LoginComponent {
     formData.append('email', this.user.email);
     formData.append('password', this.user.password);
     formData.append('image',this.selectedImage);
+  }
 
   constructor(private loginService: LoginService, private router: Router){}
 
