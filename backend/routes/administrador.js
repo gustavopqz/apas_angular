@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         try {
             let administrador = await Administrador.findOne({ "email": email });
             if (administrador) res.status(200).json(administrador)
-            else res.status(404).json({"message": "Administrador não encontrado"})
+            else res.status(400).json({"message": "Administrador não encontrado"})
         } catch (error) {
             res.status(500).json({ "message": "Algo deu errado!" });
         }
@@ -26,10 +26,10 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/cadastro', async (req, res) => {
-    let { id, nome, email, senha, img, privilegio } = await req.body;
+    let { nome, email, senha, img } = await req.body;
     
 
-    if (!id || !nome || !email || !senha) {
+    if ( !nome || !email || !senha) {
         res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
         return;
     }
@@ -45,12 +45,11 @@ router.post('/cadastro', async (req, res) => {
     const senhaEncriptada = await bcrypt.hash(senha, salt)
 
     let administradorObj = {
-        id,
         nome,
         email,
         senha: senhaEncriptada,
         img,
-        privilegio
+        privilegio: 'admin'
     };
 
     try {

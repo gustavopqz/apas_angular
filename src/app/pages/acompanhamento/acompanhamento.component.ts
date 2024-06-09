@@ -8,7 +8,6 @@ import { InstagramService } from '../../services/instagram.service';
 import { DoacoesService } from '../../services/doacoes.service';
 import { Posts } from '../../modules/posts.module';
 import { InstaData } from '../../modules/InstaData.module'
-import { Doadores } from '../../modules/doadores.module';
 import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutuante.component';
 
 @Component({
@@ -30,7 +29,6 @@ export class AcompanhamentoComponent implements OnInit{
 
   ngOnInit(): void {
     this.mostraPosts();
-    this.getDoacoes();
   }
 
   mostraPosts(){
@@ -40,12 +38,5 @@ export class AcompanhamentoComponent implements OnInit{
       this.posts = this.instaData.data 
       this.loading = false
     })
-  }
-
-  doador ?: Doadores;
-
-  getDoacoes(){
-    this.doacoesService.getDoacoes()
-    .subscribe(doador => this.doador = doador)
   }
 }

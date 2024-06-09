@@ -13,6 +13,7 @@ router.post('/', async (req, res)=>{
 
     if (!patrocinador || !email ){
         res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
+        return;
     }
 
     const dataAtual = new Date;
@@ -30,9 +31,11 @@ router.post('/', async (req, res)=>{
     try {
         await Patrocinios.create(patrocinadorObj);
         res.status(201).json({ "message": `O patrocinador ${patrocinador} foi cadastrado!`});
+        return;
         
     } catch (error) {
         res.status(500).json({ "message": `Algo deu errado!`});
+        return;
     }
 })
 

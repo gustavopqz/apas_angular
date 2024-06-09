@@ -111,16 +111,16 @@
                     <i class="material-icons icons-forms">
                         mail
                     </i>
-                    <input type="email" placeholder="Email">
+                    <input matInput type="email" placeholder="Email" [(ngModel)]="email" name="email">
                 </label>
                 <label class="label-input">
                     <i class="material-icons icons-forms">
                         key
                     </i>
-                    <input type="password" placeholder="Senha">
+                    <input matInput type="password" placeholder="Senha" [(ngModel)]="senha" name="senha">
                 </label>
                 <a class="password" routerLink="/esqueci-senha">Esqueceu sua senha?</a>
-                <button class="btn btn-secondary" routerLink="/painel/home">Enviar</button>
+                <button class="btn btn-secondary" (click)="logIn()">Enviar</button>
             </form>
         </div>
     </div>

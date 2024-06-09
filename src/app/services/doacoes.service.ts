@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Doadores } from '../modules/doadores.module';
-import { Erro } from '../modules/erro.module'
+import { Doacoes } from '../modules/doacoes.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +10,22 @@ export class DoacoesService {
   
   constructor(private http: HttpClient) { }
 
-  getDoacoes(): Observable<Doadores>{
-    return this.http.get<Doadores>('http://localhost:9000/doacoes')
+  getDoacoes(): Observable<Doacoes>{
+    return this.http.get<Doacoes>('http://localhost:9000/doacoes')
   }
 
-  //Observable<Doadores> | Erro
-  postInicioDoacao(valor: Number) {
+  resposta?: any;
+
+  postMercadoPago(valor: number, tipoDoacao: string, extraInfo?: any){
+
+    let valorDoacao = Number(valor);
 
     let objMercadoPago = {      
       "items": [
         {
           "title": "Doação para APAS",
           "quantity": 1,
-          "unit_price": valor,
+          "unit_price": valorDoacao,
           "currency_id": "BRL"        
         }
       ],
@@ -46,23 +48,48 @@ export class DoacoesService {
     try {
       this.http.post('https://api.mercadopago.com/checkout/preferences', objMercadoPago, options)
       .subscribe(
-        (response) => {
-          console.log('HTTP POST Response:', response); // Display the response in the console
-        },
-        (error) => {
-          console.error('HTTP POST Error:', error); // Handle any errors
+        response =>{
+          this.resposta = response;         
+          this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.init_point);
         }
-      );
+      )
 
-      return 0;
-
-      // return this.http.post<Doadores>('http://localhost:9000/doacoes', response);
+      return;
     } catch (error) {
-      return { "statusCode": 500, "mensagem": "Erro ao comunicar com Mercado Pago" }
+      alert('Erro na tentativa de integrar o Mercado Pago.');
+      return;
     }
   }
 
-  postAprovaDoacao(): Observable<Doadores>{
-    return this.http.get<Doadores>('http://localhost:9000/doacoes')
+  postPrimeiroPasso(id: string, valor: number, tipoDoacao: string, extraInfo: any, url: string){
+
+    const doacaoObj = {
+      id_pagamento: id,
+      doadorNome: extraInfo.doadorNome,
+      email: extraInfo.email,
+      valor: valor,
+      mensagem: extraInfo.mensagem,
+      img: extraInfo.img,
+      tipoDoacao: tipoDoacao,
+      descricao: 'Pagamento pelo site',
+    }
+
+    try {
+      this.http.post('http://localhost:9000/doacoes/cadastro', doacaoObj)
+      .subscribe(
+        response =>{
+          window.location.href = url;
+        }
+      )
+
+      return;
+    } catch (error) {
+      alert('Erro na tentativa de integrar o Mercado Pago.');
+      return;
+    }
+  }
+
+  patchAprovaDoacao(body: any): Observable<Doacoes>{
+    return this.http.patch<Doacoes>('http://localhost:9000/doacoes/aprovacao', body)
   }  
 }

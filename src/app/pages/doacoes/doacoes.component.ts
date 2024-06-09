@@ -4,7 +4,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { MatCardModule } from '@angular/material/card'; 
 import { DoacoesService } from '../../services/doacoes.service';
-import { Doadores } from '../../modules/doadores.module';
+import { Doacoes } from '../../modules/doacoes.model';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule ,MatButton } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef, MatDialog, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent } from '@angular/material/dialog'
@@ -16,6 +16,7 @@ import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutua
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio' 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
+import { LoadingComponent } from '../../components/loading/loading.component';
 
 export interface DadosDialog{
   tipoDoacao: String,
@@ -26,40 +27,57 @@ export interface DadosDialog{
 @Component({
   selector: 'app-doacoes',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, MatCardModule, CommonModule, MatButton, MatDialogModule, BtnFlutuanteComponent],
+  imports: [HeaderComponent, FooterComponent, MatCardModule, CommonModule, MatButton, MatDialogModule, BtnFlutuanteComponent, LoadingComponent],
   templateUrl: './doacoes.component.html',
   styleUrl: './doacoes.component.scss'
 })
 export class DoacoesComponent implements OnInit {
 
-  doadores ?: Doadores[];
+  // Classe da Main OK
+  opacity = '';
+
+  doacoes ?: Doacoes[];
 
   constructor(private doacoesService :DoacoesService, public dialog: MatDialog, private activatedRoute: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.getDoadores();
+    this.getDoacoes();
 
     this.activatedRoute.queryParams.subscribe(params =>{
       let id = params['preference_id'] ? params['preference_id'] : null;
-      if (id){
-        let status = params['status'] ? params['status'] : null;
+      if (id && params['status'] && params['status'] == 'approved'){
+        let status = params['status'];
+        const body = {
+          id_pagamento: id,
+          status
+        }
+
+        console.log(body)
+        this.doacoesService.patchAprovaDoacao(body)
+        .subscribe(response => {
+          this.getDoacoes();
+          window.location.href = 'http://localhost:4200/#/doacoes';
+        })  
       }
     })
 
   }
   
   // FETCHS 
-  getDoadores() :void{
+  getDoacoes() :void{
     this.doacoesService.getDoacoes()
     .subscribe(doadores => {
-      this.doadores = doadores as unknown as Doadores[]
+      this.doacoes = doadores as unknown as Doacoes[]
     })
   }
 
   // Dialog
-  tipoDoacao: String = 'anonimo';
-  valorDoacao: Number = 0;
+  tipoDoacao: string = 'anonimo';
+  valorDoacao: number = 0;
   mensagemDoacao: String = '';
+
+  // Carregando
+  loading = false;
 
   // Doacao Dialog (CARD)
   abrirDialog(): void{
@@ -75,6 +93,17 @@ export class DoacoesComponent implements OnInit {
         this.tipoDoacao = result.tipoDoacao;
         this.valorDoacao = result.valorDoacao;
         this.mensagemDoacao = result.mensagemDoacao;
+
+        const extraInfo = {
+          doadorNome: "Gustavo Pasqua",
+          email: "gustavo.pasqua@teste.com",
+          mensagem: this.mensagemDoacao,
+          img: "./assets/img/profiles/pasqua.png"
+        }
+        
+        this.doacoesService.postMercadoPago(this.valorDoacao, this.tipoDoacao, extraInfo);
+        this.opacity = 'opacity';
+        this.loading = true;
       }
     })
   }
@@ -96,7 +125,7 @@ export class DoacoesComponent implements OnInit {
 })
 
 export class DoacaoDialog {
-  constructor(public dialogRef: MatDialogRef<DoacaoDialog>, @Inject(MAT_DIALOG_DATA) public data: DadosDialog, private doacoesService :DoacoesService) {}
+  constructor(public dialogRef: MatDialogRef<DoacaoDialog>, @Inject(MAT_DIALOG_DATA) public data: DadosDialog) {}
 
   atualizaValorDoacao(valor :number) :void{
     this.data.valorDoacao = valor;
@@ -107,7 +136,6 @@ export class DoacaoDialog {
       alert('Nenhum valor digitado');
     }else{
       this.dialogRef.close(this.data);
-      this.doacoesService.postInicioDoacao(this.data.valorDoacao);
     }
   }
 }
