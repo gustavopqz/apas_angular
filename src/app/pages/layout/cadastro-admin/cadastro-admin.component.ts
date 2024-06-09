@@ -2,14 +2,32 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
+import { AdministradoresService } from '../../../services/administradores.service';
+import { LoadingComponent } from '../../../components/loading/loading.component';
 
 
 @Component({
   selector: 'app-cadastro-admin',
   templateUrl: './cadastro-admin.component.html',
-  styleUrls: ['./cadastro-admin.component.scss']
+  styleUrls: ['./cadastro-admin.component.scss']  
 })
 export class CadastroAdminComponent {
+
+  loading = false;
+  classeMain = 'main-register'
+
+  constructor(private administradorService: AdministradoresService ){}
+
+  cadastraAdmin(){
+    const adminObj = {
+      nome: this.usuario,
+      email: this.email,
+      senha: this.senha,
+      img: ''
+    }
+    return this.administradorService.postNovoAdmin(adminObj);
+    
+  }
   
   usuario: string = '';
   email: string = '';
@@ -38,19 +56,36 @@ export class CadastroAdminComponent {
     this.isConfirmPasswordValid = this.confirmarSenha === this.senha;
   }
 
+  limpaCampos(){
+    this.usuario = ''
+    this.email = ''
+    this.senha = ''
+    this.confirmarSenha = ''
+  }
+
+  resposta?: any;
   
   onSubmit() {
     
     this.validateEmail();
     this.validatePassword();
     this.validateConfirmPassword();
-
     
     if (this.isEmailValid && this.isPasswordValid && this.isConfirmPasswordValid) {
-      console.log('Formulário enviado com sucesso!');
-    
+      
+      this.classeMain = 'main-register opacity';
+      this.loading = true;
+
+      this.cadastraAdmin()
+      .subscribe(response =>{
+        this.resposta = response;
+        alert(this.resposta.mensagem)
+        this.limpaCampos();
+        this.classeMain = 'main-register';
+        this.loading = false;
+      });          
     } else {
-      console.log('Falha na validação do formulário!');
+      alert('Erro no envio dos dados cadastrais.');
     }
   }
 }
@@ -60,7 +95,7 @@ export class CadastroAdminComponent {
 
 
 @NgModule({
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, LoadingComponent],
   declarations: [CadastroAdminComponent],
   bootstrap: [CadastroAdminComponent]
 })
