@@ -6,12 +6,16 @@ import { Administradores } from '../modules/administrador.module';
 @Injectable({
   providedIn: 'root'
 })
-export class AdministradoresService {
+export class AdministradoresService { 
 
   constructor(private http: HttpClient) { }
 
   getTodosAdmins(): Observable<Administradores>{
     return this.http.get<Administradores>('http://localhost:9000/administrador');
+  }
+
+  postNovoAdmin(body: any){
+    return this.http.post<Administradores>('http://localhost:9000/administrador/cadastro', body)    
   }
 
 }

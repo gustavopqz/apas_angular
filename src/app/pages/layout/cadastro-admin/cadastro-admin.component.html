@@ -1,4 +1,4 @@
-<div class="main-register">
+<div [class]="classeMain">
     <div class="register-container">
       <div class="card-register">
         <h2>Cadastro</h2>
@@ -27,3 +27,5 @@
       </div>
     </div>
 </div>
+
+<app-loading *ngIf="loading"></app-loading>

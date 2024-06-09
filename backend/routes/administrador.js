@@ -11,16 +11,16 @@ router.get('/', async (req, res) => {
         try {
             let administrador = await Administrador.findOne({ "email": email });
             if (administrador) res.status(200).json(administrador)
-            else res.status(400).json({"message": "Administrador não encontrado"})
+            else res.status(400).json({"mensagem": "Administrador não encontrado"})
         } catch (error) {
-            res.status(500).json({ "message": "Algo deu errado!" });
+            res.status(500).json({ "mensagem": "Algo deu errado!" });
         }
     } else {
         try {
             let todosAdministradores = await Administrador.find({});
             res.status(200).json(todosAdministradores);
         } catch (error) {
-            res.status(500).json({ "message": "Algo deu errado!" });
+            res.status(500).json({ "mensagem": "Algo deu errado!" });
         }
     }
 });
@@ -54,9 +54,9 @@ router.post('/cadastro', async (req, res) => {
 
     try {
         await Administrador.create(administradorObj);
-        res.status(201).json({ "message": `O administrador ${nome} foi salvo com sucesso!` });
+        res.status(201).json({ "mensagem": `O administrador ${nome} foi cadastrado com sucesso!` });
     } catch (error) {
-        res.status(500).json({ "message": "Algo deu errado!" });
+        res.status(500).json({ "mensagem": "Algo deu errado!" });
     }
 });
 
