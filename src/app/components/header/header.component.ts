@@ -13,18 +13,17 @@ import { LoginService } from '../../services/login.service'
 })
 export class HeaderComponent implements OnInit {
 
-  logadoHeader: Boolean | undefined = false;
-  loginText: String | null = 'LOGIN';
-
   constructor(private loginService: LoginService){}
-
   ngOnInit(): void {
-    this.logadoHeader = this.loginService.logado;
-    console.log(this.loginService.logado)
-    if (this.logadoHeader == true){
-      this.loginText = this.loginService.usuario.nome;
+    if (localStorage.getItem('nome')){
+      this.loginService.loginInfo = {
+        text: localStorage.getItem('nome')
+      }
     }
-    
+  }
+
+  get loginText(): string{
+    return this.loginService.loginInfo.text;
   }
 
 }

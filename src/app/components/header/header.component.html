@@ -8,8 +8,11 @@
         <li routerLink="/patrocinios">PATROCÍNIOS</li>        
       </ul>
     </nav>
-    <div *ngIf="!logadoHeader" routerLink="/login" id="space">
+    <div routerLink="/login" id="space">
       <img src="/assets/img/header/user.png" class="user_img">
       <span >{{ loginText }}</span>
+      <button class="material-icons">
+        logout
+      </button>
     </div>
   </header>

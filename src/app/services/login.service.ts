@@ -1,19 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService implements OnInit{
+export class LoginService {
 
-  logado?: Boolean | undefined;
+  private _loginInfo = new BehaviorSubject<any>({
+    text: 'LOGIN'
+  })
+
+  get loginInfo(): any{
+    return this._loginInfo.value;
+  }
+
+  set loginInfo(loginInfo: any){
+    this._loginInfo.next(loginInfo);
+  }
 
   constructor(private http: HttpClient) { }
-  ngOnInit(): void {
-    if (localStorage.getItem('logado') == 'true'){
-      this.logado = true;
-    }
-  }
 
   // LogIn
   resposta?: any;
@@ -34,7 +40,9 @@ export class LoginService implements OnInit{
     localStorage.setItem('img', this.usuario.img);
     localStorage.setItem('logado', 'true');
 
-    this.logado = true;    
+    this.loginInfo = {
+      text: this.usuario.nome
+    }
 
     return true;
   }
