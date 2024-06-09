@@ -60,6 +60,7 @@ export class LoginComponent {
     }else{
       const privilegio = localStorage.getItem('privilegio');
       if (privilegio == 'admin') this.router.navigate(['/painel/home']);
+      else this.router.navigate(['/']);
     }
   }
 }
