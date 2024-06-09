@@ -8,10 +8,12 @@
         <li routerLink="/patrocinios">PATROCÍNIOS</li>        
       </ul>
     </nav>
-    <div routerLink="/login" id="space">
+    <div [routerLink]="routerLoginButton" id="space">
       <img src="/assets/img/header/user.png" class="user_img">
       <span >{{ loginText }}</span>
-      <button class="material-icons">
+    </div>
+    <div class="logoffButton">
+      <button *ngIf="loginText != 'LOGIN'" class="material-icons logoff" (click)="logoff()">
         logout
       </button>
     </div>

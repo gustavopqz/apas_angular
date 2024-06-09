@@ -13,17 +13,31 @@ import { LoginService } from '../../services/login.service'
 })
 export class HeaderComponent implements OnInit {
 
+  routerLoginButton?: string;
+
   constructor(private loginService: LoginService){}
   ngOnInit(): void {
     if (localStorage.getItem('nome')){
       this.loginService.loginInfo = {
         text: localStorage.getItem('nome')
       }
+
+      this.routerLoginButton = '/painel/home'
+    }else{
+      this.routerLoginButton = '/login'
     }
   }
 
   get loginText(): string{
     return this.loginService.loginInfo.text;
+  }
+
+  logoff(): void{
+    localStorage.clear();
+    this.loginService.loginInfo = {
+      text: 'LOGIN'
+    }
+    this.routerLoginButton = '/login'
   }
 
 }
