@@ -37,7 +37,7 @@ const patrocinios = require("./routes/patrocinios")
 const gastos = require("./routes/gastos");
 const administrador = require("./routes/administrador");
 const login = require("./routes/login");
-const cadastro = require('./routes/cadastro')
+const usuario = require("./routes/usuario")
 const webhook = require('./routes/webhook')
 
 // Routes
@@ -46,7 +46,7 @@ app.use('/patrocinios', patrocinios);
 app.use('/gastos', gastos);
 app.use('/administrador', administrador);
 app.use('/login', login);
-app.use('/cadastro', cadastro);
+app.use('/usuario', usuario);
 app.use('/webhook', webhook);
 
 // Serve

@@ -9,10 +9,12 @@ router.get('/', async (req, res)=>{
     if (id){
         let gastos = await Gastos.findOne({ "id": _id })
         res.status(200).json(gastos);
+        return;
     }
 
     let todosGastos = await Gastos.find({})
     res.status(200).json(todosGastos);
+    return;
 
 })
 
@@ -33,9 +35,11 @@ router.post('/', async (req, res)=>{
     try {
         await Gastos.create(gastosObj);
         res.status(201).json({ "message": `O gasto foi salvo com sucesso!`});
+        return;
         
     } catch (error) {
         res.status(500).json({ "message": `Algo deu errado!`});
+        return;
     }
 })
 
