@@ -22,7 +22,11 @@ export class HeaderComponent implements OnInit {
         text: localStorage.getItem('nome')
       }
 
-      this.routerLoginButton = '/painel/home'
+      if (localStorage.getItem('privilegio') == 'admin'){
+        this.routerLoginButton = '/painel/home'
+      }else{
+        this.routerLoginButton = '/'
+      } 
     }else{
       this.routerLoginButton = '/login'
     }
