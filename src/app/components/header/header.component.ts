@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { CommonModule } from '@angular/common';
@@ -11,11 +11,20 @@ import { LoginService } from '../../services/login.service'
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+
+  logadoHeader: Boolean | undefined = false;
+  loginText: String | null = 'LOGIN';
 
   constructor(private loginService: LoginService){}
 
-  logadoHeader = this.loginService.logado;
-  loginText = this.loginService.logado ? localStorage.getItem('nome') : 'LOGIN';
+  ngOnInit(): void {
+    this.logadoHeader = this.loginService.logado;
+    console.log(this.loginService.logado)
+    if (this.logadoHeader == true){
+      this.loginText = this.loginService.usuario.nome;
+    }
+    
+  }
 
 }

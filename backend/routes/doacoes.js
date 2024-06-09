@@ -7,6 +7,7 @@ router.get('/', async (req, res)=>{
 
     let todasDoacoesConcluidas = await Doacoes.find({"conclusao": true, "tipoDoacao": 'usuario'})
     res.status(200).json(todasDoacoesConcluidas);
+    return;
 
 })
 
@@ -43,9 +44,10 @@ router.post('/cadastro', async (req, res)=>{
     try {
         await Doacoes.create(doacoesObj);
         res.status(201).json({ "mensagem": `A doação de ${doadorNome} foi salva com sucesso!`});
-        
+        return;
     } catch (error) {
         res.status(500).json({ "mensagem": `Algo deu errado!`});
+        return;
     }
 })
 
@@ -75,9 +77,11 @@ router.patch('/aprovacao', async (req, res) =>{
         await Doacoes.updateOne(filter, update)
 
         res.status(200).json({"mensagem": `Doação ${id_pagamento} atualizada com sucesso!`})
+        return;
 
     } catch (error) {
         res.status(500).json({ "mensagem": `Algo deu errado!`});    
+        return;
     }
 
 });
