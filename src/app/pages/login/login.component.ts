@@ -28,10 +28,13 @@ export class LoginComponent {
     this.container = !this.container;
   }
 
+  inputImg = 'Escolha sua foto';
+
   onSelectImage(event: Event){
     const target = event.target as HTMLInputElement;
     if (target.files && target.files.length){
       this.selectedImage = target.files[0];
+      this.inputImg = target.files[0].name;
     } else {
       this.selectedImage = null;
     }

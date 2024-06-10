@@ -65,8 +65,8 @@
                     <i class="material-icons icons-forms">
                         image
                     </i>
-                    <span class="file-upload">Insira sua imagem</span>
-                    <input class="uploadImg" type="file" (change)="onSelectImage($event)" placeholder="Envie sua imagem">
+                    <span class="file-upload">{{ inputImg }}</span>
+                    <input class="uploadImg" type="file" (change)="onSelectImage($event)" [placeholder]="inputImg">
                 </label>
                 <button class="btn btn-secondary" (click)="onSubmit()">Enviar</button>
             </form>
