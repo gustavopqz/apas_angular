@@ -68,10 +68,6 @@ export class LoginComponent {
       senha: this.user.password
     }
 
-    const formData = new FormData();
-    formData.append('nome', this.user.username);
-    formData.append('email', this.user.email);
-    formData.append('senha', this.user.password);
     this.uploadFile(novoUsuario);
   }
 

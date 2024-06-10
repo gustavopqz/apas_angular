@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         try {
             let administrador = await Administrador.findOne({ "email": email });
             if (administrador) res.status(200).json(administrador)
-            else res.status(400).json({"mensagem": "Administrador não encontrado"})
+            else res.status(200).json({"mensagem": "Administrador não encontrado"})
         } catch (error) {
             res.status(500).json({ "mensagem": "Algo deu errado!" });
         }
