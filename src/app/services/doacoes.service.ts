@@ -14,6 +14,11 @@ export class DoacoesService {
     return this.http.get<Doacoes>('http://localhost:9000/doacoes')
   }
 
+  // Novo método para retornar um objeto que contém um array de Doacoes
+  getDoacoesCompletas(): Observable<{ doacoes: Doacoes[] }> {
+    return this.http.get<{ doacoes: Doacoes[] }>('http://localhost:9000/doacoes');
+  }  
+
   resposta?: any;
 
   postMercadoPago(valor: number, tipoDoacao: string, extraInfo?: any){

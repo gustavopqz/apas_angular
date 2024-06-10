@@ -6,7 +6,7 @@ import { CadastroAdminComponent } from './pages/layout/cadastro-admin/cadastro-a
 import { LandingComponent } from './pages/landing/landing.component';
 import { AcompanhamentoComponent } from './pages/acompanhamento/acompanhamento.component';
 import { RelatoriosGastosComponent } from './pages/layout/relatorios-gastos/relatorios-gastos.component';
-import { RelatoriosDoacoesComponent } from './pages/layout/relatorios-doacoes/relatorios-doacoes.component';
+import { RelatorioDoacoesComponent } from './pages/layout/relatorios-doacoes/relatorios-doacoes.component';
 import { DoacoesComponent } from './pages/doacoes/doacoes.component';
 import { PatrocinadoresComponent } from './pages/patrocinadores/patrocinadores.component';
 import { EsqueciSenhaComponent } from './pages/esqueci-senha/esqueci-senha.component';
@@ -54,8 +54,9 @@ export const routes: Routes = [
             },
             {
                 path: 'relatorios-doacoes',
-                component: RelatoriosDoacoesComponent
+                component: RelatorioDoacoesComponent
             },
+
             {
               path: '',
               redirectTo: 'home',
