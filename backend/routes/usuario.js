@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs')
 
 const Usuario = require("../models/Usuario");
+const Administrador = require('../models/Administrador');
 
 router.get('/', async (req, res) => {
     let email = req.query.email;
@@ -32,7 +33,9 @@ router.post('/cadastro', async (req, res)=>{
     let { nome, email, senha, img } = req.body;
 
     const usuario = await Usuario.findOne({"email": email});
-    if(usuario){
+    const administrador = await Administrador.findOne({"email": email});
+
+    if(usuario || administrador){
         res.status(400).json({"mensangem": "Esse e-mail já existe"});
         return;
     }
