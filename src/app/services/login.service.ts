@@ -66,4 +66,8 @@ export class LoginService {
     return '/user.png';
 
   }
+
+  async getUsuarioPorEmail(email: string | null){
+    return await this.http.get<any>('http://localhost:9000/usuario?email=' + email).toPromise();
+  }
 }

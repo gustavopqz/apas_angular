@@ -109,3 +109,22 @@
 .opacity{
   opacity: 0.3;
 }
+
+#chooseImg{
+  display: flex;
+  justify-content: center;
+
+  .label-input{
+    background-color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 350px;
+    justify-content: center;
+    padding: 5px 0;
+  }
+
+  input[type="file"]{
+    display: none;
+  }
+}

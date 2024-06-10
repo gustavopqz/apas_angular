@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { AdministradoresService } from '../../../services/administradores.service';
 import { LoadingComponent } from '../../../components/loading/loading.component';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,20 +15,60 @@ import { LoadingComponent } from '../../../components/loading/loading.component'
 })
 export class CadastroAdminComponent {
 
+  selectedImage: any = null;
+  inputImg = 'Escolha a foto do administrador';
+
+  onSelectImage(event: Event){
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length){
+      this.selectedImage = target.files[0];
+      this.inputImg = target.files[0].name;
+    } else {
+      this.selectedImage = null;
+    }
+  }
+
   loading = false;
   classeMain = 'main-register'
 
-  constructor(private administradorService: AdministradoresService ){}
+  constructor(private administradorService: AdministradoresService, private http: HttpClient, private router: Router){}
 
-  cadastraAdmin(){
+  async cadastraAdmin(){
     const adminObj = {
       nome: this.usuario,
       email: this.email,
       senha: this.senha,
       img: ''
     }
-    return this.administradorService.postNovoAdmin(adminObj);
-    
+
+    const existeEmail = await this.administradorService.getAdminPorEmail(this.email);
+    if (!existeEmail.mensagem) {
+      alert('E-mail já existe!');
+      this.classeMain = 'main-register';
+      this.loading = false;
+      return;
+    }
+
+    if (this.selectedImage){
+      const formImg = new FormData();
+      formImg.append('file', this.selectedImage);
+  
+      this.http.post('http://localhost:9000/profile/', formImg)
+      .subscribe(response =>{
+        this.resposta = response;
+        adminObj.img = this.resposta.success;
+        this.http.post('http://localhost:9000/administrador/cadastro', adminObj)
+        .subscribe(response => {
+          this.resposta = response;
+          if (this.resposta.mensagem.includes('com sucesso')){
+            alert(this.resposta.mensagem);
+            this.limpaCampos();
+            this.classeMain = 'main-register';
+            this.loading = false;
+          }
+        })
+      });
+    }    
   }
   
   usuario: string = '';
@@ -76,14 +118,7 @@ export class CadastroAdminComponent {
       this.classeMain = 'main-register opacity';
       this.loading = true;
 
-      this.cadastraAdmin()
-      .subscribe(response =>{
-        this.resposta = response;
-        alert(this.resposta.mensagem)
-        this.limpaCampos();
-        this.classeMain = 'main-register';
-        this.loading = false;
-      });          
+      this.cadastraAdmin();        
     } else {
       alert('Erro no envio dos dados cadastrais.');
     }
