@@ -46,7 +46,7 @@ export class LoginComponent {
     return emailRegex.test(email);
   }
 
-  onSubmit(){
+  async onSubmit(){
     if (!this.user.username || !this.user.email || !this.user.password || !this.user.confirmPassword){
       alert('Campo(s) faltantes.');
       return;
@@ -66,6 +66,12 @@ export class LoginComponent {
       nome: this.user.username,
       email: this.user.email,
       senha: this.user.password
+    }
+
+    const existeEmail = await this.loginService.getUsuarioPorEmail(this.user.email);
+    if (!existeEmail.mensagem){
+      alert('E-mail já existe!');
+      return;  
     }
 
     this.uploadFile(novoUsuario);

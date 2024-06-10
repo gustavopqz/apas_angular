@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
         try {
             let usuario = await Usuario.findOne({ "email": email });
             if (usuario) res.status(200).json(usuario)
-            else res.status(400).json({"message": "Usuário não encontrado"})
+            else res.status(200).json({"message": "Usuário não encontrado"})
         } catch (error) {
             res.status(500).json({ "message": "Algo deu errado!" });
             return;
@@ -36,7 +36,7 @@ router.post('/cadastro', async (req, res)=>{
     const administrador = await Administrador.findOne({"email": email});
 
     if(usuario || administrador){
-        res.status(400).json({"mensangem": "Esse e-mail já existe"});
+        res.status(200).json({"mensangem": "Esse e-mail já existe"});
         return;
     }
     const senhaSalt = await bcrypt.genSalt(8);
