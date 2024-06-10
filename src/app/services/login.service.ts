@@ -47,18 +47,23 @@ export class LoginService {
     return true;
   }
 
-  async getImagem(email: string | null){
+  async getImagem(email: string | null, privilegio: string | null){
     if (email){
-      const response = await this.http.get(`http://localhost:9000/usuario?email=${email}`).toPromise();
-      this.resposta = response;
+      if (privilegio == 'comum'){
+        const response = await this.http.get(`http://localhost:9000/usuario?email=${email}`).toPromise();
+        this.resposta = response;
+      }else {
+        const response = await this.http.get(`http://localhost:9000/administrador?email=${email}`).toPromise();
+        this.resposta = response;
+      }
       
       if (this.resposta.img)
       return this.resposta.img;
-      else '/assets/img/header/user.png';
-      return 
+      else 
+      return '/user.png';
     }
 
-    return '/assets/img/header/user.png';
+    return '/user.png';
 
   }
 }
