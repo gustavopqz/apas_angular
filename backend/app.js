@@ -38,7 +38,7 @@ const gastos = require("./routes/gastos");
 const administrador = require("./routes/administrador");
 const login = require("./routes/login");
 const usuario = require("./routes/usuario")
-const webhook = require('./routes/webhook')
+const profile = require("./routes/profile")
 
 // Routes
 app.use('/doacoes', doacoes);
@@ -47,7 +47,7 @@ app.use('/gastos', gastos);
 app.use('/administrador', administrador);
 app.use('/login', login);
 app.use('/usuario', usuario);
-app.use('/webhook', webhook);
+app.use('/profile', profile);
 
 // Serve
 app.listen(9000, ()=>{
