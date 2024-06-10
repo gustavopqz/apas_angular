@@ -12,6 +12,7 @@
     "express": "^4.19.2",
     "json-server": "^1.0.0-alpha.23",
     "mongoose": "^8.3.3",
+    "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0"
   }
 }

@@ -39,6 +39,7 @@ const administrador = require("./routes/administrador");
 const login = require("./routes/login");
 const usuario = require("./routes/usuario")
 const webhook = require('./routes/webhook')
+const recupera = require('./routes/recuperar')
 
 // Routes
 app.use('/doacoes', doacoes);
@@ -48,6 +49,7 @@ app.use('/administrador', administrador);
 app.use('/login', login);
 app.use('/usuario', usuario);
 app.use('/webhook', webhook);
+app.use('/recupera', recupera);
 
 // Serve
 app.listen(9000, ()=>{
