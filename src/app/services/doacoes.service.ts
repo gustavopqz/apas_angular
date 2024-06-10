@@ -67,17 +67,28 @@ export class DoacoesService {
   }
 
   postPrimeiroPasso(id: string, valor: number, tipoDoacao: string, extraInfo: any, url: string){
+    let doacaoObj;
 
-    const doacaoObj = {
-      id_pagamento: id,
-      doadorNome: extraInfo.doadorNome,
-      email: extraInfo.email,
-      valor: valor,
-      mensagem: extraInfo.mensagem,
-      img: extraInfo.img,
-      tipoDoacao: tipoDoacao,
-      descricao: 'Pagamento pelo site',
+    if (extraInfo){
+      doacaoObj = {
+        id_pagamento: id,
+        doadorNome: extraInfo.doadorNome,
+        email: extraInfo.email,
+        valor: valor,
+        mensagem: extraInfo.mensagem,
+        img: extraInfo.img,
+        tipoDoacao: tipoDoacao,
+        descricao: 'Doação de usuário pelo site'
+      }
+    } else {
+      doacaoObj = {
+        id_pagamento: id,
+        valor: valor,
+        tipoDoacao: tipoDoacao,
+        descricao: 'Doação anônima pelo site'
+      }
     }
+    
 
     try {
       this.http.post('http://localhost:9000/doacoes/cadastro', doacaoObj)
