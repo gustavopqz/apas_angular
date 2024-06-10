@@ -1,46 +1,37 @@
 const express = require("express");
 const router = express.Router();
+const Gastos = require('../models/gastos_model');
 
-const Gastos = require('../models/Gastos')
-
-router.get('/', async (req, res)=>{
-    let id = await req.query._id;
-
-    if (id){
-        let gastos = await Gastos.findOne({ "id": _id })
+// Rota para obter gastos
+router.get('/', async (req, res) => {
+    try {
+        const gastos = await Gastos.find({});
         res.status(200).json(gastos);
-        return;
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao obter os gastos", error: error.message });
+    }
+});
+
+// Rota para adicionar um novo gasto
+router.post('/', async (req, res) => {
+    const { data, descricao, valor } = req.body;
+
+    if (!data || !descricao || !valor) {
+        return res.status(400).json({ message: "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
     }
 
-    let todosGastos = await Gastos.find({})
-    res.status(200).json(todosGastos);
-    return;
-
-})
-
-router.post('/', async (req, res)=>{
-    let { data, descricao, valor } = await req.body;
-
-    if (!data || !descricao || !valor){
-        res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
-        return;
-    }
-
-    let gastosObj = {
+    const gasto = new Gastos({
         data,
         descricao,
         valor
-    };
+    });
 
     try {
-        await Gastos.create(gastosObj);
-        res.status(201).json({ "message": `O gasto foi salvo com sucesso!`});
-        return;
-        
+        await gasto.save();
+        res.status(201).json({ message: "O gasto foi salvo com sucesso!" });
     } catch (error) {
-        res.status(500).json({ "message": `Algo deu errado!`});
-        return;
+        res.status(500).json({ message: "Algo deu errado!", error: error.message });
     }
-})
+});
 
 module.exports = router;
