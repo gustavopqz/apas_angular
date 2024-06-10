@@ -11,12 +11,12 @@ export class DoacoesService {
   constructor(private http: HttpClient) { }
 
   getDoacoes(): Observable<Doacoes>{
-    return this.http.get<Doacoes>('http://localhost:9000/doacoes')
+    return this.http.get<Doacoes>('http://localhost:9000/doacoes/feed')
   }
 
   // Novo método para retornar um objeto que contém um array de Doacoes
   getDoacoesCompletas(): Observable<{ doacoes: Doacoes[] }> {
-    return this.http.get<{ doacoes: Doacoes[] }>('http://localhost:9000/doacoes');
+    return this.http.get<{ doacoes: Doacoes[] }>('http://localhost:9000/doacoes/concluidas');
   }  
 
   resposta?: any;
@@ -83,6 +83,7 @@ export class DoacoesService {
     } else {
       doacaoObj = {
         id_pagamento: id,
+        doadorNome: 'Anônimo',
         valor: valor,
         tipoDoacao: tipoDoacao,
         descricao: 'Doação anônima pelo site'
