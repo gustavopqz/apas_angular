@@ -18,10 +18,11 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent {
   container: boolean = true;
   selectedImage: any = null;
-  user: {username: string, email: string, password: string} = {
+  user: {username: string, email: string, password: string, confirmPassword: string} = {
     username: '',
     email: '',
     password: '',
+    confirmPassword: ''
   };
   
   trocaCard(){
@@ -39,7 +40,28 @@ export class LoginComponent {
       this.selectedImage = null;
     }
   }
+
+  validaEmail(email: string) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
+    return emailRegex.test(email);
+  }
+
   onSubmit(){
+    if (!this.user.username || !this.user.email || !this.user.password || !this.user.confirmPassword){
+      alert('Campo(s) faltantes.');
+      return;
+    }
+
+    if (this.user.password != this.user.confirmPassword){
+      alert('Senhas não conferem.');
+      return;
+    }
+
+    if (!this.validaEmail(this.user.email)){
+      alert('E-mail inválido.');
+      return;
+    }
+
     const novoUsuario = {
       nome: this.user.username,
       email: this.user.email,
