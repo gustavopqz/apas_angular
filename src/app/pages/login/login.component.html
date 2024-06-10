@@ -41,19 +41,19 @@
                     <i class="material-icons icons-form">
                         person
                     </i>
-                    <input type="text" placeholder="Nome">
+                    <input type="text" placeholder="Nome" [(ngModel)]="user.username" name="nome">
                 </label>
                 <label class="label-input">
                     <i class="material-icons icons-forms">
                         mail
                     </i>
-                    <input type="email" placeholder="Email">
+                    <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email">
                 </label>
                 <label class="label-input">
                     <i class="material-icons icons-forms">
                         key
                     </i>
-                    <input type="password" placeholder="Senha">
+                    <input type="password" placeholder="Senha" [(ngModel)]="user.password" name="senha">
                 </label>
                 <label class="label-input">
                     <i class="material-icons icons-forms">
@@ -68,7 +68,7 @@
                     <span class="file-upload">Insira sua imagem</span>
                     <input class="uploadImg" type="file" (change)="onSelectImage($event)" placeholder="Envie sua imagem">
                 </label>
-                <button class="btn btn-secondary" routerLink="/painel/home">Enviar</button>
+                <button class="btn btn-secondary" (click)="onSubmit()">Enviar</button>
             </form>
         </div>
     </div>

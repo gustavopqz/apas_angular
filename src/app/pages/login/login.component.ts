@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router'
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -36,14 +37,49 @@ export class LoginComponent {
     }
   }
   onSubmit(){
+    const novoUsuario = {
+      nome: this.user.username,
+      email: this.user.email,
+      senha: this.user.password
+    }
+
     const formData = new FormData();
-    formData.append('username', this.user.username);
+    formData.append('nome', this.user.username);
     formData.append('email', this.user.email);
-    formData.append('password', this.user.password);
-    formData.append('image',this.selectedImage);
+    formData.append('senha', this.user.password);
+    this.uploadFile(novoUsuario);
   }
 
-  constructor(private loginService: LoginService, private router: Router){}
+  resposta?: any;
+
+  uploadFile(body: any) {
+    if (this.selectedImage) {
+      const formImg = new FormData();
+      formImg.append('file', this.selectedImage);
+  
+      this.httpClient.post('http://localhost:9000/profile/', formImg)
+      .subscribe(response =>{
+        this.resposta = response;
+        body.img = this.resposta.success;
+        this.httpClient.post('http://localhost:9000/usuario/cadastro', body)
+        .subscribe(response => {
+          this.resposta = response;
+          if (this.resposta.mensagem.includes('com sucesso')){
+            localStorage.setItem('nome', this.user.username);
+            localStorage.setItem('email', this.user.email);
+            localStorage.setItem('privilegio', 'comum');
+            localStorage.setItem('logado', 'true');
+            this.loginService.loginInfo = {
+              text: this.user.username
+            }
+            this.router.navigate(['/'])
+          }
+        })
+      });
+    }
+  }
+
+  constructor(private loginService: LoginService, private router: Router, private httpClient: HttpClient){}
 
   email?: string;
   senha?: string;
