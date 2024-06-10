@@ -21,6 +21,15 @@ input[type="date"] {
     border-radius: 5px;
 }
 
+.base input[type="number"] {
+    width: 300px;
+    height: 40px;
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #397269;
+    border-radius: 5px;
+}
+
 .base .titulo h1 {
     font-size: 48px;
     color: #397269;

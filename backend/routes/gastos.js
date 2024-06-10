@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Gastos = require('../models/gastos_model');
 
-// Rota para obter gastos
+// Rota para obter todos os gastos
 router.get('/', async (req, res) => {
     try {
         const gastos = await Gastos.find({});
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 
     try {
         await gasto.save();
-        res.status(201).json({ message: "O gasto foi salvo com sucesso!" });
+        res.status(201).json(gasto);
     } catch (error) {
         res.status(500).json({ message: "Algo deu errado!", error: error.message });
     }

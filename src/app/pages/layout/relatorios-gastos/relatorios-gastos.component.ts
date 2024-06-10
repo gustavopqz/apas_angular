@@ -1,26 +1,53 @@
-import { Component } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
+import { Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms'; 
+import { CommonModule } from '@angular/common';
+import { GastosService } from '../../../gastos.service';
 import { Gastos } from '../../../modules/gastos.module';
 
 @Component({
   selector: 'app-relatorios-gastos',
   standalone: true,
-  imports: [MatButtonModule, MatDividerModule, MatIconModule, MatTableModule],
+  imports: [MatButtonModule, MatDividerModule, MatIconModule, MatTableModule, FormsModule, CommonModule], // Adicionar CommonModule aqui
   templateUrl: './relatorios-gastos.component.html',
-  styleUrl: './relatorios-gastos.component.scss'
+  styleUrls: ['./relatorios-gastos.component.scss']
 })
-
-export class RelatoriosGastosComponent {
+export class RelatoriosGastosComponent implements OnInit {
   displayedColumns: string[] = ['data', 'descricao', 'valor'];
-  dataSource: Gastos[] = [
-    { data: '2024-04-01', descricao: 'Ração', valor: 'R$ 680,00' },
-    { data: '2024-04-02', descricao: 'Medicamentos', valor: 'R$ 450,00' },
-    { data: '2024-04-02', descricao: 'Aluguel', valor: 'R$ 700,00' },
-    { data: '2024-04-02', descricao: 'Embasa', valor: 'R$ 425,00' },
-    { data: '2024-04-02', descricao: 'Coelba', valor: 'R$ 500,00' }
-  ]
- }
+  dataSource: Gastos[] = [];
+  novoGasto: Gastos = { data: new Date(), descricao: '', valor: 0 };
 
+  constructor(private gastosService: GastosService) { }
+
+  ngOnInit(): void {
+    this.carregarGastos();
+  }
+
+  carregarGastos(): void {
+    this.gastosService.getGastos().subscribe(
+      (data: Gastos[]) => {
+        this.dataSource = data;
+        console.log(this.dataSource); // Adicione este log para verificar os dados
+      },
+      (error: any) => {
+        console.error('Erro ao carregar gastos', error);
+      }
+    );
+  }
+
+  adicionarGasto(): void {
+    this.gastosService.addGasto(this.novoGasto).subscribe(
+      (data: Gastos) => {
+        this.dataSource.push(data);
+        this.dataSource = [...this.dataSource]; // Atualiza a tabela
+        this.novoGasto = { data: new Date(), descricao: '', valor: 0 }; // Reseta o formulário
+      },
+      (error: any) => {
+        console.error('Erro ao adicionar gasto', error);
+      }
+    );
+  }
+}
