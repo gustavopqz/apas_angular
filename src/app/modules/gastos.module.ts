@@ -1,5 +1,6 @@
 export interface Gastos {
-    data: string,
-    descricao: string,
-    valor: string,
-}
+    data: Date;
+    descricao: string;
+    valor: number;
+  }
+  
