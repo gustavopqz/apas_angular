@@ -16,8 +16,12 @@ export class HeaderComponent implements OnInit {
   routerLoginButton?: string;
 
   constructor(private loginService: LoginService){}
-  ngOnInit(): void {
+  async ngOnInit() {
     if (localStorage.getItem('nome')){
+
+      const imgPath = await this.loginService.getImagem(localStorage.getItem('email'));
+      this.imagemUsuario = 'http://localhost:9000/profile/' + imgPath;
+
       this.loginService.loginInfo = {
         text: localStorage.getItem('nome')
       }
@@ -42,6 +46,9 @@ export class HeaderComponent implements OnInit {
       text: 'LOGIN'
     }
     this.routerLoginButton = '/login'
+    this.imagemUsuario = '/assets/img/header/user.png';
   }
+
+  imagemUsuario = '/assets/img/header/user.png';
 
 }

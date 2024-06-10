@@ -46,4 +46,19 @@ export class LoginService {
 
     return true;
   }
+
+  async getImagem(email: string | null){
+    if (email){
+      const response = await this.http.get(`http://localhost:9000/usuario?email=${email}`).toPromise();
+      this.resposta = response;
+      
+      if (this.resposta.img)
+      return this.resposta.img;
+      else '/assets/img/header/user.png';
+      return 
+    }
+
+    return '/assets/img/header/user.png';
+
+  }
 }
