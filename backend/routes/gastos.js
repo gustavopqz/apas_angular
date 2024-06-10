@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Gastos = require('../models/gastos_model');
+const Gastos = require('../models/Gastos');
 
 // Rota para obter todos os gastos
 router.get('/', async (req, res) => {

@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
-import { GastosService } from '../../../gastos.service';
+import { GastosService } from '../../../services/gastos.service';
 import { Gastos } from '../../../modules/gastos.module';
 
 @Component({

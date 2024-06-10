@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Gastos } from './modules/gastos.module';
+import { Gastos } from './../modules/gastos.module';
 
 @Injectable({
   providedIn: 'root'
