@@ -92,6 +92,7 @@ export class LoginComponent {
           if (this.resposta.mensagem.includes('com sucesso')){
             localStorage.setItem('nome', this.user.username);
             localStorage.setItem('email', this.user.email);
+            localStorage.setItem('img', body.img),
             localStorage.setItem('privilegio', 'comum');
             localStorage.setItem('logado', 'true');
             this.loginService.loginInfo = {
@@ -101,6 +102,22 @@ export class LoginComponent {
           }
         })
       });
+    } else {
+      this.httpClient.post('http://localhost:9000/usuario/cadastro', body)
+        .subscribe(response => {
+          this.resposta = response;
+          if (this.resposta.mensagem.includes('com sucesso')){
+            localStorage.setItem('nome', this.user.username);
+            localStorage.setItem('email', this.user.email);
+            localStorage.setItem('img', 'user.png'),
+            localStorage.setItem('privilegio', 'comum');
+            localStorage.setItem('logado', 'true');
+            this.loginService.loginInfo = {
+              text: this.user.username
+            }
+            this.router.navigate(['/'])
+          }
+        })
     }
   }
 

@@ -52,7 +52,6 @@ export class DoacoesComponent implements OnInit {
           status
         }
 
-        console.log(body)
         this.doacoesService.patchAprovaDoacao(body)
         .subscribe(response => {
           this.getDoacoes();
@@ -94,12 +93,22 @@ export class DoacoesComponent implements OnInit {
         this.valorDoacao = result.valorDoacao;
         this.mensagemDoacao = result.mensagemDoacao;
 
-        const extraInfo = {
-          doadorNome: "Gustavo Pasqua",
-          email: "gustavo.pasqua@teste.com",
-          mensagem: this.mensagemDoacao,
-          img: "./assets/img/profiles/pasqua.png"
-        }
+        let extraInfo;
+
+        if (this.tipoDoacao == 'usuario'){
+          const getLogado = localStorage.getItem('logado');
+          if (!getLogado){
+            alert('Para doar como usuário é necessário realizar o login!');
+            return;
+          }
+
+          extraInfo = {
+            doadorNome: localStorage.getItem('nome'),
+            email: localStorage.getItem('email'),
+            mensagem: this.mensagemDoacao,
+            img: 'http://localhost:9000/profile/' + (localStorage.getItem('img') ? localStorage.getItem('img') : 'user.png') 
+          }
+        }        
         
         this.doacoesService.postMercadoPago(this.valorDoacao, this.tipoDoacao, extraInfo);
         this.opacity = 'opacity';
