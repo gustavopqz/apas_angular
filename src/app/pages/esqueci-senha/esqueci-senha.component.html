@@ -14,9 +14,9 @@
                     <i class="material-icons icons-forms">
                         mail
                     </i>
-                    <input type="email" placeholder="Email">
+                    <input type="email" placeholder="Email" [(ngModel)]="email" name="email">
                 </label>
-                <button class="btn btn-secondary">Enviar</button>
+                <button class="btn btn-secondary" (click)="onSubmit()">Enviar</button>
             </form>
         </div>
     </div>

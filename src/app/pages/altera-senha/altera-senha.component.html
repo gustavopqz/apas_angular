@@ -13,15 +13,15 @@
                     <i class="material-icons icons-forms">
                         key
                     </i>
-                    <input type="password" placeholder="Senha">
+                    <input type="password" placeholder="Senha" [(ngModel)]="senha" name="senha">
                 </label>
                 <label class="label-input">
                     <i class="material-icons icons-forms">
                         key
                     </i>
-                    <input type="password" placeholder="Confirmar Senha">
+                    <input type="password" placeholder="Confirmar Senha" [(ngModel)]="confirmaSenha" name="confirmaSenha">
                 </label>
-                <button class="btn btn-secondary">Enviar</button>
+                <button class="btn btn-secondary" (click)="onSubmit()">Enviar</button>
             </form>
         </div>
     </div>
