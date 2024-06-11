@@ -10,6 +10,7 @@ import { RelatorioDoacoesComponent } from './pages/layout/relatorios-doacoes/rel
 import { DoacoesComponent } from './pages/doacoes/doacoes.component';
 import { PatrocinadoresComponent } from './pages/patrocinadores/patrocinadores.component';
 import { EsqueciSenhaComponent } from './pages/esqueci-senha/esqueci-senha.component';
+import { AlteraSenhaComponent } from './pages/altera-senha/altera-senha.component';
 
 export const routes: Routes = [
     {
@@ -35,6 +36,10 @@ export const routes: Routes = [
     {
         path: 'esqueci-senha',
         component: EsqueciSenhaComponent
+    },
+    {
+        path: 'altera-senha',
+        component: AlteraSenhaComponent
     },
     {
         path: 'painel',
