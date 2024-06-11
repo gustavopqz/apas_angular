@@ -84,11 +84,11 @@ export class LoginComponent {
       const formImg = new FormData();
       formImg.append('file', this.selectedImage);
   
-      this.httpClient.post('http://localhost:9000/profile/', formImg)
+      this.httpClient.post('http://hubfin-infracommerce-hml.devit.com.br:49020/profile/', formImg)
       .subscribe(response =>{
         this.resposta = response;
         body.img = this.resposta.success;
-        this.httpClient.post('http://localhost:9000/usuario/cadastro', body)
+        this.httpClient.post('http://hubfin-infracommerce-hml.devit.com.br:49020/usuario/cadastro', body)
         .subscribe(response => {
           this.resposta = response;
           if (this.resposta.mensagem.includes('com sucesso')){
@@ -105,7 +105,7 @@ export class LoginComponent {
         })
       });
     } else {
-      this.httpClient.post('http://localhost:9000/usuario/cadastro', body)
+      this.httpClient.post('http://hubfin-infracommerce-hml.devit.com.br:49020/usuario/cadastro', body)
         .subscribe(response => {
           this.resposta = response;
           if (this.resposta.mensagem.includes('com sucesso')){

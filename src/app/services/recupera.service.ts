@@ -13,7 +13,7 @@ export class RecuperaService {
       email
     }
 
-    return await this.http.post('http://localhost:9000/recupera/', body).toPromise();
+    return await this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/recupera/', body).toPromise();
   }
 
   async validaToken(token: any){
@@ -21,7 +21,7 @@ export class RecuperaService {
       token
     }
 
-    return await this.http.post('http://localhost:9000/recupera/valida-token', body).toPromise();
+    return await this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/recupera/valida-token', body).toPromise();
   }
 
   async conclusao(email :string, senha: string | undefined){
@@ -30,6 +30,6 @@ export class RecuperaService {
       senha
     }
 
-    return await this.http.post('http://localhost:9000/recupera/conclusao', body).toPromise();
+    return await this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/recupera/conclusao', body).toPromise();
   }
 }

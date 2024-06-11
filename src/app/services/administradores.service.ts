@@ -13,15 +13,15 @@ export class AdministradoresService {
   constructor(private http: HttpClient) { }
 
   getTodosAdmins(): Observable<Administradores>{
-    return this.http.get<Administradores>('http://localhost:9000/administrador');
+    return this.http.get<Administradores>('http://hubfin-infracommerce-hml.devit.com.br:49020/administrador');
   }
 
   async getAdminPorEmail(email: string | null){
-    return await this.http.get<any>('http://localhost:9000/administrador?email=' + email).toPromise();
+    return await this.http.get<any>('http://hubfin-infracommerce-hml.devit.com.br:49020/administrador?email=' + email).toPromise();
   }
 
   postNovoAdmin(body: any){
-    return this.http.post<Administradores>('http://localhost:9000/administrador/cadastro', body)    
+    return this.http.post<Administradores>('http://hubfin-infracommerce-hml.devit.com.br:49020/administrador/cadastro', body)    
   }
 
 }

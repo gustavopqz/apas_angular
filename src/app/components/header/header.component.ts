@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     if (localStorage.getItem('nome')){
 
       const imgPath = await this.loginService.getImagem(localStorage.getItem('email'), localStorage.getItem('privilegio'));
-      this.imagemUsuario = 'http://localhost:9000/profile/' + imgPath;
+      this.imagemUsuario = 'http://hubfin-infracommerce-hml.devit.com.br:49020/profile/' + imgPath;
 
       this.loginService.loginInfo = {
         text: localStorage.getItem('nome')

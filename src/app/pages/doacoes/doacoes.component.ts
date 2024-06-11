@@ -106,7 +106,7 @@ export class DoacoesComponent implements OnInit {
             doadorNome: localStorage.getItem('nome'),
             email: localStorage.getItem('email'),
             mensagem: this.mensagemDoacao,
-            img: 'http://localhost:9000/profile/' + (localStorage.getItem('img') ? localStorage.getItem('img') : 'user.png') 
+            img: 'http://hubfin-infracommerce-hml.devit.com.br:49020/profile/' + (localStorage.getItem('img') ? localStorage.getItem('img') : 'user.png') 
           }
         }        
         
