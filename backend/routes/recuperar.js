@@ -1,73 +1,116 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
-const Doacoes = require('../models/Doacoes')
-const Administrador = require('../models/Administrador')
+const Usuario = require('../models/Usuario');
+const Administrador = require('../models/Administrador');
+const Token = require('../models/Token')
 
 router.post('/', async (req, res)=>{
     const {email} = req.body;
     
-    const usuario = await Doacoes.findOne({email});
+    const usuario = await Usuario.findOne({email});
     const admin = await Administrador.findOne({email});
 
     if(!usuario && !admin){
-        return res.status(200).json({"mensagem": 'Email não encontrado!'});
+        return res.status(404).json({"mensagem": 'Email não encontrado!'});
     }
 
-    const token = gerarToken();
+    const token = await gerarToken();
 
-    await RecuperarSenha.updateOne({email}, {token});
+    await Token.create(token);
 
-    enviarEmailRecuperacao(email, token);
+    enviarEmailRecuperacao(email, token.token);
 
     res.status(200).json({message: 'Email de recuperação enviado'});
 });
 
-router.post('/validar-token', async (req, res)=>{
-    const {email, token} = req.body;
+router.post('/conclusao', async (req, res) =>{
+    const { email, senha } = req.body;
 
-    const usuario = await RecuperarSenha.findOne({email, token});
-    if(!usuario){
+    // HASH NOVA SENHA
+    const salt = await bcrypt.genSalt(8);
+    const senhaEncriptada = await bcrypt.hash(senha, salt);
+
+    // ENCONTRAR USUÁRIO COMUM OU ADMIN
+    const usuario = await Usuario.findOne({email});
+    const admin = await Administrador.findOne({email});
+
+    // Atualização da senha
+    if (usuario){
+        await Usuario.updateOne({ email }, {senha: senhaEncriptada});
+        res.status(200).json({"mensagem": "Senha alterada com sucesso"});
+        return;
+    } else if (admin){
+        await Administrador.updateOne({ email }, {senha: senhaEncriptada});
+        res.status(200).json({"mensagem": "Senha alterada com sucesso"});
+        return;
+    }
+})
+
+
+router.post('/valida-token', async (req, res)=>{
+    const {token} = req.body;
+
+    const tokenObj = await Token.findOne({token});
+    if(!tokenObj){
         return res.status(400).json({"mensagem": 'Token inválido'})
     }
 
     res.status(200).json({"mensagem": 'Token Válido'});
 });
 
-function gerarToken(){
+async function gerarToken(){
 
-    const id = bcrypt.randomBytes(32).toString('hex');
+    const now = new Date();
 
-    const registroTempo = Date.now();
-    const expirar = registroTempo + 1800000; //Tempo para o token expirar
+    const date = now.toLocaleDateString('pt-BR');  // "10/06/2024"
+    const time = now.toLocaleTimeString('pt-BR');  // "15:30:00"
     
-    const hash = crypto.creatHash('sha256');
+    function generateHash(input) {
+        return crypto.createHash('sha256').update(input).digest('hex');
+    }
+    
+    const input = 'md18KF2la';
+    const hash = generateHash(input);
 
-    const token = id + registroTempo + hash + expirar;
+    const token = {
+        token: hash,
+        validade: `${date} ${time}`
+    }    
     
     return token;
     
 };
 
 async function enviarEmailRecuperacao(email, token){
-    const transporter = nodemailer.createTransport({
-        host: 'apasserrinha.netlify.app',
-        port: 9000,
+    // Configuração do transporte
+    let transporter = nodemailer.createTransport({
+        service: 'hotmail', // Você pode usar outros serviços, como 'hotmail', 'yahoo', etc.
         auth: {
-            usuario: 'email',
-            pass: '1234'
+        user: 'automatize.sistemas@outlook.com', // Seu e-mail
+        pass: process.env.AUTOMATIZE // Sua senha ou app password (recomendado)
         }
     });
-    const link = '';
-    const mensagem = `Olá, clique nesse link para recuperar sua senha: ${link}`;
-
-    await transporter.sendMail({
-        from: 'email',
-        to: email,
-        subject: 'Recuperação de senha',
-        text: mensagem
+    
+    // Opções do e-mail
+    let mailOptions = {
+        from: 'automatize.sistemas@outlook.com', // Endereço do remetente
+        to: email, // Lista de destinatários
+        subject: 'RECUPERAÇÃO DE SENHA - SISTEMA APAS', // Assunto do e-mail
+        text: 'Clique no link abaixo para alterar a sua senha:', // Corpo do e-mail em texto simples
+        html: `<h1><a href="http://localhost:4200/#/altera-senha?email=${email}&token=${token}">Link para recuperação de senha site APAS<a></h1>` // Corpo do e-mail em HTML (opcional)
+    };
+    
+    // Enviando o e-mail
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+        return console.log(error);
+        }
+        console.log('E-mail enviado: ' + info.response);
     });
 };
 

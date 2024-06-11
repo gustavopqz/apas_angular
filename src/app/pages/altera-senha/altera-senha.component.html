@@ -7,14 +7,19 @@
             <button class="btn btn-primary" routerLink="/login">Voltar</button>
         </div>
         <div class="second-column">
-            <h2 class="title title-secondary">Insira as informações</h2>
-            <p class="description description-secondary">Insira seu email para recuperar a senha</p>
+            <h2 class="title title-secondary">Digite sua nova senha</h2>
             <form class="form">
                 <label class="label-input">
                     <i class="material-icons icons-forms">
-                        mail
+                        key
                     </i>
-                    <input type="email" placeholder="Email" [(ngModel)]="email" name="email">
+                    <input type="password" placeholder="Senha" [(ngModel)]="senha" name="senha">
+                </label>
+                <label class="label-input">
+                    <i class="material-icons icons-forms">
+                        key
+                    </i>
+                    <input type="password" placeholder="Confirmar Senha" [(ngModel)]="confirmaSenha" name="confirmaSenha">
                 </label>
                 <button class="btn btn-secondary" (click)="onSubmit()">Enviar</button>
             </form>
