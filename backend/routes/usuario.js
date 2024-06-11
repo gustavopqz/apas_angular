@@ -6,26 +6,38 @@ const Usuario = require("../models/Usuario");
 const Administrador = require('../models/Administrador');
 
 router.get('/', async (req, res) => {
-    let email = req.query.email;
+    const email = req.query.email;
 
+    // Usuário único
     if (email) {
         try {
-            let usuario = await Usuario.findOne({ "email": email });
-            if (usuario) res.status(200).json(usuario)
-            else res.status(200).json({"message": "Usuário não encontrado"})
+            let usuario = await Usuario.findOne({ email: email });
+            if (usuario){
+                res.status(200).json(usuario);
+                return;
+            } 
         } catch (error) {
-            res.status(500).json({ "message": "Algo deu errado!" });
-            return;
         }
-    } else {
+
         try {
-            let todosUsuarios = await Usuario.find({});
-            res.status(200).json(todosUsuarios);
-            return;
-        } catch (error) {
-            res.status(500).json({ "message": "Algo deu errado!" });
-            return;
+            let admin = await Administrador.findOne({ email: email });
+            if (admin){
+                res.status(200).json(admin);
+                return;
+            }          
+        } catch (error){
+            // pass
         }
+    }
+
+    // Todos usuários
+    try {
+        let todosUsuarios = await Usuario.find({});
+        res.status(200).json(todosUsuarios);
+        return;
+    } catch (error) {
+        res.status(500).json({ "message": "Algo deu errado!" });
+        return;
     }
 });
 
