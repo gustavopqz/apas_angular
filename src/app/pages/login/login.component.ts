@@ -69,7 +69,7 @@ export class LoginComponent {
     }
 
     const existeEmail = await this.loginService.getUsuarioPorEmail(this.user.email);
-    if (!existeEmail.mensagem){
+    if (existeEmail.mensagem){
       alert('E-mail já existe!');
       return;  
     }

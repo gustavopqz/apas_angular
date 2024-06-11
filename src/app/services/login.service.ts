@@ -68,6 +68,6 @@ export class LoginService {
   }
 
   async getUsuarioPorEmail(email: string | null){
-    return await this.http.get<any>('http://localhost:9000/usuario?email=' + email).toPromise();
+    return await this.http.get<any>(`http://localhost:9000/usuario?email=${email}`).toPromise();
   }
 }

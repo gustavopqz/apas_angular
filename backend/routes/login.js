@@ -3,8 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs')
 const axios = require('axios')
 
-const Login = require('../models/Login');
-
 router.post('/', async (req, res)=>{
     let { email, senha } = req.body;
 
