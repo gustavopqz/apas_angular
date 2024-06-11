@@ -3,14 +3,17 @@ const router = express.Router();
 const bcrypt = require('bcryptjs')
 const nodemailer = require('nodemailer');
 
-const RecuperarSenha = require('../models/RecuperarSenha');
+const Doacoes = require('../models/Doacoes')
+const Administrador = require('../models/Administrador')
 
-router.post('/recuperar-senha', async (req, res)=>{
+router.post('/', async (req, res)=>{
     const {email} = req.body;
     
-    const usuario = await RecuperarSenha.findOne({email});
-    if(!usuario){
-        return res.status(404).json({message: 'Email não encontrado!'});
+    const usuario = await Doacoes.findOne({email});
+    const admin = await Administrador.findOne({email});
+
+    if(!usuario && !admin){
+        return res.status(200).json({"mensagem": 'Email não encontrado!'});
     }
 
     const token = gerarToken();
@@ -27,10 +30,10 @@ router.post('/validar-token', async (req, res)=>{
 
     const usuario = await RecuperarSenha.findOne({email, token});
     if(!usuario){
-        return res.status(400).json({message: 'Token inválido'})
+        return res.status(400).json({"mensagem": 'Token inválido'})
     }
 
-    res.status(200).json({message: 'Token Válido'});
+    res.status(200).json({"mensagem": 'Token Válido'});
 });
 
 function gerarToken(){
@@ -38,35 +41,34 @@ function gerarToken(){
     const id = bcrypt.randomBytes(32).toString('hex');
 
     const registroTempo = Date.now();
-    const expirar = registroTempo + 3600000; //Tempo para o token expirar
+    const expirar = registroTempo + 1800000; //Tempo para o token expirar
     
     const hash = crypto.creatHash('sha256');
-    update(id + registroTempo + process.env.TOKEN_SECRET);
-    digest('hex');
 
     const token = id + registroTempo + hash + expirar;
     
-    return 'TOKEN_ALEATORIO';
+    return token;
+    
+};
 
-    async function enviarEmailRecuperacao(email, token){
-        const transporter = nodemailer.createTransport({
-            host: 'apasserrinha.netlify.app',
-            port: 9000,
-            auth: {
-                usuario: 'email',
-                pass: '1234'
-            }
-        });
-        const link = '';
-        const mensagem = `Olá, clique nesse link para recuperar sua senha: ${link}`;
+async function enviarEmailRecuperacao(email, token){
+    const transporter = nodemailer.createTransport({
+        host: 'apasserrinha.netlify.app',
+        port: 9000,
+        auth: {
+            usuario: 'email',
+            pass: '1234'
+        }
+    });
+    const link = '';
+    const mensagem = `Olá, clique nesse link para recuperar sua senha: ${link}`;
 
-        await transporter.sendMail({
-            from: 'email',
-            to: email,
-            subject: 'Recuperação de senha',
-            text: mensagem
-        });
-    };
+    await transporter.sendMail({
+        from: 'email',
+        to: email,
+        subject: 'Recuperação de senha',
+        text: mensagem
+    });
 };
 
 module.exports = router;
