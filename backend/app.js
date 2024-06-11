@@ -38,6 +38,7 @@ const gastos = require("./routes/gastos");
 const administrador = require("./routes/administrador");
 const login = require("./routes/login");
 const usuario = require("./routes/usuario")
+const profile = require('./routes/profile')
 const recupera = require('./routes/recuperar')
 
 // Routes
@@ -47,6 +48,7 @@ app.use('/gastos', gastos);
 app.use('/administrador', administrador);
 app.use('/login', login);
 app.use('/usuario', usuario);
+app.use('/profile', profile);
 app.use('/recupera', recupera);
 
 // Serve
