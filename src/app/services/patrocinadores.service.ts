@@ -11,6 +11,6 @@ export class PatrocinadoresService {
   constructor(private http: HttpClient) { }
 
   getPatrocinadores(): Observable<Patrocinadores>{
-    return this.http.get<Patrocinadores>('http://localhost:9000/patrocinios')
+    return this.http.get<Patrocinadores>('http://hubfin-infracommerce-hml.devit.com.br:49020/patrocinios')
   }
 }

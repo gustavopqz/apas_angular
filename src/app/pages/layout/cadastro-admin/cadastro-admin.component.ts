@@ -53,11 +53,11 @@ export class CadastroAdminComponent {
       const formImg = new FormData();
       formImg.append('file', this.selectedImage);
   
-      this.http.post('http://localhost:9000/profile/', formImg)
+      this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/profile/', formImg)
       .subscribe(response =>{
         this.resposta = response;
         adminObj.img = this.resposta.success;
-        this.http.post('http://localhost:9000/administrador/cadastro', adminObj)
+        this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/administrador/cadastro', adminObj)
         .subscribe(response => {
           this.resposta = response;
           if (this.resposta.mensagem.includes('com sucesso')){

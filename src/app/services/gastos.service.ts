@@ -7,7 +7,7 @@ import { Gastos } from './../modules/gastos.module';
   providedIn: 'root'
 })
 export class GastosService {
-  private apiUrl = 'http://localhost:9000/gastos';
+  private apiUrl = 'http://hubfin-infracommerce-hml.devit.com.br:49020/gastos';
 
   constructor(private http: HttpClient) { }
 

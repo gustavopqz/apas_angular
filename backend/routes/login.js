@@ -6,8 +6,8 @@ const axios = require('axios')
 router.post('/', async (req, res)=>{
     let { email, senha } = req.body;
 
-    const adminAPI = 'http://localhost:9000/administrador?email=';
-    const usuarioAPI = 'http://localhost:9000/usuario?email='
+    const adminAPI = 'http://hubfin-infracommerce-hml.devit.com.br:49020/administrador?email=';
+    const usuarioAPI = 'http://hubfin-infracommerce-hml.devit.com.br:49020/usuario?email='
     
     try {
         const responseAdmin = await axios.get(adminAPI + email);
