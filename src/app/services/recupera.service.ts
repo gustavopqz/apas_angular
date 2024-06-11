@@ -15,4 +15,21 @@ export class RecuperaService {
 
     return await this.http.post('http://localhost:9000/recupera/', body).toPromise();
   }
+
+  async validaToken(token: any){
+    const body = {
+      token
+    }
+
+    return await this.http.post('http://localhost:9000/recupera/valida-token', body).toPromise();
+  }
+
+  async conclusao(email :string, senha: string | undefined){
+    const body = {
+      email,
+      senha
+    }
+
+    return await this.http.post('http://localhost:9000/recupera/conclusao', body).toPromise();
+  }
 }

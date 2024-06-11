@@ -52,11 +52,11 @@ router.post('/conclusao', async (req, res) =>{
 })
 
 
-router.post('/validar-token', async (req, res)=>{
-    const {email, token} = req.body;
+router.post('/valida-token', async (req, res)=>{
+    const {token} = req.body;
 
-    const usuario = await RecuperarSenha.findOne({email, token});
-    if(!usuario){
+    const tokenObj = await Token.findOne({token});
+    if(!tokenObj){
         return res.status(400).json({"mensagem": 'Token inválido'})
     }
 
