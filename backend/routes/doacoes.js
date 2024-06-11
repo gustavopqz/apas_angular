@@ -5,16 +5,25 @@ const Doacoes = require('../models/Doacoes')
 
 router.get('/', async (req, res)=>{
 
+    let todasDoacoes = await Doacoes.find({})
+    res.status(200).json(todasDoacoes);
+
+})
+
+
+router.get('/feed', async (req, res)=>{
+
     let todasDoacoesConcluidas = await Doacoes.find({"conclusao": true, "tipoDoacao": 'usuario'})
     res.status(200).json(todasDoacoesConcluidas);
     return;
 
 })
 
-router.get('/todas', async (req, res)=>{
+router.get('/concluidas', async (req, res)=>{
 
-    let todasDoacoes = await Doacoes.find({})
-    res.status(200).json(todasDoacoes);
+    let todasDoacoesConcluidas = await Doacoes.find({"conclusao": true})
+    res.status(200).json(todasDoacoesConcluidas);
+    return;
 
 })
 

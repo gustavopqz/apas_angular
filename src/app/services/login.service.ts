@@ -46,4 +46,28 @@ export class LoginService {
 
     return true;
   }
+
+  async getImagem(email: string | null, privilegio: string | null){
+    if (email){
+      if (privilegio == 'comum'){
+        const response = await this.http.get(`http://localhost:9000/usuario?email=${email}`).toPromise();
+        this.resposta = response;
+      }else {
+        const response = await this.http.get(`http://localhost:9000/administrador?email=${email}`).toPromise();
+        this.resposta = response;
+      }
+      
+      if (this.resposta.img)
+      return this.resposta.img;
+      else 
+      return '/user.png';
+    }
+
+    return '/user.png';
+
+  }
+
+  async getUsuarioPorEmail(email: string | null){
+    return await this.http.get<any>('http://localhost:9000/usuario?email=' + email).toPromise();
+  }
 }

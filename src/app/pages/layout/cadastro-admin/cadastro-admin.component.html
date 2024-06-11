@@ -22,6 +22,16 @@
             <input type="password" name="confirmarSenha" placeholder="Confirmar Senha" [(ngModel)]="confirmarSenha" (blur)="validateConfirmPassword()">
             <div *ngIf="!isConfirmPasswordValid" class="error-message">As senhas não coincidem.</div>
           </div>
+
+          <div id="chooseImg">
+            <label class="label-input">
+              <i class="material-icons icons-forms">
+                  image
+              </i>
+              <span class="file-upload">{{ inputImg }}</span>
+              <input class="uploadImg" type="file" (change)="onSelectImage($event)" [placeholder]="inputImg">
+          </label>
+          </div>
         </div>
         <button class="btn-register" (click)="onSubmit()">Cadastrar</button>
       </div>
