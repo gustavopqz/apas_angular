@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Administradores } from '../modules/administrador.module';
 
+// Enviroment
+import { environment } from '@env/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,15 +16,15 @@ export class AdministradoresService {
   constructor(private http: HttpClient) { }
 
   getTodosAdmins(): Observable<Administradores>{
-    return this.http.get<Administradores>('http://hubfin-infracommerce-hml.devit.com.br:49020/administrador');
+    return this.http.get<Administradores>(`${environment.apiBaseUrl}/administradores`);
   }
 
   async getAdminPorEmail(email: string | null){
-    return await this.http.get<any>('http://hubfin-infracommerce-hml.devit.com.br:49020/administrador?email=' + email).toPromise();
+    return await this.http.get<any>(`${environment.apiBaseUrl}/administradores?email=` + email).toPromise();
   }
 
   postNovoAdmin(body: any){
-    return this.http.post<Administradores>('http://hubfin-infracommerce-hml.devit.com.br:49020/administrador/cadastro', body)    
+    return this.http.post<Administradores>(`${environment.apiBaseUrl}/administradores/cadastro`, body)    
   }
 
 }

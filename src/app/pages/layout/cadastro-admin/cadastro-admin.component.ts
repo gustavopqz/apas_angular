@@ -7,6 +7,9 @@ import { LoadingComponent } from '../../../components/loading/loading.component'
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+// Enviroment
+import { environment } from '@env/environment';
+
 
 @Component({
   selector: 'app-cadastro-admin',
@@ -53,11 +56,11 @@ export class CadastroAdminComponent {
       const formImg = new FormData();
       formImg.append('file', this.selectedImage);
   
-      this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/profile/', formImg)
+      this.http.post(`${environment.apiBaseUrl}/profile/`, formImg)
       .subscribe(response =>{
         this.resposta = response;
         adminObj.img = this.resposta.success;
-        this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/administrador/cadastro', adminObj)
+        this.http.post(`${environment.apiBaseUrl}/administradores/cadastro`, adminObj)
         .subscribe(response => {
           this.resposta = response;
           if (this.resposta.mensagem.includes('com sucesso')){

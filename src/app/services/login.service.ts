@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+// Enviroment
+import { environment } from '@env/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +29,7 @@ export class LoginService {
   usuario?: any = null;
 
   async logar(body: any): Promise<any>{
-    const response = await this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/login', body).toPromise();
+    const response = await this.http.post( environment.apiBaseUrl + '/login', body).toPromise();
     
     this.usuario = response;
 
@@ -50,10 +53,10 @@ export class LoginService {
   async getImagem(email: string | null, privilegio: string | null){
     if (email){
       if (privilegio == 'comum'){
-        const response = await this.http.get(`http://hubfin-infracommerce-hml.devit.com.br:49020/usuario?email=${email}`).toPromise();
+        const response = await this.http.get(`${environment.apiBaseUrl}/usuarios?email=${email}`).toPromise();
         this.resposta = response;
       }else {
-        const response = await this.http.get(`http://hubfin-infracommerce-hml.devit.com.br:49020/administrador?email=${email}`).toPromise();
+        const response = await this.http.get(`${environment.apiBaseUrl}/administradores?email=${email}`).toPromise();
         this.resposta = response;
       }
       
@@ -68,6 +71,6 @@ export class LoginService {
   }
 
   async getUsuarioPorEmail(email: string | null){
-    return await this.http.get<any>(`http://hubfin-infracommerce-hml.devit.com.br:49020/usuario?email=${email}`).toPromise();
+    return await this.http.get<any>(`${environment.apiBaseUrl}/usuarios?email=${email}`).toPromise();
   }
 }

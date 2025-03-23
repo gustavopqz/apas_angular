@@ -1,48 +1,59 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs')
-const axios = require('axios')
+const bcrypt = require('bcryptjs');
+require('dotenv').config();
+
+// Models
+const Administrador = require('../models/Administrador');
+const Usuario = require('../models/Usuario')
 
 router.post('/', async (req, res)=>{
     let { email, senha } = req.body;
 
-    const adminAPI = 'http://hubfin-infracommerce-hml.devit.com.br:49020/administrador?email=';
-    const usuarioAPI = 'http://hubfin-infracommerce-hml.devit.com.br:49020/usuario?email='
+    const admin = await Administrador.findOne({email});
+    const usuario = await Usuario.findOne({email});
     
-    try {
-        const responseAdmin = await axios.get(adminAPI + email);
-        const data = responseAdmin.data;
+    if (admin) { 
 
-        const validaSenha = await bcrypt.compare(senha, data.senha);
+        const validaSenha = await bcrypt.compare(senha, admin.senha);
+
+        const jsonResposta = {
+            nome: admin.nome,
+            email: admin.email,
+            img: admin.img,
+            privilegio: admin.privilegio
+        }
 
         if(validaSenha){
-            res.status(200).json(data);
+            res.status(200).json(jsonResposta);
             return;      
         }else {
             res.status(200).json({"mensagem": "Senha incorreta"});
             return; 
         }
-    } catch (error) {
-        //pass
     }
 
-    try {
-        const responseUse = await axios.get(usuarioAPI + email);
-        const data = responseUse.data; 
+    if (usuario) {
         
-        const validaSenha = await bcrypt.compare(senha, data.senha);
+        const validaSenha = await bcrypt.compare(senha, usuario.senha);
+
+        const jsonResposta = {
+            nome: usuario.nome,
+            email: usuario.email,
+            img: usuario.img,
+            privilegio: usuario.privilegio
+        }
 
         if(validaSenha){
-            res.status(200).json(data);
+            res.status(200).json(jsonResposta);
             return;       
         }else {
             res.status(200).json({"mensagem": "Senha incorreta"})
             return; 
         } 
-    } catch (error) {
-        res.status(200).json({"mensagem": "Erro ao tentar efetuar login"});
-        return; 
     }
+
+    return res.status(404).json({"mensagem": "Usuário não encontrado"})
 })
 
 module.exports = router;

@@ -3,11 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Gastos } from './../modules/gastos.module';
 
+// Enviroment
+import { environment } from '@env/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class GastosService {
-  private apiUrl = 'http://hubfin-infracommerce-hml.devit.com.br:49020/gastos';
+  private apiUrl = `${environment.apiBaseUrl}/gastos`;
 
   constructor(private http: HttpClient) { }
 

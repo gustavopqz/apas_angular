@@ -17,16 +17,7 @@ router.get('/', async (req, res) => {
                 return;
             } 
         } catch (error) {
-        }
-
-        try {
-            let admin = await Administrador.findOne({ email: email });
-            if (admin){
-                res.status(200).json(admin);
-                return;
-            }          
-        } catch (error){
-            // pass
+            //pass
         }
     }
 

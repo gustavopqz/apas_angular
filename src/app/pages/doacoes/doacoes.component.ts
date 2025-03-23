@@ -18,6 +18,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
 import { LoadingComponent } from '../../components/loading/loading.component';
 
+// Enviroment
+import { environment } from '@env/environment';
+
 export interface DadosDialog{
   tipoDoacao: String,
   valorDoacao: Number,
@@ -106,7 +109,7 @@ export class DoacoesComponent implements OnInit {
             doadorNome: localStorage.getItem('nome'),
             email: localStorage.getItem('email'),
             mensagem: this.mensagemDoacao,
-            img: 'http://hubfin-infracommerce-hml.devit.com.br:49020/profile/' + (localStorage.getItem('img') ? localStorage.getItem('img') : 'user.png') 
+            img: `${environment.apiBaseUrl}/profile/` + (localStorage.getItem('img') ? localStorage.getItem('img') : 'user.png') 
           }
         }        
         

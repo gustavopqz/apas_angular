@@ -30,7 +30,7 @@ export class RelatoriosGastosComponent implements OnInit {
     this.gastosService.getGastos().subscribe(
       (data: Gastos[]) => {
         this.dataSource = data;
-        console.log(this.dataSource); // Adicione este log para verificar os dados
+        // console.log(this.dataSource); // Adicione este log para verificar os dados
       },
       (error: any) => {
         console.error('Erro ao carregar gastos', error);
