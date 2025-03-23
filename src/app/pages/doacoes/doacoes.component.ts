@@ -67,7 +67,7 @@ export class DoacoesComponent implements OnInit {
         this.doacoesService.patchAprovaDoacao(body)
         .subscribe(response => {
           this.getDoacoes();
-          // window.location.href = environment.frontBaseUrl + '/doacoes';
+          window.location.href = environment.frontBaseUrl + '/doacoes';
         }) 
 
       }
