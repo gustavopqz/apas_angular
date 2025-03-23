@@ -4,6 +4,9 @@ import { NgOptimizedImage } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../../services/login.service'
 
+// Enviroment
+import { environment } from '@env/environment';
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -20,7 +23,7 @@ export class HeaderComponent implements OnInit {
     if (localStorage.getItem('nome')){
 
       const imgPath = await this.loginService.getImagem(localStorage.getItem('email'), localStorage.getItem('privilegio'));
-      this.imagemUsuario = 'http://hubfin-infracommerce-hml.devit.com.br:49020/profile/' + imgPath;
+      this.imagemUsuario = environment.apiBaseUrl + '/profile/' + imgPath;
 
       this.loginService.loginInfo = {
         text: localStorage.getItem('nome')

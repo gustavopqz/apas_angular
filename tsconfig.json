@@ -23,7 +23,8 @@
       "dom"
     ],
     "paths": {
-      "@raiz/*": ["./src/*"]
+      "@raiz/*": ["./src/*"],
+      "@env/*": ["./src/environments/*"]
     }
   },
   "angularCompilerOptions": {

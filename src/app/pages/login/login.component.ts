@@ -7,6 +7,9 @@ import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router'
 import { HttpClient } from '@angular/common/http';
 
+// Enviroment
+import { environment } from '@env/environment';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -84,11 +87,11 @@ export class LoginComponent {
       const formImg = new FormData();
       formImg.append('file', this.selectedImage);
   
-      this.httpClient.post('http://hubfin-infracommerce-hml.devit.com.br:49020/profile/', formImg)
+      this.httpClient.post(`${environment.apiBaseUrl}/profile/`, formImg)
       .subscribe(response =>{
         this.resposta = response;
         body.img = this.resposta.success;
-        this.httpClient.post('http://hubfin-infracommerce-hml.devit.com.br:49020/usuario/cadastro', body)
+        this.httpClient.post(`${environment.apiBaseUrl}/usuarios/cadastro`, body)
         .subscribe(response => {
           this.resposta = response;
           if (this.resposta.mensagem.includes('com sucesso')){
@@ -105,7 +108,7 @@ export class LoginComponent {
         })
       });
     } else {
-      this.httpClient.post('http://hubfin-infracommerce-hml.devit.com.br:49020/usuario/cadastro', body)
+      this.httpClient.post(`${environment.apiBaseUrl}/usuarios/cadastro`, body)
         .subscribe(response => {
           this.resposta = response;
           if (this.resposta.mensagem.includes('com sucesso')){

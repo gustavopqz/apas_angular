@@ -17,14 +17,19 @@ app.use(express.urlencoded({ extended: true }));
 //Enviroments variabels
 require('dotenv').config()
 const user = process.env.USER
-const pass = process.env.PASS
-const cluster = process.env.CLUSTER
+const pass = process.env.PASSWORD
 
-//DB connection
-const connection = mongoose.connect(`mongodb+srv://${user}:${pass}@${cluster}.gvpzqhx.mongodb.net/apas`)
-if(connection){
-    console.log('Conectado to MongoDB');
+// DB connection
+async function connectToDatabase() {
+    try {
+        await mongoose.connect(`mongodb+srv://${user}:${pass}@cluster.5v80ino.mongodb.net/apas`);
+        console.log('Conectado ao MongoDB');
+    } catch (error) {
+        console.error('Erro ao conectar ao MongoDB:', error);
+    }
 }
+
+connectToDatabase();
 
 // Rotas
 app.get('/', (req, res)=>{
@@ -45,9 +50,9 @@ const recupera = require('./routes/recuperar')
 app.use('/doacoes', doacoes);
 app.use('/patrocinios', patrocinios);
 app.use('/gastos', gastos);
-app.use('/administrador', administrador);
+app.use('/administradores', administrador);
 app.use('/login', login);
-app.use('/usuario', usuario);
+app.use('/usuarios', usuario);
 app.use('/profile', profile);
 app.use('/recupera', recupera);
 

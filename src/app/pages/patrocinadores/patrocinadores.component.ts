@@ -31,7 +31,6 @@ export class PatrocinadoresComponent implements OnInit {
     this.patrocinadoresService.getPatrocinadores()
     .subscribe(patrocinadores => {
       this.patrocinadores = patrocinadores as unknown as Patrocinadores[]
-      console.log(this.patrocinadores)
     })
   }
 

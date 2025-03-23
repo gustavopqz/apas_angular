@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+// Enviroment
+import { environment } from '@env/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +16,7 @@ export class RecuperaService {
       email
     }
 
-    return await this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/recupera/', body).toPromise();
+    return await this.http.post( environment.apiBaseUrl + '/recupera/', body).toPromise();
   }
 
   async validaToken(token: any){
@@ -21,7 +24,7 @@ export class RecuperaService {
       token
     }
 
-    return await this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/recupera/valida-token', body).toPromise();
+    return await this.http.post( environment.apiBaseUrl + '/recupera/valida-token', body).toPromise();
   }
 
   async conclusao(email :string, senha: string | undefined){
@@ -30,6 +33,6 @@ export class RecuperaService {
       senha
     }
 
-    return await this.http.post('http://hubfin-infracommerce-hml.devit.com.br:49020/recupera/conclusao', body).toPromise();
+    return await this.http.post( environment.apiBaseUrl + '/recupera/conclusao', body).toPromise();
   }
 }
