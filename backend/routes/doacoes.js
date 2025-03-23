@@ -31,7 +31,7 @@ router.get('/concluidas', async (req, res)=>{
 })
 
 router.post('/cadastro', async (req, res)=>{
-    let { id_pagamento ,doadorNome, tipoDoacao, email, valor, mensagem, img, descricao } = await req.body;
+    let { id_preferencia ,doadorNome, tipoDoacao, email, valor, mensagem, img, descricao } = await req.body;
 
     if (!valor){
         res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
@@ -41,7 +41,7 @@ router.post('/cadastro', async (req, res)=>{
     const dataAtual = new Date;
 
     let doacoesObj = {
-        id_pagamento,
+        id_preferencia,
         doadorNome,
         tipoDoacao,
         email,
@@ -99,11 +99,10 @@ router.post('/mercado-pago', async (req, res) => {
 
         const data = await response.json();
 
-        console.log(data);
-
         jsonResponse = {
             id: data.id,
             url: data.init_point,
+            sandbox_url: data.sandbox_init_point,
             valor: data.items[0].unit_price            
         }
         res.status(200).json(jsonResponse);
@@ -114,38 +113,76 @@ router.post('/mercado-pago', async (req, res) => {
 })
 
 router.patch('/aprovacao', async (req, res) =>{
-    let { id_pagamento, status } = req.body;
+    let { id_pagamento, tipo_pagamento, id_preferencia, status } = req.body;
 
-    if (!id_pagamento || !status){
+    console.log(id_pagamento);
+
+    if (!id_pagamento || !tipo_pagamento || !id_preferencia || !status){
         res.status(400).json({ "mensagem": "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente." });
         return;
     }
 
-    try {
-        let doacao = await Doacoes.findOne({id_pagamento});
-        if(!doacao){
-            return { "mensagem": "Doação não encontrada"}
-        }else 
-        if (status = 'approved'){
-            doacao.conclusao = status;
+    if(tipo_pagamento == 'credit_card'){
+        try {
+            let doacao = await Doacoes.findOne({id_preferencia});
+            if(!doacao){
+                return { "mensagem": "Doação não encontrada"}
+            }
+    
+            // Filter
+            let filter = {id_preferencia}
+    
+            // Update
+            let update = { $set: { conclusao: true, id_pagamento: id_pagamento } }
+    
+            await Doacoes.updateOne(filter, update)
+    
+            res.status(200).json({"mensagem": `Doação ${id_preferencia} atualizada com sucesso!`})
+            return;
+    
+        } catch (error) {
+            res.status(500).json({ "mensagem": `Algo deu errado!`});    
+            return;
         }
+    } else
+    if (tipo_pagamento == 'bank_transfer'){
+        try{
+            const resposta = await fetch(`https://api.mercadopago.com/v1/payments/${id_pagamento}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${tokenMercadoPago}`, 
+                }, 
+            });
 
-        // Filter
-        let filter = {id_pagamento}
+            const data = await resposta.json();
+            let status_api = data.status;
 
-        // Update
-        let update = { $set: { conclusao: true } }
-
-        await Doacoes.updateOne(filter, update)
-
-        res.status(200).json({"mensagem": `Doação ${id_pagamento} atualizada com sucesso!`})
-        return;
-
-    } catch (error) {
-        res.status(500).json({ "mensagem": `Algo deu errado!`});    
+            if(status_api == 'approved'){
+                let doacao = await Doacoes.findOne({id_preferencia});
+                if(!doacao){
+                    return { "mensagem": "Doação não encontrada"}
+                }
+        
+                // Filter
+                let filter = {id_preferencia}
+        
+                // Update
+                let update = { $set: { conclusao: true, id_pagamento: id_pagamento } }
+        
+                await Doacoes.updateOne(filter, update)
+        
+                res.status(200).json({"mensagem": `Doação ${id_preferencia} atualizada com sucesso!`});
+                return;
+            }
+        } catch (error){
+            res.status(500).json({ "mensagem": `Algo deu errado!`});    
+            return;
+        } 
+    } else {
+        res.status(200).json({"mensagem": `Tipo de doação não encontrado!`});
         return;
     }
-
+    
 });
 
 module.exports = router;

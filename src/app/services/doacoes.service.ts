@@ -33,7 +33,11 @@ export class DoacoesService {
       .subscribe(
         response =>{
           this.resposta = response;
-          this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.url);
+          if(environment.production){
+            this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.url);
+          } else {
+            this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.sandbox_url);
+          }
         }
       )
 
@@ -49,7 +53,7 @@ export class DoacoesService {
 
     if (extraInfo){
       doacaoObj = {
-        id_pagamento: id,
+        id_preferencia: id,
         doadorNome: extraInfo.doadorNome,
         email: extraInfo.email,
         valor: valor,
@@ -60,7 +64,7 @@ export class DoacoesService {
       }
     } else {
       doacaoObj = {
-        id_pagamento: id,
+        id_preferencia: id,
         doadorNome: 'Anônimo',
         valor: valor,
         tipoDoacao: tipoDoacao,

@@ -1,4 +1,5 @@
 export const environment = {
-    production: false,
-    apiBaseUrl: 'http://localhost:9000'
+    production: true,
+    apiBaseUrl: 'https://localhost:9000',
+    frontBaseUrl: 'https://apaserrinha.netlify.app/#/doacoes'
 };
