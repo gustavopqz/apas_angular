@@ -47,19 +47,29 @@ export class DoacoesComponent implements OnInit {
     this.getDoacoes();
 
     this.activatedRoute.queryParams.subscribe(params =>{
-      let id = params['preference_id'] ? params['preference_id'] : null;
-      if (id && params['status'] && params['status'] == 'approved'){
-        let status = params['status'];
+      let id_preferencia = params['preference_id'] ? params['preference_id'] : null;   
+      let status = params['status'] ? params['status'] : null;
+
+      if (status == 'rejected'){
+        window.location.href = environment.frontBaseUrl + '/doacoes';
+      } else
+      if(id_preferencia && status){
+        let id_pagamento = params['payment_id'] ? params['payment_id'] : null;   
+        let tipo_pagamento = params['payment_type'] ? params['payment_type'] : null;
+
         const body = {
-          id_pagamento: id,
+          id_pagamento,
+          tipo_pagamento,
+          id_preferencia,
           status
-        }
+        };
 
         this.doacoesService.patchAprovaDoacao(body)
         .subscribe(response => {
           this.getDoacoes();
-          window.location.href = 'http://localhost:4200/#/doacoes';
-        })  
+          // window.location.href = environment.frontBaseUrl + '/doacoes';
+        }) 
+
       }
     })
 

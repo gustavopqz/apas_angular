@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const Doacoes = mongoose.model("Doacoes", {
     id_pagamento: String,
+    id_preferencia: String,
     doadorNome: String,
     tipoDoacao: String,
     email: String,
