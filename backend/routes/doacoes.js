@@ -99,6 +99,8 @@ router.post('/mercado-pago', async (req, res) => {
 
         const data = await response.json();
 
+        console.log(data);
+
         jsonResponse = {
             id: data.id,
             url: data.init_point,

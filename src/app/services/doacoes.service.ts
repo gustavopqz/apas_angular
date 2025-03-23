@@ -29,11 +29,11 @@ export class DoacoesService {
     let valorDoacao = Number(valor);
 
     try {
-      this.http.post(`${environment.apiBaseUrl}/doacoe/mercado-pago`, {valorDoacao})
+      this.http.post(`${environment.apiBaseUrl}/doacoes/mercado-pago`, {"valorDoacao": valorDoacao})
       .subscribe(
         response =>{
-          this.resposta = response;         
-          this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.init_point);
+          this.resposta = response;
+          this.postPrimeiroPasso(this.resposta.id, valor, tipoDoacao, extraInfo, this.resposta.url);
         }
       )
 
@@ -68,7 +68,6 @@ export class DoacoesService {
       }
     }
     
-
     try {
       this.http.post( environment.apiBaseUrl + '/doacoes/cadastro', doacaoObj)
       .subscribe(

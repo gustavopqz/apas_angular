@@ -10,7 +10,7 @@
           <div *ngIf="this.loading" class="loadingio-spinner-spinner-umdfa32ztyl"><div class="ldio-9dlqot11oq7"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
             <mat-card class="card" *ngFor="let post of posts.slice(0, 5)">
                 <mat-card-header>
-                  <img mat-card-avatar class="header-image" src="./assets/img/landing/apas_logo.jpg">
+                  <img mat-card-avatar class="header-image" src="./assets/img/landing/apas_logo.jpg" priority>
                   <mat-card-title>apas_serrinha_official</mat-card-title>
                 </mat-card-header>
                 <video *ngIf="post.media_type == 'VIDEO'" mat-card-image [src]="posts ? post.media_url : ''" alt="APAS Logo" controls></video>
