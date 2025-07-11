@@ -9,6 +9,34 @@ const bodyParser = require("body-parser");
 // DB Import
 const mongoose = require("mongoose");
 
+// Swagger
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+
+const options = {
+    definition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'API Documentation',
+        version: '1.0.0',
+        description: 'Documentação da API usando Swagger',
+      },
+      servers: [
+        {
+          url: 'http://localhost:9000',
+          description: 'Servidor local',
+        },
+      ],
+    },
+    apis: ['./routes/*.js'],
+};
+
+// Especificação swagger
+const swaggerSpec = swaggerJsdoc(options);
+
+// Rota para servir a UI do Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
 // Middlewars
 app.use(cors());
 app.use(bodyParser.json());
