@@ -50,5 +50,16 @@ router.get('/:imageName', (req, res) => {
     });
 });
 
+router.get('/patrocinadores/:imageName', (req, res) => {
+  const imageName = req.params.imageName;
+  const imagePath = path.join(__dirname, '../patrocinadores/' + imageName);
+
+  res.sendFile(imagePath, err => {
+    if (err) {
+      res.status(404).send('Image not found');
+    }
+  });
+});
+
 
 module.exports = router;
