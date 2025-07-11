@@ -23,7 +23,7 @@
 
         <mat-card class="patrocinador" *ngFor="let patrocinador of patrocinadores">
           <mat-card-header>
-            <div mat-card-avatar><img class="doador-img" [src]="patrocinador?.img || '/assets/img/header/user.png'" width="40" height="40"></div>
+            <div mat-card-avatar><img class="doador-img" [src]="(this.apiBaseUrl + '/profile/patrocinadores/' + patrocinador?.img) || '/assets/img/header/user.png'" width="40" height="40"></div>
             <mat-card-title>{{patrocinador?.patrocinador}}</mat-card-title>
             <mat-card-subtitle>Valor doado: {{ patrocinador?.valor | number: '1.2-2' }}</mat-card-subtitle>
           </mat-card-header>

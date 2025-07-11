@@ -8,6 +8,8 @@ import { PatrocinadoresService } from '../../services/patrocinadores.service';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutuante.component';
 
+import { environment } from '@raiz/environments/environment';
+
 @Component({
   selector: 'app-patrocinadores',
   standalone: true,
@@ -19,8 +21,11 @@ export class PatrocinadoresComponent implements OnInit {
 
   patrocinador1 ?: Patrocinadores;
   patrocinadores ?: Patrocinadores[];
+  apiBaseUrl ?: string;
 
-  constructor(private patrocinadoresService: PatrocinadoresService){}
+  constructor(private patrocinadoresService: PatrocinadoresService){
+    this.apiBaseUrl = environment.apiBaseUrl;
+  }
 
   ngOnInit(): void {
     this.getPatrocinadores();

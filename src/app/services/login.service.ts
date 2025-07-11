@@ -63,10 +63,10 @@ export class LoginService {
       if (this.resposta.img)
       return this.resposta.img;
       else 
-      return '/user.png';
+      return 'user.png';
     }
 
-    return '/user.png';
+    return 'user.png';
 
   }
 
