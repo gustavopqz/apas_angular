@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Gastos } from './../modules/gastos.module';
 
@@ -15,10 +15,17 @@ export class GastosService {
   constructor(private http: HttpClient) { }
 
   getGastos(): Observable<Gastos[]> {
-    return this.http.get<Gastos[]>(this.apiUrl);
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<Gastos[]>(this.apiUrl, { headers });
   }
 
   addGasto(gasto: Gastos): Observable<Gastos> {
-    return this.http.post<Gastos>(this.apiUrl, gasto);
-  }
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post<Gastos>(this.apiUrl, gasto, { headers });
+}
+
 }

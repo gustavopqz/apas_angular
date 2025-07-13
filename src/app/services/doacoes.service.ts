@@ -13,23 +13,32 @@ export class DoacoesService {
   
   constructor(private http: HttpClient) { }
 
-  getDoacoes(): Observable<Doacoes>{
-    return this.http.get<Doacoes>( environment.apiBaseUrl + '/doacoes/feed')
+  getDoacoes(): Observable<Doacoes> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<Doacoes>(`${environment.apiBaseUrl}/doacoes/feed`, { headers });
+  } 
+
+  getDoacoesCompletas(): Observable<{ doacoes: Doacoes[] }> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<{ doacoes: Doacoes[] }>(`${environment.apiBaseUrl}/doacoes/concluidas`, { headers });
   }
 
-  // Novo método para retornar um objeto que contém um array de Doacoes
-  getDoacoesCompletas(): Observable<{ doacoes: Doacoes[] }> {
-    return this.http.get<{ doacoes: Doacoes[] }>( environment.apiBaseUrl + '/doacoes/concluidas');
-  }  
 
   resposta?: any;
 
   postMercadoPago(valor: number, tipoDoacao: string, extraInfo?: any){
 
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
     let valorDoacao = Number(valor);
 
     try {
-      this.http.post(`${environment.apiBaseUrl}/doacoes/mercado-pago`, {"valorDoacao": valorDoacao})
+      this.http.post(`${environment.apiBaseUrl}/doacoes/mercado-pago`, {"valorDoacao": valorDoacao}, { headers })
       .subscribe(
         response =>{
           this.resposta = response;
@@ -71,9 +80,12 @@ export class DoacoesService {
         descricao: 'Doação anônima pelo site'
       }
     }
+
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
     try {
-      this.http.post( environment.apiBaseUrl + '/doacoes/cadastro', doacaoObj)
+      this.http.post( environment.apiBaseUrl + '/doacoes/cadastro', doacaoObj, { headers })
       .subscribe(
         response =>{
           window.location.href = url;
@@ -87,7 +99,11 @@ export class DoacoesService {
     }
   }
 
-  patchAprovaDoacao(body: any): Observable<Doacoes>{
-    return this.http.patch<Doacoes>( environment.apiBaseUrl + '/doacoes/aprovacao', body)
-  }  
+  patchAprovaDoacao(body: any): Observable<Doacoes> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.patch<Doacoes>(`${environment.apiBaseUrl}/doacoes/aprovacao`, body, { headers });
+  }
+  
 }

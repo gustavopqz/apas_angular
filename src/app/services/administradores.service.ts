@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Administradores } from '../modules/administrador.module';
@@ -15,16 +15,26 @@ export class AdministradoresService {
 
   constructor(private http: HttpClient) { }
 
-  getTodosAdmins(): Observable<Administradores>{
-    return this.http.get<Administradores>(`${environment.apiBaseUrl}/administradores`);
-  }
+  getTodosAdmins(): Observable<Administradores> {
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-  async getAdminPorEmail(email: string | null){
-    return await this.http.get<any>(`${environment.apiBaseUrl}/administradores?email=` + email).toPromise();
-  }
+  return this.http.get<Administradores>(`${environment.apiBaseUrl}/administradores`, { headers });
+}
 
-  postNovoAdmin(body: any){
-    return this.http.post<Administradores>(`${environment.apiBaseUrl}/administradores/cadastro`, body)    
-  }
+async getAdminPorEmail(email: string | null) {
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  return await this.http.get<any>(`${environment.apiBaseUrl}/administradores?email=` + email, { headers }).toPromise();
+}
+
+postNovoAdmin(body: any) {
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  return this.http.post<Administradores>(`${environment.apiBaseUrl}/administradores/cadastro`, body, { headers });
+}
+
 
 }

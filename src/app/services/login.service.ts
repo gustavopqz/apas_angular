@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -42,6 +42,7 @@ export class LoginService {
     localStorage.setItem('privilegio', this.usuario.privilegio);
     localStorage.setItem('img', this.usuario.img);
     localStorage.setItem('logado', 'true');
+    localStorage.setItem('token', this.usuario.token);
 
     this.loginInfo = {
       text: this.usuario.nome
@@ -50,25 +51,28 @@ export class LoginService {
     return true;
   }
 
-  async getImagem(email: string | null, privilegio: string | null){
-    if (email){
-      if (privilegio == 'comum'){
-        const response = await this.http.get(`${environment.apiBaseUrl}/usuarios?email=${email}`).toPromise();
-        this.resposta = response;
-      }else {
-        const response = await this.http.get(`${environment.apiBaseUrl}/administradores?email=${email}`).toPromise();
-        this.resposta = response;
-      }
-      
-      if (this.resposta.img)
-      return this.resposta.img;
-      else 
-      return 'user.png';
+  async getImagem(email: string | null, privilegio: string | null) {
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  if (email) {
+    if (privilegio === 'comum') {
+      const response = await this.http.get<any>(`${environment.apiBaseUrl}/usuarios?email=${email}`, { headers }).toPromise();
+      this.resposta = response;
+    } else {
+      const response = await this.http.get<any>(`${environment.apiBaseUrl}/administradores?email=${email}`, { headers }).toPromise();
+      this.resposta = response;
     }
 
-    return 'user.png';
-
+    if (this.resposta && this.resposta.img) {
+      return this.resposta.img;
+    } else {
+      return 'user.png';
+    }
   }
+
+  return 'user.png';
+}
 
   async getUsuarioPorEmail(email: string | null){
     return await this.http.get<any>(`${environment.apiBaseUrl}/usuarios?email=${email}`).toPromise();
