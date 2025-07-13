@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 
 // Enviroment
 import { environment } from '@env/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class LoginService {
     this._loginInfo.next(loginInfo);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   // LogIn
   resposta?: any;
@@ -48,6 +49,8 @@ export class LoginService {
       text: this.usuario.nome
     }
 
+    this.authService.initializeAuthMonitoring();
+
     return true;
   }
 
@@ -65,10 +68,7 @@ export class LoginService {
           this.resposta = response;
         }  
       } catch (error) {
-        localStorage.clear();
-        alert('Token expirado, faça login novamente');
-        window.location.reload();
-        return 'user.png';
+
       }
       
       if (this.resposta && this.resposta.img) {

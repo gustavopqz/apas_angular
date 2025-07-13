@@ -100,13 +100,14 @@ app.get('/', (req, res)=>{
 
 // Import routes
 const doacoes = require("./routes/doacoes");
-const patrocinios = require("./routes/patrocinios")
+const patrocinios = require("./routes/patrocinios");
 const gastos = require("./routes/gastos");
 const administrador = require("./routes/administrador");
 const login = require("./routes/login");
-const usuario = require("./routes/usuario")
-const profile = require('./routes/profile')
-const recupera = require('./routes/recuperar')
+const usuario = require("./routes/usuario");
+const profile = require('./routes/profile');
+const recupera = require('./routes/recuperar');
+const refreshToken = require('./routes/refresh-token');
 
 // Public Routes
 app.use('/login', login);
@@ -123,6 +124,7 @@ app.use('/patrocinios', patrocinios);
 app.use('/gastos', gastos);
 app.use('/administradores', administrador);
 app.use('/profile', profile);
+app.use('/refreshtoken', refreshToken);
 
 // Serve
 app.listen(9000, ()=>{

@@ -17,10 +17,11 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
 import { LoadingComponent } from '../../components/loading/loading.component';
+import { PerfilService } from '@raiz/app/services/perfil.service';
 
 // Enviroment
 import { environment } from '@env/environment';
-import { PerfilService } from '@raiz/app/services/perfil.service';
+
 
 export interface DadosDialog{
   tipoDoacao: String,
