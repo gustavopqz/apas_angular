@@ -20,6 +20,7 @@ import { LoadingComponent } from '../../components/loading/loading.component';
 
 // Enviroment
 import { environment } from '@env/environment';
+import { PerfilService } from '@raiz/app/services/perfil.service';
 
 export interface DadosDialog{
   tipoDoacao: String,
@@ -41,7 +42,7 @@ export class DoacoesComponent implements OnInit {
 
   doacoes ?: Doacoes[];
 
-  constructor(private doacoesService :DoacoesService, public dialog: MatDialog, private activatedRoute: ActivatedRoute){}
+  constructor(private doacoesService :DoacoesService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private perfilService: PerfilService){}
 
   ngOnInit(): void {
     this.getDoacoes();
@@ -76,12 +77,26 @@ export class DoacoesComponent implements OnInit {
   }
   
   // FETCHS 
-  getDoacoes() :void{
-    this.doacoesService.getDoacoes()
-    .subscribe(doadores => {
-      this.doacoes = doadores as unknown as Doacoes[]
-    })
+  async getDoacoes() {
+    this.doacoesService.getDoacoes().subscribe(async doadores => {
+      this.doacoes = doadores as unknown as Doacoes[];
+
+      for (const doacao of this.doacoes) {
+        try {
+          if (doacao.img) {
+            const splited = doacao.img.split('/');
+            doacao.img = await this.perfilService.getImagemUrlPorPathAsync(splited[splited.length - 1]);
+          } else {
+            doacao.img = 'assets/user.png'; // imagem padrão
+          }
+        } catch (error) {
+          console.error('Erro ao carregar imagem:', error);
+          doacao.img = 'assets/user.png'; // fallback em caso de erro
+        }
+      }
+    });
   }
+
 
   // Dialog
   tipoDoacao: string = 'anonimo';

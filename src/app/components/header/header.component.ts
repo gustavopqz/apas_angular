@@ -6,6 +6,7 @@ import { LoginService } from '../../services/login.service'
 
 // Enviroment
 import { environment } from '@env/environment';
+import { PerfilService } from '@raiz/app/services/perfil.service';
 
 @Component({
   selector: 'app-header',
@@ -17,16 +18,25 @@ import { environment } from '@env/environment';
 export class HeaderComponent implements OnInit {
 
   routerLoginButton?: string;
+  imagemUsuario = '/assets/img/header/user.png';
 
-  constructor(private loginService: LoginService){}
+  constructor(private loginService: LoginService, private perfilService: PerfilService){}
   async ngOnInit() {
-    if (localStorage.getItem('nome')){
+    const userName = await localStorage.getItem('nome');
+    const userEmail = await localStorage.getItem('email');
+    const userPrivilege = await localStorage.getItem('privilegio')
 
-      const imgPath = await this.loginService.getImagem(localStorage.getItem('email'), localStorage.getItem('privilegio'));
-      this.imagemUsuario = environment.apiBaseUrl + '/profile/' + imgPath;
+    if (userName){
+
+      const imgPath = await this.loginService.getImagem(userEmail, userPrivilege);
+      try {
+        this.imagemUsuario = await this.perfilService.getImagemUrlPorPathAsync(imgPath);  
+      } catch (error) {
+        this.imagemUsuario = '/assets/img/header/user.png';
+      }    
 
       this.loginService.loginInfo = {
-        text: localStorage.getItem('nome')
+        text: userName
       }
 
       if (localStorage.getItem('privilegio') == 'admin'){
@@ -34,7 +44,8 @@ export class HeaderComponent implements OnInit {
       }else{
         this.routerLoginButton = '/'
       } 
-    }else{
+    }
+    else{
       this.routerLoginButton = '/login'
     }
   }
@@ -51,7 +62,5 @@ export class HeaderComponent implements OnInit {
     this.routerLoginButton = '/login'
     this.imagemUsuario = '/assets/img/header/user.png';
   }
-
-  imagemUsuario = '/assets/img/header/user.png';
 
 }

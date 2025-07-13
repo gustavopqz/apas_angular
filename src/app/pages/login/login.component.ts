@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // Enviroment
 import { environment } from '@env/environment';
@@ -87,26 +87,32 @@ export class LoginComponent {
       const formImg = new FormData();
       formImg.append('file', this.selectedImage);
   
-      this.httpClient.post(`${environment.apiBaseUrl}/profile/`, formImg)
-      .subscribe(response =>{
-        this.resposta = response;
-        body.img = this.resposta.success;
-        this.httpClient.post(`${environment.apiBaseUrl}/usuarios/cadastro`, body)
+      const token = localStorage.getItem('token') || '';
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+      this.httpClient.post(`${environment.apiBaseUrl}/profile/`, formImg, { headers })
         .subscribe(response => {
           this.resposta = response;
-          if (this.resposta.mensagem.includes('com sucesso')){
-            localStorage.setItem('nome', this.user.username);
-            localStorage.setItem('email', this.user.email);
-            localStorage.setItem('img', body.img),
-            localStorage.setItem('privilegio', 'comum');
-            localStorage.setItem('logado', 'true');
-            this.loginService.loginInfo = {
-              text: this.user.username
-            }
-            this.router.navigate(['/'])
-          }
-        })
-      });
+          body.img = this.resposta.success;
+
+          this.httpClient.post(`${environment.apiBaseUrl}/usuarios/cadastro`, body, { headers })
+            .subscribe(response => {
+              this.resposta = response;
+              if (this.resposta.mensagem.includes('com sucesso')) {
+                localStorage.setItem('nome', this.user.username);
+                localStorage.setItem('email', this.user.email);
+                localStorage.setItem('img', body.img);
+                localStorage.setItem('privilegio', 'comum');
+                localStorage.setItem('logado', 'true');
+                localStorage.setItem('token', this.resposta.token);
+                this.loginService.loginInfo = {
+                  text: this.user.username
+                };
+                this.router.navigate(['/']);
+              }
+            });
+        });
+
     } else {
       this.httpClient.post(`${environment.apiBaseUrl}/usuarios/cadastro`, body)
         .subscribe(response => {
@@ -117,6 +123,7 @@ export class LoginComponent {
             localStorage.setItem('img', 'user.png'),
             localStorage.setItem('privilegio', 'comum');
             localStorage.setItem('logado', 'true');
+            localStorage.setItem('token', this.resposta.token);
             this.loginService.loginInfo = {
               text: this.user.username
             }
@@ -137,14 +144,15 @@ export class LoginComponent {
       senha: this.senha
     }
 
-    const tentaLogar = await this.loginService.logar(loginObj);
-    if (!tentaLogar){
-      alert('Usuário ou senha incorretos.');
-    }else{
+    try {
+      await this.loginService.logar(loginObj);  
+
       const privilegio = localStorage.getItem('privilegio');
       if (privilegio == 'admin') this.router.navigate(['/painel/home']);
       else this.router.navigate(['/']);
-    }
+    } catch (error) {
+      alert('Usuário ou senha incorretos.');
+    }    
   }
 }
 

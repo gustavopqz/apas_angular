@@ -9,6 +9,7 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutuante.component';
 
 import { environment } from '@raiz/environments/environment';
+import { PerfilService } from '@raiz/app/services/perfil.service';
 
 @Component({
   selector: 'app-patrocinadores',
@@ -19,11 +20,10 @@ import { environment } from '@raiz/environments/environment';
 })
 export class PatrocinadoresComponent implements OnInit {
 
-  patrocinador1 ?: Patrocinadores;
   patrocinadores ?: Patrocinadores[];
   apiBaseUrl ?: string;
 
-  constructor(private patrocinadoresService: PatrocinadoresService){
+  constructor(private patrocinadoresService: PatrocinadoresService, private perfilService: PerfilService){
     this.apiBaseUrl = environment.apiBaseUrl;
   }
 
@@ -32,11 +32,27 @@ export class PatrocinadoresComponent implements OnInit {
   }
   
   // FETCHS 
-  getPatrocinadores() :void{
+  async getPatrocinadores(): Promise<void> {
     this.patrocinadoresService.getPatrocinadores()
-    .subscribe(patrocinadores => {
-      this.patrocinadores = patrocinadores as unknown as Patrocinadores[]
-    })
+      .subscribe(async patrocinadores => {
+        this.patrocinadores = patrocinadores as unknown as Patrocinadores[];
+
+        for (const patrocinador of this.patrocinadores) {
+          try {
+            if (patrocinador.img) {
+              const splited = patrocinador.img.split('/');
+              const nomeArquivo = splited[splited.length - 1];
+              // Usando o método específico para patrocinadores
+              patrocinador.img = await this.perfilService.getImagemPatrocinadorUrlAsync(nomeArquivo);
+            } else {
+              patrocinador.img = 'assets/user.png'; // imagem padrão
+            }
+          } catch (error) {
+            console.error('Erro ao carregar imagem do patrocinador:', error);
+            patrocinador.img = 'assets/user.png'; // fallback em caso de erro
+          }
+        }
+      });
   }
 
   redirencionaParaPatrocinador(url:string){

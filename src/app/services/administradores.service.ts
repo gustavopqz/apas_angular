@@ -16,25 +16,25 @@ export class AdministradoresService {
   constructor(private http: HttpClient) { }
 
   getTodosAdmins(): Observable<Administradores> {
-  const token = localStorage.getItem('token') || '';
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-  return this.http.get<Administradores>(`${environment.apiBaseUrl}/administradores`, { headers });
-}
+    return this.http.get<Administradores>(`${environment.apiBaseUrl}/administradores`, { headers });
+  }
 
-async getAdminPorEmail(email: string | null) {
-  const token = localStorage.getItem('token') || '';
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  async getAdminPorEmail(email: string | null) {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-  return await this.http.get<any>(`${environment.apiBaseUrl}/administradores?email=` + email, { headers }).toPromise();
-}
+    return await this.http.get<any>(`${environment.apiBaseUrl}/administradores?email=` + email, { headers }).toPromise();
+  }
 
-postNovoAdmin(body: any) {
-  const token = localStorage.getItem('token') || '';
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  postNovoAdmin(body: any) {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-  return this.http.post<Administradores>(`${environment.apiBaseUrl}/administradores/cadastro`, body, { headers });
-}
+    return this.http.post<Administradores>(`${environment.apiBaseUrl}/administradores/cadastro`, body, { headers });
+  }
 
 
 }
