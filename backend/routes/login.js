@@ -7,6 +7,77 @@ require('dotenv').config();
 const Administrador = require('../models/Administrador');
 const Usuario = require('../models/Usuario')
 
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     tags:
+ *       - Autenticação
+ *     summary: Realiza o login de administradores ou usuários
+ *     description: Verifica se o e-mail pertence a um administrador ou usuário, compara a senha e retorna os dados de perfil ou uma mensagem de erro.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - senha
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: "gustavo.pasqua@hotmail.com"
+ *               senha:
+ *                 type: string
+ *                 example: "minhaSenhaSegura123"
+ *     responses:
+ *       200:
+ *         description: Login realizado com sucesso ou senha incorreta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               oneOf:
+ *                 - type: object
+ *                   properties:
+ *                     nome:
+ *                       type: string
+ *                       example: "Gustavo Pasqua"
+ *                     email:
+ *                       type: string
+ *                       example: "gustavo.pasqua@hotmail.com"
+ *                     img:
+ *                       type: string
+ *                       example: "https://link.da.imagem.com/foto.jpg"
+ *                     privilegio:
+ *                       type: string
+ *                       example: "admin"
+ *                 - type: object
+ *                   properties:
+ *                     mensagem:
+ *                       type: string
+ *                       example: "Senha incorreta"
+ *       404:
+ *         description: Usuário não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Usuário não encontrado"
+ *       500:
+ *         description: Erro interno no servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Algo deu errado!"
+ */
 router.post('/', async (req, res)=>{
     let { email, senha } = req.body;
 

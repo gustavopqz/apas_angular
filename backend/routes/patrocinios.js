@@ -5,10 +5,10 @@ const Patrocinios = require('../models/Patrocionios')
 
 /**
  * @swagger
- * /patrocinios/:
+ * /patrocinios:
  *   get:
  *     tags:
- *       - Patrocinios
+ *       - Patrocínios
  *     summary: Retorna todos os patrocínios cadastrados
  *     description: Retorna uma lista de todos os patrocínios disponíveis no banco de dados.
  *     responses:
@@ -63,7 +63,74 @@ router.get('/', async (req, res) => {
     }
 });
 
-
+/**
+ * @swagger
+ * /patrocinios:
+ *   post:
+ *     tags:
+ *       - Patrocínios
+ *     summary: Cadastra um novo patrocinador
+ *     description: Registra um novo patrocinador com as informações fornecidas. Os campos obrigatórios são `patrocinador` e `email`.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - patrocinador
+ *               - email
+ *             properties:
+ *               patrocinador:
+ *                 type: string
+ *                 example: "Empresa XYZ"
+ *               email:
+ *                 type: string
+ *                 example: "contato@empresa.xyz"
+ *               valor:
+ *                 type: number
+ *                 example: 1000.00
+ *               mensagem:
+ *                 type: string
+ *                 example: "É um prazer apoiar este projeto!"
+ *               img:
+ *                 type: string
+ *                 example: "https://empresa.xyz/logo.png"
+ *               url:
+ *                 type: string
+ *                 example: "https://empresa.xyz"
+ *     responses:
+ *       201:
+ *         description: Patrocinador cadastrado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "O patrocinador Empresa XYZ foi cadastrado!"
+ *       400:
+ *         description: JSON inválido ou campos obrigatórios ausentes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "O JSON da requisição está incorreto! Faltam campos ou foram digitados erroneamente."
+ *       500:
+ *         description: Erro ao cadastrar o patrocinador
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Algo deu errado!"
+ */
 router.post('/', async (req, res)=>{
     let { patrocinador, email, valor, mensagem, img, url } = req.body;
 

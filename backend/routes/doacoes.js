@@ -9,10 +9,10 @@ const baseUrl = process.env.BASEURL;
 
 /**
  * @swagger
- * /doacoes/:
+ * /doacoes:
  *   get:
  *     tags:
- *       - Doacoes
+ *       - Doações
  *     summary: Retorna todas as doacoes cadastradas
  *     description: Retorna uma lista de todas as doacoes disponiveis no banco de dados.
  *     responses:
@@ -64,7 +64,7 @@ router.get('/', async (req, res) => {
  * /doacoes/feed:
  *   get:
  *     tags:
- *       - Doacoes
+ *       - Doações
  *     summary: Retorna todas as doacoes concluídas do tipo usuario
  *     description: Retorna uma lista de todas as doacoes concluidas e do tipo usuario.
  *     responses:
@@ -117,7 +117,7 @@ router.get('/feed', async (req, res) => {
  * /doacoes/concluidas:
  *   get:
  *     tags:
- *       - Doacoes
+ *       - Doações
  *     summary: Retorna todas as doações concluídas
  *     description: Retorna uma lista de todas as doações concluídas.
  *     responses:
@@ -169,7 +169,7 @@ router.get('/concluidas', async (req, res) => {
  * /doacoes/cadastro:
  *   post:
  *     tags:
- *       - Doacoes
+ *       - Doações
  *     summary: Cadastra uma nova doação
  *     description: Recebe os dados de uma doação e a cadastra no banco de dados.
  *     requestBody:
@@ -270,7 +270,7 @@ router.post('/cadastro', async (req, res)=>{
  * /doacoes/mercado-pago:
  *   post:
  *     tags:
- *       - Doacoes
+ *       - Doações
  *     summary: Cria uma preferência de pagamento no Mercado Pago para uma doação
  *     description: Recebe o valor da doação e cria uma preferência de pagamento no Mercado Pago, retornando a URL para pagamento.
  *     requestBody:
@@ -379,7 +379,7 @@ router.post('/mercado-pago', async (req, res) => {
  * /doacoes/aprovacao:
  *   patch:
  *     tags:
- *       - Doacoes
+ *       - Doações
  *     summary: Atualiza o status de aprovação da doação
  *     description: Recebe os dados de pagamento e atualiza o status da doação, marcando-a como concluída se o pagamento for aprovado.
  *     requestBody:

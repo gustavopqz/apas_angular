@@ -9,6 +9,61 @@ const Usuario = require('../models/Usuario');
 const Administrador = require('../models/Administrador');
 const Token = require('../models/Token')
 
+const baseUrl = process.env.BASEURL;
+
+/**
+ * @swagger
+ * /recuperar:
+ *   post:
+ *     tags:
+ *       - Autenticação
+ *     summary: Solicita recuperação de senha
+ *     description: Envia um email com um token para recuperação de senha, caso o email exista no sistema (usuário ou administrador).
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: "usuario@exemplo.com"
+ *     responses:
+ *       200:
+ *         description: Email de recuperação enviado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Email de recuperação enviado"
+ *       404:
+ *         description: Email não encontrado no sistema
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Email não encontrado!"
+ *       500:
+ *         description: Erro interno ao processar recuperação de senha
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Algo deu errado!"
+ */
 router.post('/', async (req, res)=>{
     const {email} = req.body;
     
@@ -28,6 +83,74 @@ router.post('/', async (req, res)=>{
     res.status(200).json({message: 'Email de recuperação enviado'});
 });
 
+/**
+ * @swagger
+ * /recuperar/conclusao:
+ *   post:
+ *     tags:
+ *       - Autenticação
+ *     summary: Finaliza a recuperação de senha
+ *     description: Atualiza a senha do usuário ou administrador após a validação do email e token (token não exibido aqui, deve ser validado antes).
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - senha
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: "usuario@exemplo.com"
+ *               senha:
+ *                 type: string
+ *                 format: password
+ *                 example: "novaSenha123"
+ *     responses:
+ *       200:
+ *         description: Senha alterada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Senha alterada com sucesso"
+ *       400:
+ *         description: Dados da requisição inválidos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Email ou senha inválidos"
+ *       404:
+ *         description: Usuário não encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Usuário não encontrado"
+ *       500:
+ *         description: Erro interno ao alterar a senha
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Algo deu errado!"
+ */
 router.post('/conclusao', async (req, res) =>{
     const { email, senha } = req.body;
 
@@ -51,7 +174,58 @@ router.post('/conclusao', async (req, res) =>{
     }
 })
 
-
+/**
+ * @swagger
+ * /recuperar/valida-token:
+ *   post:
+ *     tags:
+ *       - Autenticação
+ *     summary: Valida o token de recuperação de senha
+ *     description: Verifica se o token enviado pelo usuário é válido para permitir a redefinição de senha.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - token
+ *             properties:
+ *               token:
+ *                 type: string
+ *                 example: "abc123def456ghi789"
+ *     responses:
+ *       200:
+ *         description: Token válido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Token Válido"
+ *       400:
+ *         description: Token inválido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Token inválido"
+ *       500:
+ *         description: Erro interno ao validar token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 mensagem:
+ *                   type: string
+ *                   example: "Algo deu errado!"
+ */
 router.post('/valida-token', async (req, res)=>{
     const {token} = req.body;
 
@@ -102,7 +276,7 @@ async function enviarEmailRecuperacao(email, token){
         to: email, // Lista de destinatários
         subject: 'RECUPERAÇÃO DE SENHA - SISTEMA APAS', // Assunto do e-mail
         text: 'Clique no link abaixo para alterar a sua senha:', // Corpo do e-mail em texto simples
-        html: `<h1><a href="http://localhost:4200/#/altera-senha?email=${email}&token=${token}">Link para recuperação de senha site APAS<a></h1>` // Corpo do e-mail em HTML (opcional)
+        html: `<h1><a href="http://${baseUrl}/#/altera-senha?email=${email}&token=${token}">Link para recuperação de senha site APAS<a></h1>` // Corpo do e-mail em HTML (opcional)
     };
     
     // Enviando o e-mail

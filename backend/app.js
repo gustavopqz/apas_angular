@@ -26,7 +26,41 @@ const options = {
           url: 'http://localhost:9000',
           description: 'Servidor local',
         },
+        {
+          url: 'https://apas.sempreautomatize.com.br',
+          description: 'Servidor de produção',
+        },
       ],
+      tags: [
+      {
+        name: 'Autenticação',
+        description: 'Endpoints de login, recuperação de senha, etc.',
+      },
+      {
+        name: 'Usuários',
+        description: 'Gerenciamento de usuários',
+      },
+      {
+        name: 'Administrador',
+        description: 'Gerenciamento de usuários',
+      },
+      {
+        name: 'Doações',
+        description: 'Controle financeiro e despesas',
+      },
+      {
+        name: 'Gastos',
+        description: 'Controle financeiro e despesas',
+      },
+      {
+        name: 'Patrocínios',
+        description: 'Cadastro e gerenciamento de patrocinadores',
+      },
+      {
+        name: 'Upload',
+        description: 'Upload de arquivos',
+      }
+    ],
     },
     apis: ['./routes/*.js'],
 };
