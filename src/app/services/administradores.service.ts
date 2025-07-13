@@ -5,6 +5,15 @@ import { Administradores } from '../modules/administrador.module';
 
 // Enviroment
 import { environment } from '@env/environment';
+import { jwtDecode } from 'jwt-decode';
+
+interface JwtPayload {
+  id: string;
+  email: string;
+  privilegio: string; // <-- Adicione/confirme esta linha
+  iat?: number;       // Opcional: Issued At
+  exp?: number;       // Opcional: Expiration Time
+}
 
 @Injectable({
   providedIn: 'root'
@@ -38,21 +47,42 @@ export class AdministradoresService {
   }
 
   checkUserPrivilege(): Observable<boolean> {
-    const userEmail = localStorage.getItem('email');
     const authToken = localStorage.getItem('token');
 
-    if (!userEmail || !authToken) {
+    if (!authToken) {
+      // Se não houver token, o usuário não está logado ou não tem privilégio de admin
       return of(false);
     }
 
-    let params = new HttpParams().set('email', userEmail);
-    let headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+    try {
+      // Decodifica o token para acessar o payload
+      const decodedToken = jwtDecode<JwtPayload>(authToken);
 
-    const apiUrlWithEmail = `${this.baseUrl}/administradores`;
+      // Verifica se o token tem a propriedade 'privilegio' e se ela é 'admin'
+      if (decodedToken && decodedToken.privilegio === 'admin') {
+        return of(true); // O usuário tem privilégio de admin
+      } else {
+        return of(false); // O usuário não tem privilégio de admin
+      }
+    } catch (error) {
+      // Erro ao decodificar o token (pode ser inválido, expirado, etc.)
+      console.error('Erro ao decodificar o JWT:', error);
+      return of(false);
+    }
+  }
 
-    return this.http.get<{ privilegio: string }>(apiUrlWithEmail, { params: params, headers: headers }).pipe(
-      map(response => response.privilegio === 'admin'),
-      catchError(() => of(false))
-    );
+  // Você pode adicionar um método auxiliar para obter o privilégio do usuário em outros lugares
+  getPrivilegeFromToken(): string | null {
+    const authToken = localStorage.getItem('token');
+    if (!authToken) {
+      return null;
+    }
+    try {
+      const decodedToken = jwtDecode<JwtPayload>(authToken);
+      return decodedToken.privilegio || null;
+    } catch (error) {
+      console.error('Erro ao decodificar o JWT:', error);
+      return null;
+    }
   }
 }
