@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Administradores } from '../modules/administrador.module';
 
 // Enviroment
@@ -12,6 +12,7 @@ import { environment } from '@env/environment';
 export class AdministradoresService { 
 
   resposta?: any;
+  baseUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -36,5 +37,22 @@ export class AdministradoresService {
     return this.http.post<Administradores>(`${environment.apiBaseUrl}/administradores/cadastro`, body, { headers });
   }
 
+  checkUserPrivilege(): Observable<boolean> {
+    const userEmail = localStorage.getItem('email');
+    const authToken = localStorage.getItem('token');
 
+    if (!userEmail || !authToken) {
+      return of(false);
+    }
+
+    let params = new HttpParams().set('email', userEmail);
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+
+    const apiUrlWithEmail = `${this.baseUrl}/administradores`;
+
+    return this.http.get<{ privilegio: string }>(apiUrlWithEmail, { params: params, headers: headers }).pipe(
+      map(response => response.privilegio === 'admin'),
+      catchError(() => of(false))
+    );
+  }
 }

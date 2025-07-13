@@ -1,8 +1,8 @@
 // src/app/services/auth.service.ts
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
-import { switchMap, tap, catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, Subscription, timer } from 'rxjs';
+import { switchMap, tap, catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router'; // Mantido caso queira redirecionar em caso de erro
 
 // Enviroment
@@ -18,8 +18,8 @@ interface AuthResponse {
 })
 export class AuthService implements OnDestroy {
   private apiUrl = environment.apiBaseUrl;
-  private refreshTokenInterval = 5 * 60 * 1000; // 5 minutos em milissegundos. Ajuste conforme necessário.
-  private activityTimeout = 1 * 60 * 1000; // 1 minuto de inatividade antes de parar de verificar. Ajuste conforme necessário.
+  private refreshTokenInterval = 60 * 60 * 1000;
+  private activityTimeout = 59 * 60 * 1000;
 
   private userActivity$: Observable<Event>;
 
@@ -147,8 +147,8 @@ export class AuthService implements OnDestroy {
       .pipe(
         switchMap(() => this.refreshToken()),
         catchError(err => {          
-          this.removeToken(); // Limpa o token se ocorrer um erro fatal
-          this.router.navigate(['/login']); // Redireciona para o login
+          this.logout(); // Limpa o token se ocorrer um erro fatal
+          this.router.navigate(['/login']);
           return [];
         })
       )
@@ -164,7 +164,7 @@ export class AuthService implements OnDestroy {
   }
 
   logout(): void {
-    this.removeToken();
+    localStorage.clear();
     this.stopRefreshTokenTimer();
     this.stopActivityMonitor();
     this.router.navigate(['/login']); // Redireciona para a página de login

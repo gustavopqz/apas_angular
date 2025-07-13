@@ -1,0 +1,58 @@
+.access-denied-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ocupa a altura total da viewport */
+  background-color: #f8f9fa; /* Fundo suave */
+  font-family: 'Arial', sans-serif; /* Fonte padrão, você pode usar outra */
+  color: #343a40; /* Cor do texto principal */
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box; /* Garante que o padding não adicione largura */
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.icon-wrapper {
+  color: #dc3545; /* Cor vermelha para o ícone de erro */
+  margin-bottom: 25px;
+}
+
+.icon {
+  width: 60px; /* Tamanho do ícone */
+  height: 60px;
+}
+
+h2 {
+  font-size: 2.2em;
+  margin-bottom: 15px;
+  color: #343a40;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.button {
+  display: inline-block;
+  background-color: #007bff; /* Azul padrão */
+  color: #ffffff;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none; /* Remove sublinhado do link */
+  font-size: 1em;
+  transition: background-color 0.3s ease; /* Efeito suave ao passar o mouse */
+}
+
+.button:hover {
+  background-color: #0056b3; /* Azul mais escuro no hover */
+}

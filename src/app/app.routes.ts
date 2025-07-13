@@ -11,11 +11,17 @@ import { DoacoesComponent } from './pages/doacoes/doacoes.component';
 import { PatrocinadoresComponent } from './pages/patrocinadores/patrocinadores.component';
 import { EsqueciSenhaComponent } from './pages/esqueci-senha/esqueci-senha.component';
 import { AlteraSenhaComponent } from './pages/altera-senha/altera-senha.component';
+import { adminGuard } from './guards/admin.guard'
+import { AcessoNegadoComponent } from './pages/acesso-negado/acesso-negado.component';
 
 export const routes: Routes = [
     {
         path: '',
         component: LandingComponent
+    },
+    {
+        path: 'acesso-negado',
+        component: AcessoNegadoComponent
     },
     {
         path: 'acompanhamento',
@@ -27,7 +33,7 @@ export const routes: Routes = [
     },
     {
         path: 'patrocinios',
-        component: PatrocinadoresComponent
+        component: PatrocinadoresComponent,
     },
     {
         path: 'login',
@@ -44,6 +50,7 @@ export const routes: Routes = [
     {
         path: 'painel',
         component: LayoutComponent,
+        canActivate: [adminGuard],
         children: [
             {
                 path: 'home',

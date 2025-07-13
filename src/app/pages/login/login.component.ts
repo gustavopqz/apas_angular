@@ -148,8 +148,9 @@ export class LoginComponent {
       await this.loginService.logar(loginObj);  
 
       const privilegio = localStorage.getItem('privilegio');
-      if (privilegio == 'admin') this.router.navigate(['/painel/home']);
-      else this.router.navigate(['/']);
+      // if (privilegio == 'admin') this.router.navigate(['/painel/home']);
+      // else this.router.navigate(['/']);
+      this.router.navigate(['/']);
     } catch (error) {
       alert('Usuário ou senha incorretos.');
     }    

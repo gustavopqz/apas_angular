@@ -10,6 +10,8 @@ import { BtnFlutuanteComponent } from '../../components/btn-flutuante/btn-flutua
 
 import { environment } from '@raiz/environments/environment';
 import { PerfilService } from '@raiz/app/services/perfil.service';
+import { AdministradoresService } from '@raiz/app/services/administradores.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-patrocinadores',
@@ -23,15 +25,19 @@ export class PatrocinadoresComponent implements OnInit {
   patrocinadores ?: Patrocinadores[];
   apiBaseUrl ?: string;
 
-  constructor(private patrocinadoresService: PatrocinadoresService, private perfilService: PerfilService){
+  constructor(private patrocinadoresService: PatrocinadoresService, private perfilService: PerfilService, private adminService: AdministradoresService){
     this.apiBaseUrl = environment.apiBaseUrl;
   }
 
   ngOnInit(): void {
     this.getPatrocinadores();
+    this.adminService.checkUserPrivilege();
   }
   
   // FETCHS 
+  isLoadingPatrocinadores: boolean = true;
+  errorMessage: string | null = null;
+  
   async getPatrocinadores(): Promise<void> {
     this.patrocinadoresService.getPatrocinadores()
       .subscribe(async patrocinadores => {
