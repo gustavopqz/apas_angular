@@ -108,15 +108,21 @@ const usuario = require("./routes/usuario")
 const profile = require('./routes/profile')
 const recupera = require('./routes/recuperar')
 
-// Routes
+// Public Routes
+app.use('/login', login);
+app.use('/recupera', recupera);
+
+// Middleware aplicado a partir daqui: tudo abaixo é protegido
+const authMiddleware = require('./middlewares/authenticateToken');
+app.use(authMiddleware);
+
+// Protected routes
+app.use('/usuarios', usuario);
 app.use('/doacoes', doacoes);
 app.use('/patrocinios', patrocinios);
 app.use('/gastos', gastos);
 app.use('/administradores', administrador);
-app.use('/login', login);
-app.use('/usuarios', usuario);
 app.use('/profile', profile);
-app.use('/recupera', recupera);
 
 // Serve
 app.listen(9000, ()=>{

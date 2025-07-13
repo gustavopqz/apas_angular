@@ -1,130 +1,54 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 // Models
 const Administrador = require('../models/Administrador');
-const Usuario = require('../models/Usuario')
+const Usuario = require('../models/Usuario');
 
-/**
- * @swagger
- * /login:
- *   post:
- *     tags:
- *       - Autenticação
- *     summary: Realiza o login de administradores ou usuários
- *     description: Verifica se o e-mail pertence a um administrador ou usuário, compara a senha e retorna os dados de perfil ou uma mensagem de erro.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - senha
- *             properties:
- *               email:
- *                 type: string
- *                 example: "gustavo.pasqua@hotmail.com"
- *               senha:
- *                 type: string
- *                 example: "minhaSenhaSegura123"
- *     responses:
- *       200:
- *         description: Login realizado com sucesso ou senha incorreta
- *         content:
- *           application/json:
- *             schema:
- *               oneOf:
- *                 - type: object
- *                   properties:
- *                     nome:
- *                       type: string
- *                       example: "Gustavo Pasqua"
- *                     email:
- *                       type: string
- *                       example: "gustavo.pasqua@hotmail.com"
- *                     img:
- *                       type: string
- *                       example: "https://link.da.imagem.com/foto.jpg"
- *                     privilegio:
- *                       type: string
- *                       example: "admin"
- *                 - type: object
- *                   properties:
- *                     mensagem:
- *                       type: string
- *                       example: "Senha incorreta"
- *       404:
- *         description: Usuário não encontrado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 mensagem:
- *                   type: string
- *                   example: "Usuário não encontrado"
- *       500:
- *         description: Erro interno no servidor
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 mensagem:
- *                   type: string
- *                   example: "Algo deu errado!"
- */
-router.post('/', async (req, res)=>{
-    let { email, senha } = req.body;
+// POST /login
+router.post('/', async (req, res) => {
+  const { email, senha } = req.body;
 
-    const admin = await Administrador.findOne({email});
-    const usuario = await Usuario.findOne({email});
-    
-    if (admin) { 
+  try {
+    const admin = await Administrador.findOne({ email });
+    const usuario = await Usuario.findOne({ email });
 
-        const validaSenha = await bcrypt.compare(senha, admin.senha);
+    const pessoa = admin || usuario;
 
-        const jsonResposta = {
-            nome: admin.nome,
-            email: admin.email,
-            img: admin.img,
-            privilegio: admin.privilegio
-        }
-
-        if(validaSenha){
-            res.status(200).json(jsonResposta);
-            return;      
-        }else {
-            res.status(200).json({"mensagem": "Senha incorreta"});
-            return; 
-        }
+    if (!pessoa) {
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
     }
 
-    if (usuario) {
-        
-        const validaSenha = await bcrypt.compare(senha, usuario.senha);
-
-        const jsonResposta = {
-            nome: usuario.nome,
-            email: usuario.email,
-            img: usuario.img,
-            privilegio: usuario.privilegio
-        }
-
-        if(validaSenha){
-            res.status(200).json(jsonResposta);
-            return;       
-        }else {
-            res.status(200).json({"mensagem": "Senha incorreta"})
-            return; 
-        } 
+    const senhaValida = await bcrypt.compare(senha, pessoa.senha);
+    if (!senhaValida) {
+      return res.status(401).json({ mensagem: "Senha incorreta" });
     }
 
-    return res.status(404).json({"mensagem": "Usuário não encontrado"})
-})
+    const payload = {
+      id: pessoa._id,
+      email: pessoa.email,
+      privilegio: pessoa.privilegio
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    const jsonResposta = {
+      nome: pessoa.nome,
+      email: pessoa.email,
+      img: pessoa.img,
+      privilegio: pessoa.privilegio,
+      token
+    };
+
+    return res.status(200).json(jsonResposta);
+
+  } catch (error) {
+    console.error("Erro no login:", error);
+    return res.status(500).json({ mensagem: "Erro interno no servidor" });
+  }
+});
 
 module.exports = router;
