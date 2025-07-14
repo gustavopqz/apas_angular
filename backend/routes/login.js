@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
       privilegio: pessoa.privilegio
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '6m' });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     const jsonResposta = {
       nome: pessoa.nome,
