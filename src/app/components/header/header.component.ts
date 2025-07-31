@@ -8,7 +8,7 @@ import { PerfilService } from '@raiz/app/services/perfil.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, NgOptimizedImage, CommonModule],
+  imports: [RouterModule, NgOptimizedImage, CommonModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -16,12 +16,17 @@ export class HeaderComponent implements OnInit {
 
   routerLoginButton?: string;
   imagemUsuario = '/assets/img/header/user.png';
+  painelAdmText: boolean = false;
 
   constructor(private loginService: LoginService, private perfilService: PerfilService, private router: Router){}
   async ngOnInit() {
+    // Logado
     const userName = await localStorage.getItem('nome');
     const userEmail = await localStorage.getItem('email');
     const userPrivilege = await localStorage.getItem('privilegio')
+
+    // Painel adm text
+    if (userPrivilege == 'admin') this.painelAdmText = true;
 
     if (userName){
 

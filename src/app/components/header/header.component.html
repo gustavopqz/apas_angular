@@ -10,7 +10,10 @@
     </nav>
     <div [routerLink]="routerLoginButton" id="space">
       <img [src]="imagemUsuario" class="user_img">
-      <span >{{ loginText }}</span>
+      <div class="loginOrName">
+        <span >{{ loginText }}</span>
+        <span *ngIf="painelAdmText" class="painel">Painel Administrativo</span>
+      </div>
     </div>
     <div class="logoffButton">
       <button *ngIf="loginText != 'LOGIN'" class="material-icons logoff" (click)="logoff()">

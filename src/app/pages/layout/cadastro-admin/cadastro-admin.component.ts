@@ -4,17 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { AdministradoresService } from '../../../services/administradores.service';
 import { LoadingComponent } from '../../../components/loading/loading.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 // Enviroment
 import { environment } from '@env/environment';
+import { CommonModule } from '@angular/common';
+import { lastValueFrom } from 'rxjs';
 
 
 @Component({
   selector: 'app-cadastro-admin',
   templateUrl: './cadastro-admin.component.html',
-  styleUrls: ['./cadastro-admin.component.scss']  
+  styleUrls: ['./cadastro-admin.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, LoadingComponent],
+  providers: [NgModule]
 })
 export class CadastroAdminComponent {
 
@@ -51,27 +56,48 @@ export class CadastroAdminComponent {
       this.loading = false;
       return;
     }
+    
 
-    if (this.selectedImage){
-      const formImg = new FormData();
-      formImg.append('file', this.selectedImage);
-  
-      this.http.post(`${environment.apiBaseUrl}/profile/`, formImg)
-      .subscribe(response =>{
-        this.resposta = response;
-        adminObj.img = this.resposta.success;
-        this.http.post(`${environment.apiBaseUrl}/administradores/cadastro`, adminObj)
-        .subscribe(response => {
-          this.resposta = response;
-          if (this.resposta.mensagem.includes('com sucesso')){
-            alert(this.resposta.mensagem);
-            this.limpaCampos();
-            this.classeMain = 'main-register';
-            this.loading = false;
-          }
-        })
+    try {
+      if (this.selectedImage){
+        const formImg = new FormData();
+        formImg.append('file', this.selectedImage);
+
+        const postImgObservable = this.http.post<any>(
+          `${environment.apiBaseUrl}/profile/`,
+          formImg,
+          { observe: 'response' }
+        );
+
+        const response: HttpResponse<any> = await lastValueFrom(postImgObservable);
+
+        const statusCode = response.status;
+        const responseBody = response.body;
+
+        if (statusCode > 300) {          
+          return;
+        } 
+      
+        this.resposta = responseBody;
+        adminObj.img = this.resposta.success;     
+                
+      }
+      
+      this.administradorService.postNovoAdmin(adminObj).subscribe(response => {
+        alert('Administrador cadastrado com sucesso.');
+        this.loading = false;
+        this.classeMain = 'main-register';
+
+        this.usuario = '';
+        this.email = '';
+        this.senha = '';
+        this.confirmarSenha = '';
       });
-    }    
+      
+            
+    } catch (error) {
+      alert('Não foi possível cadastrar um novo administrador.')
+    }
   }
   
   usuario: string = '';
@@ -110,7 +136,7 @@ export class CadastroAdminComponent {
 
   resposta?: any;
   
-  onSubmit() {
+  async onSubmit() {
     
     this.validateEmail();
     this.validatePassword();
@@ -121,23 +147,12 @@ export class CadastroAdminComponent {
       this.classeMain = 'main-register opacity';
       this.loading = true;
 
-      this.cadastraAdmin();        
+      await this.cadastraAdmin();   
     } else {
       alert('Erro no envio dos dados cadastrais.');
     }
   }
 }
-
-
-
-
-
-@NgModule({
-  imports: [BrowserModule, FormsModule, LoadingComponent],
-  declarations: [CadastroAdminComponent],
-  bootstrap: [CadastroAdminComponent]
-})
-export class CadastroAdminModule {}
 
 
 
