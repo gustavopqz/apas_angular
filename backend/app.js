@@ -141,18 +141,18 @@ if (ENVIROMENT == 'P'){
     key: fs.readFileSync(KEYCERT), 
     cert: fs.readFileSync(CERTIFICATE)
   };
+
+  const httpsServer = https.createServer(httpOptions, app);
+  
+  const PORT = 9000;
+  
+  // Serve
+  httpsServer.listen(PORT, () => {
+    console.log(`Servidor HTTPS rodando na porta ${PORT}`);
+  });
 } else if (ENVIROMENT == 'D'){
-  httpOptions = {
-    key: fs.readFileSync('./certificado/private-key.pem'), 
-    cert: fs.readFileSync('./certificado/certificate.pem')
-  };
+  app.listen(9000, ()=>{
+    console.log('Servidor HTTP rodando na porta 9000');
+  })
+
 }
-
-const httpsServer = https.createServer(httpOptions, app);
-
-const PORT = 9000;
-
-// Serve
-httpsServer.listen(PORT, () => {
-  console.log(`Servidor HTTPS rodando na porta ${PORT}`);
-});

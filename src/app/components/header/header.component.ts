@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../../services/login.service'
-
-// Enviroment
-import { environment } from '@env/environment';
 import { PerfilService } from '@raiz/app/services/perfil.service';
 
 @Component({
@@ -20,7 +17,7 @@ export class HeaderComponent implements OnInit {
   routerLoginButton?: string;
   imagemUsuario = '/assets/img/header/user.png';
 
-  constructor(private loginService: LoginService, private perfilService: PerfilService){}
+  constructor(private loginService: LoginService, private perfilService: PerfilService, private router: Router){}
   async ngOnInit() {
     const userName = await localStorage.getItem('nome');
     const userEmail = await localStorage.getItem('email');
@@ -56,11 +53,7 @@ export class HeaderComponent implements OnInit {
 
   logoff(): void{
     localStorage.clear();
-    this.loginService.loginInfo = {
-      text: 'LOGIN'
-    }
-    this.routerLoginButton = '/login'
-    this.imagemUsuario = '/assets/img/header/user.png';
+    window.location.reload();
   }
 
 }
