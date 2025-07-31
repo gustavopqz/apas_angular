@@ -8,7 +8,7 @@ import { PerfilService } from '@raiz/app/services/perfil.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, NgOptimizedImage, CommonModule, CommonModule],
+  imports: [RouterModule, CommonModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

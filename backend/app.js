@@ -108,6 +108,7 @@ const usuario = require("./routes/usuario");
 const profile = require('./routes/profile');
 const recupera = require('./routes/recuperar');
 const refreshToken = require('./routes/refresh-token');
+const instagram = require('./routes/instagram');
 
 // Public Routes
 app.use('/login', login);
@@ -115,13 +116,14 @@ app.use('/recupera', recupera);
 app.use('/doacoes', doacoes);
 app.use('/patrocinios', patrocinios);
 app.use('/profile', profile);
+app.use('/instagram', instagram);
+app.use('/usuarios', usuario);
 
 // Middleware aplicado a partir daqui: tudo abaixo é protegido
 const authMiddleware = require('./middlewares/authenticateToken');
 app.use(authMiddleware);
 
 // Protected routes
-app.use('/usuarios', usuario);
 app.use('/gastos', gastos);
 app.use('/administradores', administrador);
 app.use('/refreshtoken', refreshToken);
