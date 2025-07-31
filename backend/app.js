@@ -95,7 +95,7 @@ connectToDatabase();
 
 // Rotas
 app.get('/', (req, res)=>{
-    res.send('{ "mensagem": "Backend APAS está online!" }');
+    res.status(200).json({"mensagem": "Backend APAS está online!"});
 })
 
 // Import routes
@@ -130,10 +130,23 @@ app.use('/refreshtoken', refreshToken);
 const https = require('https');
 const fs = require('fs');
 
-const httpOptions = {
-  key: fs.readFileSync('./certificado/private-key.pem'), 
-  cert: fs.readFileSync('./certificado/certificate.pem')
-};
+const ENVIROMENT = process.env.ENVIROMENT;
+const KEYCERT = process.env.KEYCERT;
+const CERTIFICATE = process.env.CERTIFICATE;
+
+let httpOptions;
+
+if (ENVIROMENT == 'P'){
+  httpOptions = {
+    key: fs.readFileSync(KEYCERT), 
+    cert: fs.readFileSync(CERTIFICATE)
+  };
+} else if (ENVIROMENT == 'D'){
+  httpOptions = {
+    key: fs.readFileSync('./certificado/private-key.pem'), 
+    cert: fs.readFileSync('./certificado/certificate.pem')
+  };
+}
 
 const httpsServer = https.createServer(httpOptions, app);
 
