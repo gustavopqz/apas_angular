@@ -46,3 +46,4 @@ backend/.env
 backend/profiles
 backend/TSL
 backend/patrocinadores
+backend/certificado

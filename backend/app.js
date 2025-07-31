@@ -126,7 +126,20 @@ app.use('/gastos', gastos);
 app.use('/administradores', administrador);
 app.use('/refreshtoken', refreshToken);
 
+// HTTPS
+const https = require('https');
+const fs = require('fs');
+
+const httpOptions = {
+  key: fs.readFileSync('./certificado/private-key.pem'), 
+  cert: fs.readFileSync('./certificado/certificate.pem')
+};
+
+const httpsServer = https.createServer(httpOptions, app);
+
+const PORT = 9000;
+
 // Serve
-app.listen(9000, ()=>{
-    console.log('Escutando na porta 9000');
-})
+httpsServer.listen(PORT, () => {
+  console.log(`Servidor HTTPS rodando na porta ${PORT}`);
+});
